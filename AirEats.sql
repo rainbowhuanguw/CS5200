@@ -2,17 +2,17 @@
 CREATE SCHEMA IF NOT EXISTS AirEats;
 USE AirEats;
 
-DROP TABLE IF EXISTS Recommendations;
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Tips;
-DROP TABLE IF EXISTS Friends;
 DROP TABLE IF EXISTS Hours;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS YelpUsers;
 DROP TABLE IF EXISTS Airbnb;
 DROP TABLE IF EXISTS Host;
 
-CREATE TABLE Users (
+
+CREATE TABLE YelpUsers (
   UserId VARCHAR(22),
   UserName VARCHAR(255),
   review_count int,
@@ -46,6 +46,20 @@ CREATE TABLE Airbnb (
     Longitude DECIMAL(10,7) NOT NULL,
     CONSTRAINT pk_Airbnb_AirbnbId PRIMARY KEY (AirbnbId)
 );
+
+CREATE TABLE Users (
+  UserName VARCHAR(255),
+  FirstName VARCHAR(255),
+  LastName VARCHAR(255),
+  Email VARCHAR(255),
+  Phone VARCHAR(20),
+  AirbnbId INT,
+  CONSTRAINT pk_Users_UserName PRIMARY KEY (UserName),
+  CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId)
+		REFERENCES Airbnb(AirbnbId)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 CREATE TABLE Host (
 	HostId Int,
     HostName VARCHAR(255),
@@ -63,14 +77,7 @@ CREATE TABLE Restaurants(
     Stars DECIMAL(2,1) NOT NULL,
 	CONSTRAINT pk_Restaurant_RestaurantId PRIMARY KEY (RestaurantId)
 );
-CREATE TABLE Friends(
-	UserId VARCHAR(22),
-    FriendId VARCHAR(22),
-    CONSTRAINT pk_Friends_AirbnbId PRIMARY KEY (UserId),
-	CONSTRAINT fk_Friends_FriendId FOREIGN KEY (FriendId)
-		REFERENCES Users(UserId)
-		ON UPDATE CASCADE ON DELETE CASCADE
-);
+
 CREATE TABLE Reviews (
 	ReviewId VARCHAR(255),
     UserId VARCHAR(255),
@@ -127,7 +134,7 @@ CREATE TABLE Hours(
 		ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-LOAD DATA INFILE 'users.csv' INTO TABLE users
+LOAD DATA INFILE 'users.csv' INTO TABLE YelpUsers
   FIELDS TERMINATED BY ','
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
