@@ -51,7 +51,7 @@ CREATE TABLE Host (
     CONSTRAINT pk_Host_HostId PRIMARY KEY (HostId)
 );
 CREATE TABLE Restaurants(
-	RestaurantId INT,
+	RestaurantId VARCHAR(22),
     Name VARCHAR(255),
     Address VARCHAR(255),
     City VARCHAR(255),
