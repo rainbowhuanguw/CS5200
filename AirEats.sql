@@ -120,7 +120,8 @@ LOAD DATA INFILE 'business.csv' INTO TABLE restaurants
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY '\n'
-  IGNORE 1 LINES;
+  IGNORE 1 LINES
+  (RestaurantId,Name,Address,City,State,Zip,Latitude,Longitude,Stars,@dummy,@dummy);
   
 LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Fields are not quoted.
@@ -148,11 +149,3 @@ LOAD DATA INFILE 'review_small.csv' INTO TABLE reviews
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
-   
-  
-select *
-from host;
-
-
-
-
