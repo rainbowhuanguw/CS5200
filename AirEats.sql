@@ -71,15 +71,17 @@ CREATE TABLE Friends(
 		ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE Reviews (
-	ReviewId INT AUTO_INCREMENT,
+	ReviewId VARCHAR(255),
+    UserId VARCHAR(255),
+    RestaurantId VARCHAR(255),
 	Stars INT,
-	Date TIMESTAMP,
+	# Date TIMESTAMP,
 	#Might remove content field
-	Content VARCHAR(1024),
-	Useful DECIMAL(2,1) NOT NULL,
-	Funny DECIMAL(2,1) NOT NULL,
-	Cool DECIMAL(2,1) NOT NULL,
-	RestaurantId INT,
+	Useful DECIMAL(7,1) NOT NULL,
+	Funny DECIMAL(7,1) NOT NULL,
+	Cool DECIMAL(7,1) NOT NULL,
+	Content TEXT,
+    Date datetime,
 	CONSTRAINT pk_Reviews_ReviewId PRIMARY KEY (ReviewId),
 	CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId)
 		REFERENCES Restaurants(RestaurantId)
@@ -121,7 +123,7 @@ LOAD DATA INFILE 'business.csv' INTO TABLE restaurants
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
   
-LOAD DATA local INFILE "C:/Users/youyu/OneDrive - Northeastern University/CS 5200 Database Management/CS5200/airbnb_listings_usa.csv" INTO TABLE Airbnb
+LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Fields are not quoted.
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
@@ -130,12 +132,18 @@ LOAD DATA local INFILE "C:/Users/youyu/OneDrive - Northeastern University/CS 520
   IGNORE 1 LINES
   (@dummy,AirbnbId, Name,@dummy,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
 
-LOAD DATA INFILE 'C:/Users/youyu/OneDrive - Northeastern University/CS 5200 Database Management/CS5200/hosts.csv' INTO TABLE host
+LOAD DATA INFILE 'hosts.csv' INTO TABLE host
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
-
+  
+LOAD DATA INFILE 'C:/Users/youyu/OneDrive - Northeastern University/CS 5200 Database Management/CS5200/review_small.csv' INTO TABLE reviews
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES;
+  
 select *
 from host;
 
