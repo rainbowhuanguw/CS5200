@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Tips;
 DROP TABLE IF EXISTS Friends;
 DROP TABLE IF EXISTS Hours;
+DROP TABLE IF EXISTS Attributes;
+DROP TABLE IF EXISTS Categories;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Airbnb;
@@ -76,7 +78,6 @@ CREATE TABLE Reviews (
     UserId VARCHAR(255),
     RestaurantId VARCHAR(255),
 	Stars INT,
-	# Date TIMESTAMP,
 	#Might remove content field
 	Useful DECIMAL(7,1) NOT NULL,
 	Funny DECIMAL(7,1) NOT NULL,
@@ -127,6 +128,25 @@ CREATE TABLE Hours(
 		ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE TABLE Attributes(
+	RestaurantId VARCHAR(255),
+    Attributes TEXT,
+    CONSTRAINT pk_Attributes_RestaurantId PRIMARY KEY (RestaurantId),
+    CONSTRAINT fk_Attributes_RestaurantId FOREIGN KEY (RestaurantId)
+		REFERENCES Restaurants(RestaurantId)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Categories(
+	RestaurantId VARCHAR(255),
+    Categories TEXT,
+    CONSTRAINT pk_Categories_RestaurantId PRIMARY KEY (RestaurantId),
+    CONSTRAINT fk_Categories_RestaurantId FOREIGN KEY (RestaurantId)
+		REFERENCES Restaurants(RestaurantId)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
 LOAD DATA INFILE 'users.csv' INTO TABLE users
   FIELDS TERMINATED BY ','
   LINES TERMINATED BY '\n'
@@ -172,7 +192,19 @@ LOAD DATA INFILE 'hours.csv'  INTO TABLE hours
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES; 
+
+LOAD DATA INFILE 'attributes_new.csv'  INTO TABLE attributes
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES; 
   
+LOAD DATA INFILE 'category.csv'  INTO TABLE categories
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES; 
+
 select *
 from host;
 
