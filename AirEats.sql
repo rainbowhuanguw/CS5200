@@ -112,7 +112,7 @@ CREATE TABLE Tips(
 
 CREATE TABLE Recommendations(
 	RecommendationId INT,
-	RestaurantId INT,
+	RestaurantId VARCHAR(22),
     UserId VARCHAR(22),
 	CONSTRAINT pk_Recommendations_RecommendationId PRIMARY KEY (RecommendationId),
 	CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId)
