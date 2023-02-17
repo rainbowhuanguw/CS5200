@@ -136,7 +136,8 @@ LOAD DATA INFILE 'business.csv' INTO TABLE restaurants
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY '\n'
-  IGNORE 1 LINES;
+  IGNORE 1 LINES
+  (RestaurantId,Name,Address,City,State,Zip,Latitude,Longitude,Stars,@dummy,@dummy);
   
 LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Fields are not quoted.
@@ -165,6 +166,7 @@ LOAD DATA INFILE 'review_small.csv' INTO TABLE reviews
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
 
+
 LOAD DATA INFILE 'hours.csv'  INTO TABLE hours
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
@@ -182,3 +184,4 @@ from users;
 
 select count(*) as count_tips
 from tips;
+
