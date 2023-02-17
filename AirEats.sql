@@ -11,18 +11,6 @@ DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Airbnb;
 DROP TABLE IF EXISTS Host;
 
-/**
-CREATE TABLE Users (
-  UserId VARCHAR(22),
-  UserName VARCHAR(255),
-  Password VARCHAR(255) NOT NULL,
-  FirstName VARCHAR(255) NOT NULL,
-  LastName VARCHAR(255) NOT NULL,
-  Email VARCHAR(255) NOT NULL,
-  Phone VARCHAR(255),
-  CONSTRAINT pk_Users_UserId PRIMARY KEY (UserId)
-);
-**/
 CREATE TABLE Users (
   UserId VARCHAR(22),
   UserName VARCHAR(255),
@@ -59,8 +47,7 @@ CREATE TABLE Airbnb (
 );
 CREATE TABLE Host (
 	HostId Int,
-    HostName VARCHAR(22),
-	AirbnbId INT,
+    HostName VARCHAR(255),
     CONSTRAINT pk_Host_HostId PRIMARY KEY (HostId)
 );
 CREATE TABLE Restaurants(
@@ -134,7 +121,7 @@ LOAD DATA INFILE 'business.csv' INTO TABLE restaurants
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
   
-LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
+LOAD DATA local INFILE "C:/Users/youyu/OneDrive - Northeastern University/CS 5200 Database Management/CS5200/airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Fields are not quoted.
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
@@ -143,10 +130,14 @@ LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   IGNORE 1 LINES
   (@dummy,AirbnbId, Name,@dummy,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
 
-
+LOAD DATA INFILE 'C:/Users/youyu/OneDrive - Northeastern University/CS 5200 Database Management/CS5200/hosts.csv' INTO TABLE host
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES;
 
 select *
-from restaurants;
+from host;
 
 
 
