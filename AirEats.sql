@@ -90,13 +90,12 @@ CREATE TABLE Reviews (
 
 
 CREATE TABLE Tips(
-	TipId INT,
     UserId VARCHAR(22),
-    Content VARCHAR(255),
-    Date TIMESTAMP,
-    ComplimentCount INT,
-    RestaurantId INT,
-	CONSTRAINT pk_Tips_TipId PRIMARY KEY (TipId),
+    RestaurantId VARCHAR(22),
+    Compliment_count INT,
+    Date datetime,
+    Context TEXT,
+	CONSTRAINT pk_Tips_TipId PRIMARY KEY (UserId, RestaurantId, Date),
 	CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId)
 		REFERENCES Restaurants(RestaurantId)
 		ON UPDATE CASCADE ON DELETE CASCADE
@@ -138,11 +137,18 @@ LOAD DATA INFILE 'hosts.csv' INTO TABLE host
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
   
-LOAD DATA INFILE 'C:/Users/youyu/OneDrive - Northeastern University/CS 5200 Database Management/CS5200/review_small.csv' INTO TABLE reviews
+LOAD DATA INFILE 'review_small.csv' INTO TABLE reviews
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
+  
+ LOAD DATA INFILE 'tip.csv' INTO TABLE tips
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES;
+   
   
 select *
 from host;
