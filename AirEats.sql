@@ -123,11 +123,17 @@ CREATE TABLE Recommendations(
 		ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-LOAD DATA INFILE 'C:/Users/youyu/Downloads/Coding/users.csv' INTO TABLE users
+LOAD DATA INFILE 'users.csv' INTO TABLE users
   FIELDS TERMINATED BY ','
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
 
+LOAD DATA INFILE 'business.csv' INTO TABLE restaurants
+  FIELDS TERMINATED BY ','
+  OPTIONALLY ENCLOSED BY '"'
+  LINES TERMINATED BY '\n'
+  IGNORE 1 LINES;
+  
 LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Fields are not quoted.
   FIELDS TERMINATED BY ','
@@ -137,8 +143,10 @@ LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   IGNORE 1 LINES
   (@dummy,AirbnbId, Name,@dummy,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
 
+
+
 select *
-from users;
+from restaurants;
 
 
 
