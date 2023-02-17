@@ -128,6 +128,15 @@ LOAD DATA INFILE 'C:/Users/youyu/Downloads/Coding/users.csv' INTO TABLE users
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
 
+LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
+  # Fields are not quoted.
+  FIELDS TERMINATED BY ','
+  OPTIONALLY ENCLOSED BY '"'
+  # Windows platforms may need '\r\n'.#  # Windows platforms may need '\r\n'.
+  LINES TERMINATED BY '\n'
+  IGNORE 1 LINES
+  (@dummy,AirbnbId, Name,@dummy,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
+
 select *
 from users;
 
