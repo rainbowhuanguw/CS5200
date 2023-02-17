@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS Recommendations;
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Tips;
 DROP TABLE IF EXISTS Friends;
+DROP TABLE IF EXISTS Hours;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Airbnb;
@@ -111,6 +112,21 @@ CREATE TABLE Recommendations(
 		ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE TABLE Hours(
+	RestaurantId VARCHAR(255),
+    Monday VARCHAR(255),
+    Tuesday VARCHAR(255),
+    Wednesday VARCHAR(255),
+    Thurday VARCHAR(255),
+    Friday VARCHAR(255),
+    Saturday VARCHAR(255),
+    Sunday VARCHAR(255),
+    CONSTRAINT pk_Hours_RestaurantId PRIMARY KEY (RestaurantId),
+    CONSTRAINT fk_Hours_RestaurantId FOREIGN KEY (RestaurantId)
+		REFERENCES Restaurants(RestaurantId)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 LOAD DATA INFILE 'users.csv' INTO TABLE users
   FIELDS TERMINATED BY ','
   LINES TERMINATED BY '\n'
@@ -143,16 +159,26 @@ LOAD DATA INFILE 'review_small.csv' INTO TABLE reviews
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
   
- LOAD DATA INFILE 'tip.csv' INTO TABLE tips
+ LOAD DATA INFILE 'tip.csv' IGNORE INTO TABLE tips
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
-   
+
+LOAD DATA INFILE 'hours.csv'  INTO TABLE hours
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES; 
   
 select *
 from host;
 
+select count(*) as count_reviews
+from reviews;
 
+select count(*) as count_users
+from users;
 
-
+select count(*) as count_tips
+from tips;
