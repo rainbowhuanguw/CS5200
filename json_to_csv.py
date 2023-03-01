@@ -40,7 +40,7 @@ def handleBusiness(path: str, partition_size: int = 50000) -> dict:
             attributes = df[['business_id', 'attributes']]
 
             hours_col = ['business_id', 'hours.Monday', 'hours.Tuesday', 'hours.Wednesday',
-                         'hours.Thursday', 'hours.Friday', 'hours.Saturday', 'hours.Sunnday']
+                         'hours.Thursday', 'hours.Friday', 'hours.Saturday', 'hours.Sunday']
 
             hours = df.reindex(hours_col, axis=1)
             hours.columns = hours.columns.map(lambda x: x.split(".")[-1])
