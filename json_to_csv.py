@@ -39,11 +39,16 @@ def handleBusiness(path: str, partition_size: int = 50000) -> dict:
 
             attributes = df[['business_id', 'attributes']]
 
-            hours_col = ['business_id', 'hours.Monday', 'hours.Tuesday', 'hours.Wednesday',
-                         'hours.Thursday', 'hours.Friday', 'hours.Saturday', 'hours.Sunday']
+            hours_col = ['business_id', 'Monday', 'Tuesday', 'Wednesday',
+                         'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-            hours = df.reindex(hours_col, axis=1)
-            hours.columns = hours.columns.map(lambda x: x.split(".")[-1])
+            # hours = df.reindex(hours_col, axis=1)
+            hours = data['hours'] if data['hours'] else {}
+            hours['business_id'] = data['business_id']
+            for k in hours_col:
+                if k not in hours:
+                    hours[k] = None
+            hours = pd.json_normalize(hours)
 
             df = df[['business_id', 'name', 'address', 'city', 'state', 'postal_code',
                     'latitude', 'longitude', 'stars', 'review_count', 'is_open']]
@@ -147,7 +152,7 @@ def handleTip(path: str, partition_size: int = 50000) -> dict:
 if __name__ == "__main__":
     start = timer()
     # print(rawcount("review.csv"))
-    # handleBusiness("./yelp_academic_dataset_business.json")
+    handleBusiness("./yelp_academic_dataset_business.json")
     # handleReview("./yelp_academic_dataset_review.json")
     # handleTip("./yelp_academic_dataset_tip.json")
     print(f"Finished in {timer()-start}s")
