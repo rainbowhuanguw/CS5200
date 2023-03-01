@@ -36,7 +36,7 @@ CREATE TABLE YelpUsers (
   CONSTRAINT pk_YelpUsers_UserId PRIMARY KEY (UserId)
 );
 CREATE TABLE Airbnb (
-  AirbnbId INT,
+  AirbnbId VARCHAR(255),
   Name VARCHAR(255),
   City VARCHAR(255),
   Neighborhood VARCHAR(255),
@@ -51,7 +51,7 @@ CREATE TABLE Users (
   LastName VARCHAR(255),
   Email VARCHAR(255),
   Phone VARCHAR(20),
-  AirbnbId INT,
+  AirbnbId VARCHAR(255),
   CONSTRAINT pk_Users_UserName PRIMARY KEY (UserName),
   CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId) REFERENCES Airbnb(AirbnbId) ON UPDATE CASCADE ON DELETE CASCADE
 );

@@ -1,12 +1,12 @@
 LOAD DATA INFILE 'users.csv' INTO TABLE YelpUsers
   FIELDS TERMINATED BY ','
-  LINES TERMINATED BY '\n'
+  LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
 
 LOAD DATA INFILE 'business.csv' INTO TABLE Restaurants
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
-  LINES TERMINATED BY '\n'
+  LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES
   (RestaurantId,Name,Address,City,State,Zip,Latitude,Longitude,Stars,@dummy,@dummy);
   
@@ -15,7 +15,7 @@ LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
   # Windows platforms may need '\r\n'.#  # Windows platforms may need '\r\n'.
-  LINES TERMINATED BY '\n'
+  LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES
   (@dummy,AirbnbId, Name,@dummy,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
 
