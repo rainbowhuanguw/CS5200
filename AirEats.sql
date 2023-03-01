@@ -35,19 +35,20 @@ CREATE TABLE YelpUsers (
   compliment_cool int,
   compliment_funny int,
   compliment_writer int, 
-  compliment_photos int
+  compliment_photos int,
+  CONSTRAINT pk_YelpUsers_UserId PRIMARY KEY (UserId)
 );
 
 
 CREATE TABLE Airbnb (
-	AirbnbId INT,
-    Name VARCHAR(255),
-    City VARCHAR(255),
-    Neighborhood VARCHAR(255),
-    State VARCHAR(22),
-    Latitude DECIMAL(10,7) NOT NULL,
-    Longitude DECIMAL(10,7) NOT NULL,
-    CONSTRAINT pk_Airbnb_AirbnbId PRIMARY KEY (AirbnbId)
+  AirbnbId INT,
+  Name VARCHAR(255),
+  City VARCHAR(255),
+  Neighborhood VARCHAR(255),
+  State VARCHAR(22),
+  Latitude DECIMAL(10,7),
+  Longitude DECIMAL(10,7),
+  CONSTRAINT pk_Airbnb_AirbnbId PRIMARY KEY (AirbnbId)
 );
 
 CREATE TABLE Users (
@@ -64,76 +65,78 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Host (
-	HostId Int,
-    HostName VARCHAR(255),
-    CONSTRAINT pk_Host_HostId PRIMARY KEY (HostId)
+  HostId Int,
+  HostName VARCHAR(255),
+  CONSTRAINT pk_Host_HostId PRIMARY KEY (HostId)
 );
+
 CREATE TABLE Restaurants(
-	RestaurantId VARCHAR(22),
-    Name VARCHAR(255),
-    Address VARCHAR(255),
-    City VARCHAR(255),
-    State VARCHAR(10),
-    Zip VARCHAR(10) NOT NULL,
-    Latitude DECIMAL(10,7) NOT NULL,
-    Longitude DECIMAL(10,7) NOT NULL,
-    Stars DECIMAL(2,1) NOT NULL,
-	CONSTRAINT pk_Restaurant_RestaurantId PRIMARY KEY (RestaurantId)
+  RestaurantId VARCHAR(22),
+  Name VARCHAR(255),
+  Address VARCHAR(255),
+  City VARCHAR(255),
+  State VARCHAR(10),
+  Zip VARCHAR(10),
+  Latitude DECIMAL(10,7),
+  Longitude DECIMAL(10,7),
+  Stars DECIMAL(2,1),
+  CONSTRAINT pk_Restaurant_RestaurantId PRIMARY KEY (RestaurantId)
 );
 
 CREATE TABLE Reviews (
-	ReviewId VARCHAR(255),
-    UserId VARCHAR(255),
-    RestaurantId VARCHAR(255),
-	Stars INT,
-	#Might remove content field
-	Useful DECIMAL(7,1) NOT NULL,
-	Funny DECIMAL(7,1) NOT NULL,
-	Cool DECIMAL(7,1) NOT NULL,
-	Content TEXT,
-    Date datetime,
-	CONSTRAINT pk_Reviews_ReviewId PRIMARY KEY (ReviewId),
-	CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId)
-		REFERENCES Restaurants(RestaurantId)
-		ON UPDATE CASCADE ON DELETE CASCADE
+  ReviewId VARCHAR(255),
+  UserId VARCHAR(255),
+  RestaurantId VARCHAR(255),
+  Stars INT,
+  #Might remove content field
+  Useful DECIMAL(7,1) NOT NULL,
+  Funny DECIMAL(7,1) NOT NULL,
+  Cool DECIMAL(7,1) NOT NULL,
+  Content TEXT,
+  Date datetime,
+  CONSTRAINT pk_Reviews_ReviewId PRIMARY KEY (ReviewId),
+  CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId)
+    REFERENCES Restaurants(RestaurantId)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
 CREATE TABLE Tips(
-    UserId VARCHAR(22),
-    RestaurantId VARCHAR(22),
-    Compliment_count INT,
-    Date datetime,
-    Context TEXT,
-	CONSTRAINT pk_Tips_TipId PRIMARY KEY (UserId, RestaurantId, Date),
-	CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId)
-		REFERENCES Restaurants(RestaurantId)
-		ON UPDATE CASCADE ON DELETE CASCADE
+  TipId INT AUTO_INCREMENT,
+  UserId VARCHAR(22),
+  RestaurantId VARCHAR(22),
+  Compliment_count INT,
+  Date datetime,
+  Context TEXT,
+  CONSTRAINT pk_Tips_TipId PRIMARY KEY (TipId),
+  CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId)
+    REFERENCES Restaurants(RestaurantId)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Recommendations(
-	RecommendationId INT,
-	RestaurantId VARCHAR(22),
-    UserId VARCHAR(22),
-	CONSTRAINT pk_Recommendations_RecommendationId PRIMARY KEY (RecommendationId),
-	CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId)
-		REFERENCES Restaurants(RestaurantId)
-		ON UPDATE CASCADE ON DELETE CASCADE
+  RecommendationId INT AUTO_INCREMENT,
+  RestaurantId VARCHAR(22),
+  UserId VARCHAR(22),
+  CONSTRAINT pk_Recommendations_RecommendationId PRIMARY KEY (RecommendationId),
+  CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId)
+    REFERENCES Restaurants(RestaurantId)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Hours(
-	RestaurantId VARCHAR(255),
-    Monday VARCHAR(255),
-    Tuesday VARCHAR(255),
-    Wednesday VARCHAR(255),
-    Thurday VARCHAR(255),
-    Friday VARCHAR(255),
-    Saturday VARCHAR(255),
-    Sunday VARCHAR(255),
-    CONSTRAINT pk_Hours_RestaurantId PRIMARY KEY (RestaurantId),
-    CONSTRAINT fk_Hours_RestaurantId FOREIGN KEY (RestaurantId)
-		REFERENCES Restaurants(RestaurantId)
-		ON UPDATE CASCADE ON DELETE CASCADE
+  RestaurantId VARCHAR(255),
+  Monday VARCHAR(255),
+  Tuesday VARCHAR(255),
+  Wednesday VARCHAR(255),
+  Thurday VARCHAR(255),
+  Friday VARCHAR(255),
+  Saturday VARCHAR(255),
+  Sunday VARCHAR(255),
+  CONSTRAINT pk_Hours_RestaurantId PRIMARY KEY (RestaurantId),
+  CONSTRAINT fk_Hours_RestaurantId FOREIGN KEY (RestaurantId)
+    REFERENCES Restaurants(RestaurantId)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Attributes(
@@ -146,12 +149,12 @@ CREATE TABLE Attributes(
 );
 
 CREATE TABLE Categories(
-	RestaurantId VARCHAR(255),
-    Categories TEXT,
-    CONSTRAINT pk_Categories_RestaurantId PRIMARY KEY (RestaurantId),
-    CONSTRAINT fk_Categories_RestaurantId FOREIGN KEY (RestaurantId)
-		REFERENCES Restaurants(RestaurantId)
-		ON UPDATE CASCADE ON DELETE CASCADE
+  RestaurantId VARCHAR(255),
+  Categories TEXT,
+  CONSTRAINT pk_Categories_RestaurantId PRIMARY KEY (RestaurantId),
+  CONSTRAINT fk_Categories_RestaurantId FOREIGN KEY (RestaurantId)
+    REFERENCES Restaurants(RestaurantId)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
