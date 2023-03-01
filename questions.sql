@@ -22,7 +22,21 @@ SELECT UserName, COUNT(Tips.UserId) AS CNT FROM Tips
 # restaurants 
 # [YuYang]What cities in the US have the most number of restaurants with average ratings of 4 and above? 
 
-# [YuYang]What are the top 10 rated restaurants in Seattle? 
+SELECT City, Count(*) as RestaurantCount
+FROM Restaurants
+WHERE Stars >= 4.0
+GROUP BY City
+ORDER BY RestaurantCount DESC
+LIMIT 1;
+
+# [YuYang]What cities have more than 100 Restaurants in California? 
+
+SELECT City, Count(*) AS RestaurantCount
+FROM Restaurants
+WHERE State = "CA"
+GROUP BY City
+HAVING RestaurantCount > 100
+ORDER BY RestaurantCount DESC
 
 # [YiCheng]What are the top 100 tipped Asian restaurants since Jan 2022?
 
