@@ -164,7 +164,7 @@ LOAD DATA INFILE 'users.csv' INTO TABLE YelpUsers
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES;
 
-LOAD DATA INFILE 'business.csv' INTO TABLE restaurants
+LOAD DATA INFILE 'business.csv' INTO TABLE Restaurants
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY '\n'
@@ -180,32 +180,33 @@ LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
   IGNORE 1 LINES
   (@dummy,AirbnbId, Name,@dummy,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
 
-LOAD DATA INFILE 'hosts.csv' INTO TABLE host
+LOAD DATA INFILE 'hosts.csv' INTO TABLE Host
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
   
-LOAD DATA INFILE 'review_small.csv' INTO TABLE reviews
+LOAD DATA INFILE 'review_small.csv' INTO TABLE Reviews
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
   
- LOAD DATA INFILE 'tip.csv' IGNORE INTO TABLE tips
+ LOAD DATA INFILE 'tip.csv' IGNORE INTO TABLE Tips
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
-  IGNORE 1 LINES;
+  IGNORE 1 LINES
+  (UserId,RestaurantId,Compliment_count,Date,Context);
 
 
-LOAD DATA INFILE 'hours.csv'  INTO TABLE hours
+LOAD DATA INFILE 'hours.csv'  INTO TABLE Hours
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES; 
 
-LOAD DATA INFILE 'attributes_new.csv'  INTO TABLE attributes
+LOAD DATA INFILE 'attributes_new.csv'  INTO TABLE Attributes
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
