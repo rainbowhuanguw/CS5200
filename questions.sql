@@ -5,7 +5,7 @@
 # [Youyu] List top 10 people who wrote the most reviews?
 SELECT re.UserId, count(ReviewId) as total_reviews, u.UserName
 FROM reviews re
-JOIN users u ON u.UserId = re.UserId
+JOIN YelpUsers u ON u.UserId = re.UserId
 GROUP BY UserId
 ORDER BY count(ReviewId) DESC
 LIMIT 10
