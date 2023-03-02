@@ -8,16 +8,16 @@ FROM reviews re
 JOIN YelpUsers u ON u.UserId = re.UserId
 GROUP BY re.UserId
 ORDER BY count(ReviewId) DESC
-LIMIT 10
-;
+LIMIT 10;
 
-# [Youwei] What users have created tips for Asian restaurants? Provide username and counts. 
-SELECT UserName, COUNT(Tips.UserId) AS CNT FROM Tips
-  LEFT JOIN YelpUsers ON Tips.UserId = YelpUsers.UserId
-  LEFT JOIN Categories ON Tips.RestaurantId = Categories.RestaurantId
-  WHERE categories like "%Asian%"
-  GROUP BY Tips.UserId
-  ORDER BY CNT DESC;
+# [Youwei] What are the average numbers of tips created by users who have created tips for Asian restaurants?
+SELECT AVG(UserTip.CNT) AS Average FROM (
+  SELECT UserId, COUNT(*) AS CNT 
+    FROM Tips
+      LEFT JOIN Categories ON Tips.RestaurantId = Categories.RestaurantId
+      WHERE categories like "%Asian%"
+    GROUP BY Tips.UserId
+  ) AS UserTip;
 
 # restaurants 
 # [YuYang]What cities in the US have the most number of restaurants with average ratings of 4 and above? 
