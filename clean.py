@@ -1,5 +1,6 @@
 import csv
 
+
 def rawcount(filename):
     f = open(filename, 'rb')
     lines = 0
@@ -24,8 +25,8 @@ def clean(filename):
         for row in reader:
             new_row = []
             for item in row:
-                if '\n' in item:
-                    new_item = item.replace('\n', '|')
+                if '\n' in item or '\\' in item:
+                    new_item = item.replace('\n', '|').replace('\\', '|')
                     cleaned_count += 1
                 else:
                     new_item = item
