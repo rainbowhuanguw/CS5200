@@ -108,7 +108,7 @@ CREATE TABLE Hours(
   Monday VARCHAR(255),
   Tuesday VARCHAR(255),
   Wednesday VARCHAR(255),
-  Thurday VARCHAR(255),
+  Thursday VARCHAR(255),
   Friday VARCHAR(255),
   Saturday VARCHAR(255),
   Sunday VARCHAR(255),
