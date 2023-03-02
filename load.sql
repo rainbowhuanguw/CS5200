@@ -10,7 +10,7 @@ LOAD DATA INFILE 'business.csv' INTO TABLE Restaurants
   IGNORE 1 LINES
   (RestaurantId,Name,Address,City,State,Zip,Latitude,Longitude,Stars,@dummy,@dummy);
   
-LOAD DATA local INFILE "airbnb_listings_usa.csv" INTO TABLE Airbnb
+LOAD DATA local INFILE "cleaned_airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Fields are not quoted.
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
