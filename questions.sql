@@ -64,7 +64,17 @@ SELECT Restaurants.Name, Categories, SUM(CNT) AS TOTAL FROM
   ORDER BY TOTAL DESC
   LIMIT 10;
 
-# [Caihong]For each restaurant type, what is the ratio of bad reviews (rating of 2 and below) to all of the reviews.
+# [Caihong]What are the top 10 highly rated restaurant types?
+SELECT AVG(Reviews.Stars) average_stars, Categories.category
+FROM Reviews
+INNER JOIN Restaurants
+ON Reviews.RestaurantId = Restaurants.RestaurantId
+INNER JOIN Categories
+ON Categories.RestaurantId = Reviews.RestaurantId
+WHERE Categories.category like '%Restaurant%'
+GROUP BY Categories.category
+ORDER BY average_stars DESC
+LIMIT 10;
 
 # [Min]What is the percentage of restaurants opening 24/7?
 
