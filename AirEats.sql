@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS Airbnb;
 DROP TABLE IF EXISTS Host;
 DROP TABLE IF EXISTS Recommendations;
 DROP TABLE IF EXISTS Restaurants;
+DROP TABLE IF EXISTS Locations; 
+
 CREATE TABLE YelpUsers (
   UserId VARCHAR(22),
   UserName VARCHAR(255),
@@ -115,15 +117,24 @@ CREATE TABLE Hours(
   CONSTRAINT pk_Hours_RestaurantId PRIMARY KEY (RestaurantId),
   CONSTRAINT fk_Hours_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
 CREATE TABLE Attributes(
   RestaurantId VARCHAR(255),
   Attributes TEXT,
   CONSTRAINT pk_Attributes_RestaurantId PRIMARY KEY (RestaurantId),
   CONSTRAINT fk_Attributes_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
 CREATE TABLE Categories(
   RestaurantId VARCHAR(255),
   Categories TEXT,
   CONSTRAINT pk_Categories_RestaurantId PRIMARY KEY (RestaurantId),
   CONSTRAINT fk_Categories_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE TABLE Locations(
+	LocationId INT NOT NULL AUTO_INCREMENT,
+    State CHAR(2),
+    City VARCHAR(255), 
+    CONSTRAINT pk_Locations_LocationId PRIMARY KEY (LocationId)
+); 
