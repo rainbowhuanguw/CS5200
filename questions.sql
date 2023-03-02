@@ -36,9 +36,17 @@ FROM Restaurants
 WHERE State = "CA"
 GROUP BY City
 HAVING RestaurantCount > 100
-ORDER BY RestaurantCount DESC
+ORDER BY RestaurantCount DESC;
 
 # [YiCheng]What are the top 100 tipped Asian restaurants since Jan 2022?
+SELECT Restaurants.Name, COUNT(Tips.TipId) AS NumTips
+FROM Tips
+INNER JOIN Restaurants ON Tips.RestaurantId = Restaurants.RestaurantId
+INNER JOIN Categories ON Restaurants.RestaurantId = Categories.RestaurantId
+WHERE Categories.Categories LIKE '%Asian%' AND Tips.Date >= '2022-01-01'
+GROUP BY Restaurants.RestaurantId
+ORDER BY COUNT(Tips.TipId) DESC
+LIMIT 100;
 
 # [Youwei] List the type of the top 10 most popular restaurant based on the total number of reviews and tips. 
 SELECT Restaurants.Name, Categories, SUM(CNT) AS TOTAL FROM
