@@ -38,8 +38,7 @@ LOAD DATA INFILE 'tip.csv' IGNORE INTO TABLE Tips
   IGNORE 1 LINES
   (UserId,RestaurantId,Compliment_count,Date,Context);
 
-
-LOAD DATA INFILE 'hours.csv'  INTO TABLE Hours
+LOAD DATA INFILE 'hours.csv' IGNORE INTO TABLE Hours
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
