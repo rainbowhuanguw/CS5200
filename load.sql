@@ -39,7 +39,7 @@ LOAD DATA INFILE 'tip.csv' IGNORE INTO TABLE Tips
   (UserId,RestaurantId,Compliment_count,Date,Context);
 
 
-LOAD DATA INFILE 'hours.csv'  INTO TABLE Hours
+LOAD DATA INFILE 'hours.csv' IGNORE INTO TABLE Hours
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
@@ -52,12 +52,6 @@ LOAD DATA INFILE 'attributes_new.csv'  INTO TABLE Attributes
   IGNORE 1 LINES; 
   
 LOAD DATA INFILE 'category.csv'  INTO TABLE categories
-  FIELDS TERMINATED BY ','
-  ENCLOSED BY '"'
-  LINES TERMINATED BY '\r\n'
-  IGNORE 1 LINES; 
-
-LOAD DATA INFILE 'hours.csv' IGNORE INTO TABLE hours
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
