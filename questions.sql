@@ -64,46 +64,61 @@ SELECT Restaurants.Name, Categories, SUM(CNT) AS TOTAL FROM
   ORDER BY TOTAL DESC
   LIMIT 10;
 
-# [Caihong]For each restaurant type, what is the ratio of bad reviews (rating of 2 and below) to all of the reviews.
+# [Caihong]What are the top 10 highly rated restaurant types?
+SELECT AVG(Reviews.Stars) AS average_stars, COUNT(*) AS review_count, Categories.categories
+FROM Reviews
+INNER JOIN Restaurants
+ON Reviews.RestaurantId = Restaurants.RestaurantId
+INNER JOIN Categories
+ON Categories.RestaurantId = Reviews.RestaurantId
+WHERE Categories.categories like '%Restaurant%'
+GROUP BY Categories.categories
+HAVING review_count > 10
+ORDER BY average_stars DESC
+LIMIT 10;
 
 # [Min]What is the percentage of restaurants opening 24/7?
 SELECT
-    COUNT(*) AS total_restaurants,
-    SUM(CASE WHEN Hours.Monday = '00:00-24:00' AND
-                  Hours.Tuesday = '00:00-24:00' AND
-                  Hours.Wednesday = '00:00-24:00' AND
-                  Hours.Thursday = '00:00-24:00' AND
-                  Hours.Friday = '00:00-24:00' AND
-                  Hours.Saturday = '00:00-24:00' AND
-                  Hours.Sunday = '00:00-24:00'
-             THEN 1 ELSE 0 END) AS restaurants_open_24_7,
-    (SUM(CASE WHEN Hours.Monday = '00:00-24:00' AND
-                   Hours.Tuesday = '00:00-24:00' AND
-                   Hours.Wednesday = '00:00-24:00' AND
-                   Hours.Thursday = '00:00-24:00' AND
-                   Hours.Friday = '00:00-24:00' AND
-                   Hours.Saturday = '00:00-24:00' AND
-                   Hours.Sunday = '00:00-24:00'
-              THEN 1 ELSE 0 END) / COUNT(*)) * 100 AS percentage_open_24_7
+	COUNT(*) AS total_restaurants,
+	SUM(CASE WHEN Hours.Monday = '0:0-0:0' AND
+              	Hours.Tuesday = '0:0-0:0' AND
+              	Hours.Wednesday = '0:0-0:0' AND
+              	Hours.Thursday = '0:0-0:0' AND
+              	Hours.Friday = '0:0-0:0' AND
+              	Hours.Saturday = '0:0-0:0' AND
+              	Hours.Sunday = '0:0-0:0'
+         	THEN 1 ELSE 0 END) AS restaurants_open_24_7,
+	(SUM(CASE WHEN Hours.Monday = '0:0-0:0' AND
+               	Hours.Tuesday = '0:0-0:0' AND
+               	Hours.Wednesday = '0:0-0:0' AND
+               	Hours.Thursday = '0:0-0:0' AND
+               	Hours.Friday = '0:0-0:0' AND
+               	Hours.Saturday = '0:0-0:0' AND
+               	Hours.Sunday = '0:0-0:0'
+          	THEN 1 ELSE 0 END) / COUNT(*)) * 100 AS percentage_open_24_7
 FROM
-    Restaurants
+	Restaurants
 INNER JOIN
-    Hours
+	Hours
 ON
-    Restaurants.RestaurantId = Hours.RestaurantId;
+	Restaurants.RestaurantId = Hours.RestaurantId;
 
 # location related 
-# [Min]How many restaurants are within 1-mile walking distance of our Airbnb location and have a rating of 4.5 or higher?
+# [Min]How many restaurants within 1-mile walking distance of the Airbnb location (longitude: -119.686624, latitude:34.4274939) have ratings of 4.5 or higher?
 SELECT COUNT(*) AS 'Number of Restaurants'
 FROM Restaurants
-WHERE ST_DISTANCE_SPHERE(point(Restaurants.Latitude, Restaurants.Longitude), point(Airbnb.Latitude, Airbnb.Longitude)) <= 1609.34 /* Convert 1 mile to meters */
+WHERE ST_DISTANCE_SPHERE(point(Restaurants.Longitude, Restaurants.Latitude), point(-119.686624, 34.4274939)) <= 1609.34 /* Convert 1 mile to meters */
 AND Stars >= 4.5;
 
-# [Min]What are the top 10 vegetarian restaurants in the Greater Seattle Area?
-SELECT r.Name, r.Stars
+# [Min]What are the top 10 most reviewed vegetarian restaurants rating above 4?
+SELECT r.Name, r.Stars, COUNT(*) AS Review_Count
 FROM Restaurants r
-JOIN Categories c ON r.RestaurantId = c.RestaurantId
-WHERE c.Categories LIKE '%Vegetarian%' OR c.Categories LIKE '%Vegan%'
-AND r.City = 'Seattle'
-ORDER BY r.Stars DESC
+JOIN Categories c 
+ON r.RestaurantId = c.RestaurantId
+JOIN Reviews 
+ON r.RestaurantId = Reviews.RestaurantId
+WHERE (c.Categories LIKE '%Vegetarian%' OR c.Categories LIKE '%Vegan%')
+AND r.Stars > 4
+GROUP BY r.Name, r.Stars
+ORDER BY Review_Count DESC
 LIMIT 10;
