@@ -101,6 +101,34 @@ public class YelpUsersDao {
         }
     }
     
+    public YelpUsers updateUser(YelpUsers yelpUser, int reviewCount) throws SQLException {
+        String updateUser = "UPDATE YelpUsers SET review_count=? WHERE UserId=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+        try {
+            connection = connectionManager.getConnection();
+            updateStmt = connection.prepareStatement(updateUser);
+            
+            updateStmt.setInt(1, reviewCount);
+            updateStmt.setString(2, yelpUser.getUserId());
+            updateStmt.executeUpdate();
+
+            // Update the yelpUser param before returning to the caller.
+            yelpUser.setReviewCount(reviewCount);
+            return yelpUser;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if(connection != null) {
+                connection.close();
+            }
+            if(updateStmt != null) {
+                updateStmt.close();
+            }
+        }
+    }
+    
     public YelpUsers getYelpUserById(String userId) throws SQLException {
         String selectYelpUser =
             "SELECT UserId, UserName, review_count, yelping_since, useful, funny, cool, fans, "
