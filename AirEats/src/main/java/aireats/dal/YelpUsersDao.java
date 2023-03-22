@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class YelpUsersDao {
