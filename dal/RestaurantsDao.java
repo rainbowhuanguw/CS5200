@@ -1,5 +1,6 @@
 package aireats.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,32 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import aireats.model.Restaurant;
 
-/**
- * Use ConnectionManager to connect to your database instance.
- * 
- * ConnectionManager uses the MySQL Connector/J driver to connect to your local MySQL instance.
- * 
- * In our example, we will create a DAO (data access object) java class to interact with
- * each MySQL table. The DAO java classes will use ConnectionManager to open and close
- * connections.
- * 
- * Instructions:
- * 1. Install MySQL Community Server. During installation, you will need to set up a user,
- * password, and port. Keep track of these values.
- * 2. Download and install Connector/J: http://dev.mysql.com/downloads/connector/j/
- * 3. Add the Connector/J JAR to your buildpath. This allows your application to use the
- * Connector/J library. You can add the JAR using either of the following methods:
- *   A. When creating a new Java project, on the "Java Settings" page, go to the 
- *   "Libraries" tab.
- *   Click on the "Add External JARs" button.
- *   Navigate to the Connector/J JAR. On Windows, this looks something like:
- *   C:\Program Files (x86)\MySQL\Connector.J 8.0\mysql-connector-java-8.0.16-bin.jar
- *   B. If you already have a Java project created, then go to your project properties.
- *   Click on the "Java Build Path" option.
- *   Click on the "Libraries" tab, click on the "Add External Jars" button, and
- *   navigate to the Connector/J JAR.
- * 4. Update the "private final" variables below.
- */
+
 //MinYih Leu
 public class RestaurantsDao {
 	protected ConnectionManager connectionManager;
@@ -71,9 +47,65 @@ public class RestaurantsDao {
 	    }
 	    return restaurant;
 	}
+	
+	public Restaurant getRestaurantById(String id) throws SQLException {
+	    String query = "SELECT * FROM Restaurants WHERE RestaurantId = ?";
+	    Connection connection = connectionManager.getConnection();
+	    try (PreparedStatement statement = connection.prepareStatement(query)) {
+	        statement.setString(1, id);
+	        ResultSet rs = statement.executeQuery();
+	        if (rs.next()) {
+	            String restaurantId = rs.getString("RestaurantId");
+	            String name = rs.getString("Name");
+	            String address = rs.getString("Address");
+	            String city = rs.getString("City");
+	            String state = rs.getString("State");
+	            String zip = rs.getString("Zip");
+	            BigDecimal latitude = rs.getBigDecimal("Latitude");
+	            BigDecimal longitude = rs.getBigDecimal("Longitude");
+	            BigDecimal stars = rs.getBigDecimal("Stars");
+	            Restaurant restaurant = new Restaurant(restaurantId, name, address, city, state, zip, latitude, longitude, stars);
+	            return restaurant;
+	        }
+	        return null;
+	    } catch (SQLException e) {
+	        System.out.println("Error: " + e.getMessage());
+	        throw e;
+	    }
+	}
+
+	public List<Restaurant> getRestaurantByName(String name) throws SQLException {
+	    String query = "SELECT * FROM Restaurants WHERE Name LIKE ?";
+	    Connection connection = connectionManager.getConnection();
+	    List<Restaurant> restaurants = new ArrayList<>();
+	    try (PreparedStatement statement = connection.prepareStatement(query)) {
+	        statement.setString(1, "%" + name + "%");
+	        ResultSet rs = statement.executeQuery();
+	        while (rs.next()) {
+	            String restaurantId = rs.getString("RestaurantId");
+	            String restaurantName = rs.getString("Name");
+	            String address = rs.getString("Address");
+	            String city = rs.getString("City");
+	            String state = rs.getString("State");
+	            String zip = rs.getString("Zip");
+	            BigDecimal latitude = rs.getBigDecimal("Latitude");
+	            BigDecimal longitude = rs.getBigDecimal("Longitude");
+	            BigDecimal stars = rs.getBigDecimal("Stars");
+	            Restaurant restaurant = new Restaurant(restaurantId, restaurantName, address, city, state, zip, latitude, longitude, stars);
+	            restaurants.add(restaurant);
+	        }
+	        return restaurants;
+	    } catch (SQLException e) {
+	        System.out.println("Error: " + e.getMessage());
+	        throw e;
+	    }
+	}
 
 	public List<Restaurant> getNearbyRestaurants(double airbnbLatitude, double airbnbLongitude, double maxDistanceInMiles) throws SQLException {
-	    String query = "SELECT * FROM (SELECT *, (3959 * acos(cos(radians(?)) * cos(radians(Latitude)) * cos(radians(Longitude) - radians(?)) + sin(radians(?)) * sin(radians(Latitude)))) AS distance FROM Restaurants) AS X WHERE X.distance < ?";
+	    String query = "SELECT * FROM"
+	    		+ " (SELECT *, (3959 * acos(cos(radians(?)) * cos(radians(Latitude)) * cos(radians(Longitude) - radians(?)) + sin(radians(?)) * sin(radians(Latitude)))) AS distance "
+	    		+ "FROM Restaurants) AS X "
+	    		+ "WHERE X.distance < ?";
 	    Connection connection = connectionManager.getConnection();
 	    List<Restaurant> nearbyRestaurants = new ArrayList<>();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -89,9 +121,9 @@ public class RestaurantsDao {
 	            String city = rs.getString("City");
 	            String state = rs.getString("State");
 	            String zip = rs.getString("Zip");
-	            double latitude = rs.getDouble("Latitude");
-	            double longitude = rs.getDouble("Longitude");
-	            double stars = rs.getDouble("Stars");
+	            BigDecimal latitude = rs.getBigDecimal("Latitude");
+	            BigDecimal longitude = rs.getBigDecimal("Longitude");
+	            BigDecimal stars = rs.getBigDecimal("Stars");
 	            Restaurant restaurant = new Restaurant(restaurantId, name, address, city, state, zip, latitude, longitude, stars);
 	            nearbyRestaurants.add(restaurant);
 	        }

@@ -18,7 +18,7 @@ public class Restaurant {
     private BigDecimal longitude;
     private BigDecimal stars;
     
-    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, double latitude2, double longitude2, double stars2) {
+    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, BigDecimal latitude, BigDecimal longitude, BigDecimal stars) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.address = address;
