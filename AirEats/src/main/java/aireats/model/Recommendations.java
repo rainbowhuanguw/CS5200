@@ -1,4 +1,4 @@
-package aireats.models;
+package aireats.model;
 
 public class Recommendations {
     private Integer recommendationId;
