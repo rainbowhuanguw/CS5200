@@ -1,6 +1,7 @@
 package aireats.dal;
 
-import aireats.model.*;
+import aireats.model.Airbnbs;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirbnbsDao {
+public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
     protected ConnectionManager connectionManager;
 
     private static AirbnbsDao instance = null;
@@ -21,7 +22,8 @@ public class AirbnbsDao {
         }
         return instance;
     }
-    
+
+    @Override
     public Airbnbs create(Airbnbs airbnb) throws SQLException {
         String insertAirbnb = "INSERT INTO Airbnb(AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude) VALUES(?,?,?,?,?,?,?,?);";
         Connection connection = null;
@@ -53,6 +55,7 @@ public class AirbnbsDao {
         }
     }
 
+    @Override
     public Airbnbs delete(Airbnbs airbnb) throws SQLException {
         String deleteAirbnb = "DELETE FROM Airbnbs WHERE AirbnbId=?;";
         Connection connection = null;

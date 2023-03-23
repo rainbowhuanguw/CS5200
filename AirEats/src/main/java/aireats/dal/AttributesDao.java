@@ -8,7 +8,7 @@ import java.util.List;
 
 import aireats.model.*;
 
-public class AttributesDao {
+public class AttributesDao<T extends Attributes> implements Dao<T> {
 	protected ConnectionManager connectionManager;
 	
 	private static AttributesDao instance = null;
@@ -30,7 +30,7 @@ public class AttributesDao {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertUser);
 			insertStmt.setString(1, attribute.getRestaurantId());
-			insertStmt.setString(2, attribute.getAttributesStr());
+			insertStmt.setString(2,  attribute.getAttributesStr());
 			insertStmt.executeUpdate();
 			return attribute;
 		} catch (SQLException e) {

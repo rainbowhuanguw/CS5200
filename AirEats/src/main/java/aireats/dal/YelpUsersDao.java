@@ -1,4 +1,4 @@
-package aireats.dal;
+package  aireats.dal;
 
 import aireats.model.*;
 
@@ -9,12 +9,12 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 
 public class YelpUsersDao {
-    protected ConnectionManager connectionManager;
+    protected aireats.dal.ConnectionManager connectionManager;
 
     private static YelpUsersDao instance = null;
     
     protected YelpUsersDao() {
-        connectionManager = new ConnectionManager();
+        connectionManager = new aireats.dal.ConnectionManager();
     }
     
     public static YelpUsersDao getInstance() {

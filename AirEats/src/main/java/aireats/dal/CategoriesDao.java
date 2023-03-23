@@ -1,5 +1,5 @@
 //By Youwei Yu
-package aireats.dal;
+package aireats.AirEats.src.main.java.aireats.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import aireats.dal.ConnectionManager;
 import aireats.model.*;
 
 public class CategoriesDao {

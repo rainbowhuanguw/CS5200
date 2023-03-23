@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import aireats.model.*;
 
-public class HoursDao {
+public class HoursDao<T extends Hours> implements Dao<T> {
 	protected ConnectionManager connectionManager;
 	
 	private static HoursDao instance = null;
