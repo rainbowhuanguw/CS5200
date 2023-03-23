@@ -55,7 +55,7 @@ public class HoursDao {
 		
 	}
 	
-	public Hours getHourByRestaurantId(String restaurantId) throws SQLException {
+	public Hours getHoursByRestaurantId(String restaurantId) throws SQLException {
 		String selectHour = "SELECT RestaurantId,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday "
 				+ "FROM Hours WHERE RestaurantId=?;";
 		Connection connection = null;
@@ -96,7 +96,7 @@ public class HoursDao {
 		return null;
 	}
 	
-	public Hours updateHour(Hours hour) throws SQLException {
+	public Hours updateHours(Hours hour) throws SQLException {
 		String updateHour = 
 				"UPDATE Hours SET"
 				+ "Monday=?,Tuesday=?,Wednesday=?,Thursday=?,Friday=?,Saturday=?,Sunday=? "

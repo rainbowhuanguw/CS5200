@@ -47,7 +47,7 @@ public class AttributesDao {
 		}
 	}
 	
-	public Attributes getAttributeByRestaurantId(String restaurantId) throws SQLException {
+	public Attributes getAttributesByRestaurantId(String restaurantId) throws SQLException {
 		String selectAttribute = "SELECT RestaurantId,Attributes "
 				+ "FROM Attributes WHERE RestaurantId=?;";
 		Connection connection = null;
@@ -83,7 +83,7 @@ public class AttributesDao {
 		return null;
 	}
 	
-	public Attributes updateAttribute(Attributes attribute) throws SQLException {
+	public Attributes updateAttributes(Attributes attribute) throws SQLException {
 		String updateAttribute = 
 				"UPDATE Attributes SET"
 				+ "RestaurantId=?,Attributes=? "
