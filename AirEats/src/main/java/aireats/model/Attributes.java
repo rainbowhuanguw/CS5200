@@ -1,5 +1,6 @@
 package aireats.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Attributes {
@@ -50,7 +51,6 @@ public class Attributes {
 	
 	@Override
 	public String toString() {
-		return "Attributes [restaurantId=" + RestaurantId + ",
-		attributes=" + attributes + "]";
+		return "Attributes [restaurantId=" + restaurantId + ",attributes=" + attributes + "]";
 	}
 }
