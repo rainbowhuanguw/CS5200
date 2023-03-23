@@ -46,8 +46,8 @@ public class TipsDao {
             insertStmt = connection.prepareStatement(insertTip);
             insertStmt.setString(1, tips.getUserId());
             insertStmt.setString(2, tips.getRestaurantId());
-            insertStmt.setInt(3, tips.getCompliment_count());
-            insertStmt.setTimestamp(4, new Timestamp(tips.getDate().getTime()));
+            insertStmt.setInt(3, tips.getComplimentCount());
+            insertStmt.setDate(4, tips.getDate());
             insertStmt.setString(5, tips.getContext());
             insertStmt.executeUpdate();
 
@@ -150,10 +150,10 @@ public class TipsDao {
             if (results.next()) {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
-                int resultCompliment_Count = results.getInt("Compliment_count");
-                Date resultDate = new Date(results.getTimestamp("Date").getTime());
+                int resultComplimentCount = results.getInt("Compliment_count");
+                Date resultDate = new Date(results.getTime("Date").getTime());
                 String resultContext = results.getString("Context");
-                Tips tips = new Tips(resultUserId, resultRestaurantId, resultCompliment_Count, resultDate,
+                Tips tips = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
                 return tips;
             }
@@ -192,10 +192,10 @@ public class TipsDao {
             while (results.next()) {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
-                int resultCompliment_Count = results.getInt("Compliment_count");
-                Date resultDate = new Date(results.getTimestamp("Date").getTime());
+                int resultComplimentCount = results.getInt("Compliment_count");
+                Date resultDate = new Date(results.getTime("Date").getTime());
                 String resultContext = results.getString("Context");
-                Tips tips = new Tips(resultUserId, resultRestaurantId, resultCompliment_Count, resultDate,
+                Tips tips = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
                 returnTipsList.add(person);
             }
@@ -234,10 +234,10 @@ public class TipsDao {
             while (results.next()) {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
-                int resultCompliment_Count = results.getInt("Compliment_count");
-                Date resultDate = new Date(results.getTimestamp("Date").getTime());
+                int resultComplimentCount = results.getInt("Compliment_count");
+                Date resultDate = new Date(results.getDate("Date").getTime());
                 String resultContext = results.getString("Context");
-                Tips tips = new Tips(resultUserId, resultRestaurantId, resultCompliment_Count, resultDate,
+                Tips tips = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
                 returnTipsList.add(person);
             }

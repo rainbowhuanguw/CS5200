@@ -6,7 +6,7 @@ public class Recommendations {
 	private int tipId;
 	private string userId;
 	private string restaurantId;
-	private int compliment_count;
+	private int complimentCount;
 	private Date date;
 	private string context;
 
@@ -14,20 +14,20 @@ public class Recommendations {
 		this.tipId = tipId;
 	}
 
-	public Recommendations(int tipId, string userId, string restaurantId, int compliment_count, Date date,
+	public Recommendations(int tipId, string userId, string restaurantId, int complimentCount, Date date,
 			string context) {
 		this.tipId = tipId;
 		this.userId = userId;
 		this.restaurantId = restaurantId;
-		this.compliment_count = compliment_count;
+		this.complimentCount = complimentCount;
 		this.date = date;
 		this.context = context;
 	}
 
-	public Recommendations(string userId, string restaurantId, int compliment_count, Date date, string context) {
+	public Recommendations(string userId, string restaurantId, int complimentCount, Date date, string context) {
 		this.userId = userId;
 		this.restaurantId = restaurantId;
-		this.compliment_count = compliment_count;
+		this.complimentCount = complimentCount;
 		this.date = date;
 		this.context = context;
 	}
@@ -56,12 +56,12 @@ public class Recommendations {
 		this.restaurantId = restaurantId;
 	}
 
-	public int getCompliment_count() {
-		return this.compliment_count;
+	public int getComplimentCount() {
+		return this.complimentCount;
 	}
 
-	public void setCompliment_count(int compliment_count) {
-		this.compliment_count = compliment_count;
+	public void setComplimentCount(int complimentCount) {
+		this.complimentCount = complimentCount;
 	}
 
 	public Date getDate() {
