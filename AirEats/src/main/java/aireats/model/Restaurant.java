@@ -11,11 +11,15 @@ public class Restaurant {
     private String city;
     private String state;
     private String zip;
-    private double latitude;
-    private double longitude;
-    private double stars;
-    
-    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, double latitude, double longitude, double stars) {
+    private Double latitude;
+    private Double longitude;
+    private Double stars;
+    private Hours hours;
+    private Attributes attributes;
+    private Categories categories;
+
+    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip,
+            Double latitude, Double longitude, Double stars) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.address = address;
@@ -27,8 +31,24 @@ public class Restaurant {
         this.stars = stars;
     }
 
+    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip,
+            Double latitude, Double longitude, Double stars, Hours hours, Attributes attributes,
+            Categories categories) {
+        this.restaurantId = restaurantId;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.stars = stars;
+        this.hours = hours;
+        this.attributes = attributes;
+        this.categories = categories;
+    }
 
-	public String getRestaurantId() {
+    public String getRestaurantId() {
         return restaurantId;
     }
 
@@ -76,28 +96,59 @@ public class Restaurant {
         this.zip = zip;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public double getStars() {
+    public Double getStars() {
         return stars;
     }
 
-    public void setStars(double stars) {
+    public void setStars(Double stars) {
         this.stars = stars;
     }
-}
 
+    public Hours getHours() {
+        return hours;
+    }
+
+    public void setHours(Hours hours) {
+        this.hours = hours;
+    }
+
+    public Attributes getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Attributes attributes) {
+        this.attributes = attributes;
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Categories categories) {
+        this.categories = categories;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", address=" + address + ", city=" + city
+                + ", state=" + state + ", zip=" + zip + ", latitude=" + latitude + ", longitude=" + longitude
+                + ", stars=" + stars + ", hours=" + hours + ", attributes=" + attributes + ", categories=" + categories
+                + "]";
+    }
+}
