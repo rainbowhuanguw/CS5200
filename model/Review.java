@@ -11,13 +11,13 @@ public class Review {
     protected String userId;
     protected String restaurantId;
     protected int stars;
-    protected double useful;
-    protected double funny;
-    protected double cool;
+    protected Double useful;
+    protected Double funny;
+    protected Double cool;
     protected String content;
     protected LocalDateTime date;
 
-    public Review(String reviewId, String userId, String restaurantId, int stars, double useful, double funny, double cool, String content, LocalDateTime date) {
+    public Review(String reviewId, String userId, String restaurantId, int stars, Double useful, Double funny, Double cool, String content, LocalDateTime date) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.restaurantId = restaurantId;
@@ -65,7 +65,7 @@ public class Review {
 		return useful;
 	}
 
-	public void setUseful(double useful) {
+	public void setUseful(Double useful) {
 		this.useful = useful;
 	}
 
@@ -73,7 +73,7 @@ public class Review {
 		return funny;
 	}
 
-	public void setFunny(double funny) {
+	public void setFunny(Double funny) {
 		this.funny = funny;
 	}
 
@@ -81,7 +81,7 @@ public class Review {
 		return cool;
 	}
 
-	public void setCool(double cool) {
+	public void setCool(Double cool) {
 		this.cool = cool;
 	}
 

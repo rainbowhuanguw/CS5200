@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -52,6 +54,65 @@ public class ReviewsDao {
             throw e;
         }
         return review;
+    }
+    /**
+     * Retrieves a list of reviews for a given user ID.
+     */
+    public List<Review> getReviewsByUserId(String userId) throws SQLException {
+        List<Review> reviews = new ArrayList<>();
+        String query = "SELECT * FROM Reviews WHERE UserId = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, userId);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    String reviewId = rs.getString("ReviewId");
+                    String restaurantId = rs.getString("RestaurantId");
+                    int stars = rs.getInt("Stars");
+                    double useful = rs.getDouble("Useful");
+                    double funny = rs.getDouble("Funny");
+                    double cool = rs.getDouble("Cool");
+                    String content = rs.getString("Content");
+                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
+                    reviews.add(review);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            throw e;
+        }
+        return reviews;
+    }
+
+    /**
+     * Retrieves a list of reviews for a given restaurant ID.
+     */
+    public List<Review> getReviewsByRestaurantId(String restaurantId) throws SQLException {
+        List<Review> reviews = new ArrayList<>();
+        String query = "SELECT * FROM Reviews WHERE RestaurantId = ?";
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, restaurantId);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    String reviewId = rs.getString("ReviewId");
+                    String userId = rs.getString("UserId");
+                    int stars = rs.getInt("Stars");
+                    double useful = rs.getDouble("Useful");
+                    double funny = rs.getDouble("Funny");
+                    double cool = rs.getDouble("Cool");
+                    String content = rs.getString("Content");
+                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
+                    reviews.add(review);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            throw e;
+        }
+        return reviews;
     }
 
 	/**
@@ -106,7 +167,7 @@ public class ReviewsDao {
         }
         return review;
     }
-
+    
     public Review delete(Review review) throws SQLException {
         String query = "DELETE FROM Reviews WHERE ReviewId = ?";
         Connection connection = connectionManager.getConnection();

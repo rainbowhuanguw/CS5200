@@ -11,11 +11,11 @@ public class Restaurant {
     private String city;
     private String state;
     private String zip;
-    private double latitude;
-    private double longitude;
-    private double stars;
+    private Double latitude;
+    private Double longitude;
+    private Double stars;
     
-    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, double latitude, double longitude, double stars) {
+    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, Double latitude, Double longitude, Double stars) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.address = address;
@@ -80,7 +80,7 @@ public class Restaurant {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
@@ -88,7 +88,7 @@ public class Restaurant {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -96,7 +96,7 @@ public class Restaurant {
         return stars;
     }
 
-    public void setStars(double stars) {
+    public void setStars(Double stars) {
         this.stars = stars;
     }
 }
