@@ -1,31 +1,31 @@
 package aireats.models;
 
-public class Recommendations {
-    private int recommendationsId;
+public class Recommendation {
+    private int recommendationId;
     private string restaurantId;
     private string userId;
 
-    public Recommendations(int recommendationsId) {
-        this.recommendationsId = recommendationsId;
+    public Recommendation(int recommendationId) {
+        this.recommendationId = recommendationId;
     }
 
-    public Recommendations(int recommendationsId, string restaurantId, string userId) {
-        this.recommendationsId = recommendationsId;
+    public Recommendation(int recommendationId, string restaurantId, string userId) {
+        this.recommendationId = recommendationId;
         this.restaurantId = restaurantId;
         this.userId = userId;
     }
 
-    public Recommendations(string restaurantId, string userId) {
+    public Recommendation(string restaurantId, string userId) {
         this.restaurantId = restaurantId;
         this.userId = userId;
     }
 
-    public int getRecommendationsId() {
-        return this.recommendationsId;
+    public int getRecommendationId() {
+        return this.recommendationId;
     }
 
-    public void setRecommendationsId(int recommendationsId) {
-        this.recommendationsId = recommendationsId;
+    public void setRecommendationId(int recommendationId) {
+        this.recommendationId = recommendationId;
     }
 
     public string getRestaurantId() {
