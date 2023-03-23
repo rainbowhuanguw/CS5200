@@ -11,6 +11,11 @@ public class Attributes {
 		this.attributes = attributes;
 	}
 
+	public Attributes(String restaurantId, String attributesStr) {
+		this.restaurantId = restaurantId;
+		this.attributes = Arrays.asList(attributesStr.split(", "));
+	}
+
 	/**
 	 * @return the restaurantId
 	 */
@@ -32,6 +37,10 @@ public class Attributes {
 		return attributes;
 	}
 
+	public String getAttributesStr() {
+		return String.join(", ", attributes);
+	}
+
 	/**
 	 * @param attributes the attributes to set
 	 */
@@ -39,4 +48,9 @@ public class Attributes {
 		this.attributes = attributes;
 	}
 	
+	@Override
+	public String toString() {
+		return "Attributes [restaurantId=" + RestaurantId + ",
+		attributes=" + attributes + "]";
+	}
 }

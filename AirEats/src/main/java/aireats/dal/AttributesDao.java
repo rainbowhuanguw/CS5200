@@ -28,10 +28,8 @@ public class AttributesDao {
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertUser);
-			
 			insertStmt.setString(1, attribute.getRestaurantId());
-			insertStmt.setString(2, attribute.getAttributes().toString());
-
+			insertStmt.setString(2, attribute.getAttributesStr());
 			insertStmt.executeUpdate();
 			return attribute;
 		} catch (SQLException e) {
@@ -62,8 +60,7 @@ public class AttributesDao {
 			if(results.next()) {
 				String resultRestaurantId = results.getString("RestaurantId");
 				String attributeString = results.getString("Attributes");
-				List<String> attributeList = Arrays.asList(attributeString.substring(1, attributeString.length()-1).split(", "));
-				Attributes attribute = new Attributes(resultRestaurantId, attributeList);
+				Attributes attribute = new Attributes(resultRestaurantId, attributeString);
 				return attribute;
 			}
 		}catch (SQLException e) {
@@ -95,7 +92,7 @@ public class AttributesDao {
 			updateStmt = connection.prepareStatement(updateAttribute);
 	
 			updateStmt.setString(1, attribute.getRestaurantId());
-			updateStmt.setString(2, attribute.getAttributes().toString());
+			updateStmt.setString(2, attribute.getAttributesStr());
 			updateStmt.executeUpdate();
 			
 			return attribute;
