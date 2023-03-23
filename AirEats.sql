@@ -35,6 +35,11 @@ CREATE TABLE YelpUsers (
   compliment_photos int,
   CONSTRAINT pk_YelpUsers_UserId PRIMARY KEY (UserId)
 );
+CREATE TABLE Hosts (
+  HostId Int,
+  HostName VARCHAR(255),
+  CONSTRAINT pk_Hosts_HostId PRIMARY KEY (HostId)
+);
 CREATE TABLE Airbnb (
   AirbnbId VARCHAR(255),
   HostId Int,
@@ -56,11 +61,6 @@ CREATE TABLE Users (
   AirbnbId VARCHAR(255),
   CONSTRAINT pk_Users_UserName PRIMARY KEY (UserName),
   CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId) REFERENCES Airbnb(AirbnbId) ON UPDATE CASCADE ON DELETE SET NULL
-);
-CREATE TABLE Hosts (
-  HostId Int,
-  HostName VARCHAR(255),
-  CONSTRAINT pk_Hosts_HostId PRIMARY KEY (HostId)
 );
 CREATE TABLE Restaurants(
   RestaurantId VARCHAR(22),
