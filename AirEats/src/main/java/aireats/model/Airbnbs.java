@@ -2,22 +2,23 @@ package aireats.model;
 
 public class Airbnbs {
     protected String airbnbId;
-    protected int hostId;
     protected String name;
     protected String city;
     protected String neighborhood;
     protected String state;
     protected Double latitude;
     protected Double longitude;
+    protected Integer hostId;
 
     // Everything included
-    public Airbnbs(String airbnbId, int hostId, String name, String city, String neighborhood, String state,
-            Double latitude, Double longitude) {
+    public Airbnbs(String airbnbId, String name, Integer hostId, String city, String neighborhood, String state,
+                   Double latitude, Double longitude) {
         this.airbnbId = airbnbId;
         this.hostId = hostId;
         this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
+        this.hostId = hostId;
         this.state = state;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -28,11 +29,11 @@ public class Airbnbs {
     }
 
     // Everything except PK
-    public Airbnbs(String name, int hostId, String city, String neighborhood, String state,
-            Double latitude, Double longitude) {
-    	this.hostId = hostId;
-        this.name = name;
+    public Airbnbs(String name, Integer hostId, String city, String neighborhood, String state,
+                   Double latitude, Double longitude) {
+    	this.name = name;
         this.city = city;
+        this.hostId = hostId;
         this.neighborhood = neighborhood;
         this.state = state;
         this.latitude = latitude;
@@ -47,20 +48,20 @@ public class Airbnbs {
         this.airbnbId = airbnbId;
     }
 
-    public int getHostId() {
-    	return hostId;
-    }
-    
-    public void setHostId(int hostId) {
-    	this.hostId = hostId;
-    }
-    
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getHostId() {
+        return hostId;
+    }
+
+    public void setHostId(Integer hostId) {
+        this.hostId = hostId;
     }
 
     public String getCity() {

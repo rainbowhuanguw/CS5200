@@ -1,6 +1,11 @@
 package aireats.dal;
 
+<<<<<<< HEAD
 import aireats.model.Airbnbs;
+=======
+import aireats.AirEats.src.main.java.aireats.model.Airbnbs;
+import aireats.dal.ConnectionManager;
+>>>>>>> e272c38 (added host id)
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,6 +38,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             insertStmt = connection.prepareStatement(insertAirbnb);
             
             insertStmt.setString(1, airbnb.getAirbnbId());
+<<<<<<< HEAD
             insertStmt.setInt(2, airbnb.getHostId());
             insertStmt.setString(3, airbnb.getName());
             insertStmt.setString(4, airbnb.getCity());
@@ -40,6 +46,15 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             insertStmt.setString(6, airbnb.getState());
             insertStmt.setDouble(7, airbnb.getLatitude());
             insertStmt.setDouble(8, airbnb.getLongitude());
+=======
+            insertStmt.setString(2, airbnb.getName());
+            insertStmt.setString(3, airbnb.getCity());
+            insertStmt.setInt(4, airbnb.getHostId());
+            insertStmt.setString(4, airbnb.getNeighborhood());
+            insertStmt.setString(5, airbnb.getState());
+            insertStmt.setDouble(6, airbnb.getLatitude());
+            insertStmt.setDouble(7, airbnb.getLongitude());
+>>>>>>> e272c38 (added host id)
             insertStmt.executeUpdate();
             return airbnb;
         } catch (SQLException e) {
@@ -131,8 +146,13 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 String state = results.getString("State");
                 Double latitude = results.getDouble("Latitude");
                 Double longitude = results.getDouble("Longitude");
+                Integer hostId = results.getInt("HostId");
 
+<<<<<<< HEAD
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, name, city, neighborhood, state, latitude, longitude);
+=======
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, hostId, city, neighborhood, state, latitude, longitude);
+>>>>>>> e272c38 (added host id)
                 return airbnb;
             }
         } catch (SQLException e) {
@@ -175,8 +195,13 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 String state = results.getString("State");
                 Double latitude = results.getDouble("Latitude");
                 Double longitude = results.getDouble("Longitude");
+                Integer hostId = results.getInt("HostId");
 
+<<<<<<< HEAD
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, name, city, neighborhood, state, latitude, longitude);
+=======
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, hostId, city, neighborhood, state, latitude, longitude);
+>>>>>>> e272c38 (added host id)
                 airbnbs.add(airbnb);
             }
     	} catch (SQLException e) {
@@ -221,8 +246,13 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 String resultState = results.getString("State");
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
+                Integer resultsHostId = results.getInt("HostId");
 
+<<<<<<< HEAD
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+=======
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultName, resultsHostId, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+>>>>>>> e272c38 (added host id)
                 airbnbs.add(airbnb);
             }
         } catch (SQLException e) {
