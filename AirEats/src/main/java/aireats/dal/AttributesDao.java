@@ -78,6 +78,52 @@ public class AttributesDao {
 		}
 		return null;
 	}
+
+	public List<Restaurant> getRestaurantsByAttributes(String keyword) throws SQLException {
+		List<Restaurant> ret = new ArrayList<Restaurant>();
+        String selectRestaurants = "SELECT Restaurants.RestaurantId, Name, Address, City, State, Zip, Latitude, Longitude, Stars "
+                +
+                "FROM Attributes LEFT JOIN Restaurants " +
+                "ON Attributes.RestaurantId = Restaurants.RestaurantId " +
+                "WHERE Attributes.Attributes LIKE ?";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectRestaurants);
+            selectStmt.setString(1, "%" + keyword + "%");
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                String restaurantId = results.getString("Restaurants.RestaurantId");
+                String name = results.getString("Name");
+                String address = results.getString("Address");
+                String city = results.getString("City");
+                String state = results.getString("State");
+                String zip = results.getString("Zip");
+                double latitude = results.getDouble("Latitude");
+                double longitude = results.getDouble("Longitude");
+                double stars = results.getDouble("Stars");
+                Restaurant restaurant = new Restaurant(restaurantId, name, address, city, state, zip, latitude,
+                        longitude, stars);
+                ret.add(restaurant);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return ret;
+	}
 	
 	public Attributes updateAttributes(Attributes attribute) throws SQLException {
 		String updateAttribute = 
