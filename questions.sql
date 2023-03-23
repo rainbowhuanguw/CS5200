@@ -6,7 +6,11 @@ Use AirEats;
 SELECT re.UserId, count(ReviewId) as total_reviews, u.UserName
 FROM reviews re
 JOIN YelpUsers u ON u.UserId = re.UserId
+<<<<<<< HEAD
 GROUP BY re.UserId
+=======
+GROUP BY UserId
+>>>>>>> 9f1e7ed (Correct users to YelpUsers)
 ORDER BY count(ReviewId) DESC
 LIMIT 10;
 
