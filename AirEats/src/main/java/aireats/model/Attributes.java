@@ -1,5 +1,6 @@
 package aireats.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Attributes {
@@ -9,6 +10,11 @@ public class Attributes {
 	public Attributes(String restaurantId, List<String> attributes) {
 		this.restaurantId = restaurantId;
 		this.attributes = attributes;
+	}
+
+	public Attributes(String restaurantId, String attributesStr) {
+		this.restaurantId = restaurantId;
+		this.attributes = Arrays.asList(attributesStr.split(", "));
 	}
 
 	/**
@@ -32,6 +38,10 @@ public class Attributes {
 		return attributes;
 	}
 
+	public String getAttributesStr() {
+		return String.join(", ", attributes);
+	}
+
 	/**
 	 * @param attributes the attributes to set
 	 */
@@ -39,4 +49,8 @@ public class Attributes {
 		this.attributes = attributes;
 	}
 	
+	@Override
+	public String toString() {
+		return "Attributes [restaurantId=" + restaurantId + ",attributes=" + attributes + "]";
+	}
 }

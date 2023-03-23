@@ -11,7 +11,7 @@ public class Airbnbs {
 
     // Everything included
     public Airbnbs(String airbnbId, String name, String city, String neighborhood, String state,
-                  Double latitude, Double longitude) {
+            Double latitude, Double longitude) {
         this.airbnbId = airbnbId;
         this.name = name;
         this.city = city;
@@ -20,17 +20,11 @@ public class Airbnbs {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-    
-    
-    // PK only
-    public Airbnbs(String airbnbId) {
-    	this.airbnbId = airbnbId;
-    }
-    
+
     // Everything except PK
     public Airbnbs(String name, String city, String neighborhood, String state,
-    		Double latitude, Double longitude) {
-    	this.name = name;
+            Double latitude, Double longitude) {
+        this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
         this.state = state;
@@ -94,4 +88,3 @@ public class Airbnbs {
         this.longitude = longitude;
     }
 }
-
