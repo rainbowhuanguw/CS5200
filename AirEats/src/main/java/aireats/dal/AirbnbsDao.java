@@ -36,8 +36,8 @@ public class AirbnbsDao {
             insertStmt.setString(3, airbnb.getCity());
             insertStmt.setString(4, airbnb.getNeighborhood());
             insertStmt.setString(5, airbnb.getState());
-            insertStmt.setBigDecimal(6, airbnb.getLatitude());
-            insertStmt.setBigDecimal(7, airbnb.getLongitude());
+            insertStmt.setDouble(6, airbnb.getLatitude());
+            insertStmt.setDouble(7, airbnb.getLongitude());
             insertStmt.executeUpdate();
             return airbnb;
         } catch (SQLException e) {
@@ -125,8 +125,8 @@ public class AirbnbsDao {
                 String city = results.getString("City");
                 String neighborhood = results.getString("Neighborhood");
                 String state = results.getString("State");
-                BigDecimal latitude = results.getBigDecimal("Latitude");
-                BigDecimal longitude = results.getBigDecimal("Longitude");
+                Double latitude = results.getDouble("Latitude");
+                Double longitude = results.getDouble("Longitude");
 
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, city, neighborhood, state, latitude, longitude);
                 return airbnb;
@@ -168,8 +168,8 @@ public class AirbnbsDao {
                 String city = results.getString("City");
                 String neighborhood = results.getString("Neighborhood");
                 String state = results.getString("State");
-                BigDecimal latitude = results.getBigDecimal("Latitude");
-                BigDecimal longitude = results.getBigDecimal("Longitude");
+                Double latitude = results.getDouble("Latitude");
+                Double longitude = results.getDouble("Longitude");
 
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, city, neighborhood, state, latitude, longitude);
                 airbnbs.add(airbnb);
@@ -213,8 +213,8 @@ public class AirbnbsDao {
                 String resultCity = results.getString("City");
                 String resultNeighborhood = results.getString("Neighborhood");
                 String resultState = results.getString("State");
-                BigDecimal resultLatitude = results.getBigDecimal("Latitude");
-                BigDecimal resultLongitude = results.getBigDecimal("Longitude");
+                Double resultLatitude = results.getDouble("Latitude");
+                Double resultLongitude = results.getDouble("Longitude");
 
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
