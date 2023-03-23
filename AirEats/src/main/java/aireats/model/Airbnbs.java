@@ -26,7 +26,7 @@ public class Airbnbs {
     // Everything except PK
     public Airbnbs(String name, int hostId, String city, String neighborhood, String state,
             Double latitude, Double longitude) {
-    	this.hostId;
+    	this.hostId = hostId;
         this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
