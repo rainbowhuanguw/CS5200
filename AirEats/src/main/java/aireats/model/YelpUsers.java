@@ -1,8 +1,6 @@
 package aireats.model;
 
 import java.sql.Timestamp;
-import java.math.BigDecimal;
-
 
 public class YelpUsers {
 	protected String userId;
@@ -13,7 +11,7 @@ public class YelpUsers {
 	protected int funny;
 	protected int cool;
 	protected int fans;
-	protected BigDecimal averageStars;
+	protected Double averageStars;
 	protected int complimentHot;
 	protected int complimentMore;
 	protected int complimentProfile;
@@ -29,7 +27,7 @@ public class YelpUsers {
 	// Everything included
     public YelpUsers(String userId, String userName, 
     		int reviewCount, Timestamp yelpingSince, int useful, int funny, int cool, 
-    		int fans, BigDecimal averageStars, int complimentHot, int complimentMore, int complimentProfile, 
+    		int fans, Double averageStars, int complimentHot, int complimentMore, int complimentProfile, 
     		int complimentCute, int complimentList, int complimentNote, int complimentPlain, int complimentCool, 
     		int complimentFunny, int complimentWriter, int complimentPhotos) {
         this.userId = userId;
@@ -62,7 +60,7 @@ public class YelpUsers {
     // Everything except PK
     public YelpUsers(String userName, 
     		int reviewCount, Timestamp yelpingSince, int useful, int funny, int cool, 
-    		int fans, BigDecimal averageStars, int complimentHot, int complimentMore, int complimentProfile, 
+    		int fans, Double averageStars, int complimentHot, int complimentMore, int complimentProfile, 
     		int complimentCute, int complimentList, int complimentNote, int complimentPlain, int complimentCool, 
     		int complimentFunny, int complimentWriter, int complimentPhotos) {
         this.userName = userName;
@@ -151,11 +149,11 @@ public class YelpUsers {
         this.fans = fans;
     }
 
-    public BigDecimal getAverageStars() {
+    public Double getAverageStars() {
         return averageStars;
     }
 
-    public void setAverageStars(BigDecimal averageStars) {
+    public void setAverageStars(Double averageStars) {
         this.averageStars = averageStars;
     }
 

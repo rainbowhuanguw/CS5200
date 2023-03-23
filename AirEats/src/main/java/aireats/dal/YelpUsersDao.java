@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.math.BigDecimal;
-
 
 public class YelpUsersDao {
     protected ConnectionManager connectionManager;
@@ -45,7 +43,7 @@ public class YelpUsersDao {
             insertStmt.setInt(6, yelpUser.getFunny());
             insertStmt.setInt(7, yelpUser.getCool());
             insertStmt.setInt(8, yelpUser.getFans());
-            insertStmt.setBigDecimal(9, yelpUser.getAverageStars());
+            insertStmt.setDouble(9, yelpUser.getAverageStars());
             insertStmt.setInt(10, yelpUser.getComplimentHot());
             insertStmt.setInt(11, yelpUser.getComplimentMore());
             insertStmt.setInt(12, yelpUser.getComplimentProfile());
@@ -151,7 +149,7 @@ public class YelpUsersDao {
                 int funny = results.getInt("funny");
                 int cool = results.getInt("cool");
                 int fans = results.getInt("fans");
-                BigDecimal averageStars = results.getBigDecimal("average_stars");
+                Double averageStars = results.getDouble("average_stars");
                 int complimentHot = results.getInt("compliment_hot");
                 int complimentMore = results.getInt("compliment_more");
                 int complimentProfile = results.getInt("compliment_profile");

@@ -2,6 +2,7 @@ package aireats.model;
 
 public class Airbnbs {
     protected String airbnbId;
+    protected int hostId;
     protected String name;
     protected String city;
     protected String neighborhood;
@@ -10,9 +11,10 @@ public class Airbnbs {
     protected Double longitude;
 
     // Everything included
-    public Airbnbs(String airbnbId, String name, String city, String neighborhood, String state,
+    public Airbnbs(String airbnbId, int hostId, String name, String city, String neighborhood, String state,
             Double latitude, Double longitude) {
         this.airbnbId = airbnbId;
+        this.hostId = hostId;
         this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
@@ -22,8 +24,9 @@ public class Airbnbs {
     }
 
     // Everything except PK
-    public Airbnbs(String name, String city, String neighborhood, String state,
+    public Airbnbs(String name, int hostId, String city, String neighborhood, String state,
             Double latitude, Double longitude) {
+    	this.hostId = hostId;
         this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
@@ -40,6 +43,14 @@ public class Airbnbs {
         this.airbnbId = airbnbId;
     }
 
+    public int getHostId() {
+    	return hostId;
+    }
+    
+    public void setHostId(int hostId) {
+    	this.hostId = hostId;
+    }
+    
     public String getName() {
         return name;
     }
