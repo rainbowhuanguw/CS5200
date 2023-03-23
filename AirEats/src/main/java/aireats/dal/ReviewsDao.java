@@ -157,7 +157,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
         }
         return review;
     }
-    
+
     public Review delete(Review review) throws SQLException {
         String query = "DELETE FROM Reviews WHERE ReviewId = ?";
         Connection connection = connectionManager.getConnection();

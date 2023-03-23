@@ -1,4 +1,5 @@
 package aireats.model;
+
 public class Restaurant {
     private String restaurantId;
     private String name;

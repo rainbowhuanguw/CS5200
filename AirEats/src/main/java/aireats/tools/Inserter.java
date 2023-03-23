@@ -1,7 +1,7 @@
 package aireats.tools;
 
-import  aireats.dal.*;
-import  aireats.model.*;
+import aireats.dal.*;
+import aireats.model.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class Inserter {
     private static final String delim = ",";
+    private static final int ROW_COUNT_LIMIT = 5000;
     private static final HostsConverter hostsConverter = new HostsConverter();
     private static final HostsDao<Hosts> hostsDao = HostsDao.getInstance();
 
@@ -81,6 +82,7 @@ public class Inserter {
         ObjectConverter converter = converterMap.get(csvPath);
         Dao dao = daoMap.get(csvPath);
         boolean isHeader = true;
+        int rowCount = 0;
 
         while ((line = br.readLine()) != null) {
             List<String> strs = List.of(line.split(delim));
@@ -89,7 +91,12 @@ public class Inserter {
                 isHeader = false;
                 continue;
             }
+
+            // read max 5000 lines for each load
+            if (rowCount >= ROW_COUNT_LIMIT) break;
+
             try {
+                rowCount++;
                 dao.create(converter.listToObject(strs));
             } catch (SQLException e) {
                 e.printStackTrace();

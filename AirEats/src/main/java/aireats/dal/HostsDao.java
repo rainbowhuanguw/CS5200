@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import aireats.model.*;
+import aireats.model.Hosts;
 
 public class HostsDao<T extends Hosts> implements Dao<T> {
 	protected ConnectionManager connectionManager;
