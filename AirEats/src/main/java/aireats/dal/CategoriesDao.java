@@ -1,5 +1,5 @@
 //By Youwei Yu
-package aireats.AirEats.src.main.java.aireats.dal;
+package aireats.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import aireats.AirEats.src.main.java.aireats.model.Categories;
-import aireats.dal.ConnectionManager;
+import  aireats.model.Categories;
+import aireats.model.Restaurant;
 
 public class CategoriesDao<T extends Categories> implements Dao<T> {
     protected ConnectionManager connectionManager;

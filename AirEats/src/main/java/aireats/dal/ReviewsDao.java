@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewsDao {
+public class ReviewsDao <T extends Review> implements Dao<T>{
     private ConnectionManager connectionManager;
     private static ReviewsDao instance = null;
 
