@@ -1,6 +1,5 @@
 package aireats.model;
 
-
 public class Hours {
 	protected String restaurantId;
 	protected String monday;

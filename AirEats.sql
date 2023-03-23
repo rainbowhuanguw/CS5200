@@ -1,6 +1,13 @@
 # Create the schema if necessary.
+<<<<<<< HEAD
 CREATE SCHEMA IF NOT EXISTS AirEats;
 USE AirEats;
+=======
+drop database AirEats_test; 
+CREATE SCHEMA IF NOT EXISTS AirEats_test;
+USE AirEats_test;
+
+>>>>>>> 218e100 (resolve conflicts)
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Tips;
 DROP TABLE IF EXISTS Hours;
@@ -35,6 +42,7 @@ CREATE TABLE YelpUsers (
   compliment_photos int,
   CONSTRAINT pk_YelpUsers_UserId PRIMARY KEY (UserId)
 );
+<<<<<<< HEAD
 CREATE TABLE Hosts (
   HostId Int,
   HostName VARCHAR(255),
@@ -43,14 +51,22 @@ CREATE TABLE Hosts (
 CREATE TABLE Airbnb (
   AirbnbId VARCHAR(255),
   HostId Int,
+=======
+CREATE TABLE Airbnb (
+  AirbnbId VARCHAR(255),
+>>>>>>> 218e100 (resolve conflicts)
   Name VARCHAR(255),
   City VARCHAR(255),
   Neighborhood VARCHAR(255),
   State VARCHAR(22),
   Latitude DECIMAL(10, 7),
   Longitude DECIMAL(10, 7),
+<<<<<<< HEAD
   CONSTRAINT pk_Airbnb_AirbnbId PRIMARY KEY (AirbnbId),
   CONSTRAINT fk_Airbnb_HostId FOREIGN KEY (HostId) REFERENCES Hosts(HostId) ON UPDATE CASCADE ON DELETE SET NULL
+=======
+  CONSTRAINT pk_Airbnb_AirbnbId PRIMARY KEY (AirbnbId)
+>>>>>>> 218e100 (resolve conflicts)
 );
 CREATE TABLE Users (
   UserName VARCHAR(255),
@@ -60,7 +76,16 @@ CREATE TABLE Users (
   Phone VARCHAR(20),
   AirbnbId VARCHAR(255),
   CONSTRAINT pk_Users_UserName PRIMARY KEY (UserName),
+<<<<<<< HEAD
   CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId) REFERENCES Airbnb(AirbnbId) ON UPDATE CASCADE ON DELETE SET NULL
+=======
+  CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId) REFERENCES Airbnb(AirbnbId) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE Hosts (
+  HostId Int,
+  HostName VARCHAR(255),
+  CONSTRAINT pk_Hosts_HostId PRIMARY KEY (HostId)
+>>>>>>> 218e100 (resolve conflicts)
 );
 CREATE TABLE Restaurants(
   RestaurantId VARCHAR(22),
@@ -86,7 +111,11 @@ CREATE TABLE Reviews (
   Content TEXT,
   Date datetime,
   CONSTRAINT pk_Reviews_ReviewId PRIMARY KEY (ReviewId),
+<<<<<<< HEAD
   CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
+=======
+  CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
+>>>>>>> 218e100 (resolve conflicts)
 );
 CREATE TABLE Tips(
   TipId INT AUTO_INCREMENT,
@@ -96,14 +125,22 @@ CREATE TABLE Tips(
   Date datetime,
   Context TEXT,
   CONSTRAINT pk_Tips_TipId PRIMARY KEY (TipId),
+<<<<<<< HEAD
   CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
+=======
+  CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
+>>>>>>> 218e100 (resolve conflicts)
 );
 CREATE TABLE Recommendations(
   RecommendationId INT AUTO_INCREMENT,
   RestaurantId VARCHAR(22),
   UserId VARCHAR(22),
   CONSTRAINT pk_Recommendations_RecommendationId PRIMARY KEY (RecommendationId),
+<<<<<<< HEAD
   CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
+=======
+  CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
+>>>>>>> 218e100 (resolve conflicts)
 );
 CREATE TABLE Hours(
   RestaurantId VARCHAR(255),

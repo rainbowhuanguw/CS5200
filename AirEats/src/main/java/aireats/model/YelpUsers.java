@@ -88,6 +88,7 @@ public class YelpUsers {
             int fans, Double averageStars, int complimentHot, int complimentMore, int complimentProfile,
             int complimentCute, int complimentList, int complimentNote, int complimentPlain, int complimentCool,
             int complimentFunny, int complimentWriter, int complimentPhotos) {
+
         this.userName = userName;
         this.reviewCount = reviewCount;
         this.yelpingSince = yelpingSince;
@@ -245,29 +246,29 @@ public class YelpUsers {
     public void setComplimentCool(int complimentCool) {
         this.complimentCool = complimentCool;
     }
-
-    public int getComplimentFunny() {
-        return complimentFunny;
-    }
-
-    public void setComplimentFunny(int complimentFunny) {
-        this.complimentFunny = complimentFunny;
-    }
-
-    public int getComplimentWriter() {
-        return complimentWriter;
-    }
-
-    public void setComplimentWriter(int complimentWriter) {
-        this.complimentWriter = complimentWriter;
-    }
-
-    public int getComplimentPhotos() {
-        return complimentPhotos;
-    }
-
-    public void setComplimentPhotos(int complimentPhotos) {
-        this.complimentPhotos = complimentPhotos;
-    }
+    
+	public int getComplimentFunny() {
+		return complimentFunny;
+	}
+    
+	public void setComplimentFunny(int complimentFunny) {
+		this.complimentFunny = complimentFunny;
+	}
+    
+	public int getComplimentWriter() {
+		return complimentWriter;
+	}
+	
+	public void setComplimentWriter(int complimentWriter) {
+		this.complimentWriter = complimentWriter;
+	}
+	
+	public int getComplimentPhotos() {
+		return complimentPhotos;
+	}
+	
+	public void setComplimentPhotos(int complimentPhotos) {
+		this.complimentPhotos = complimentPhotos; 
+	}
 
 }

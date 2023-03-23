@@ -1,7 +1,5 @@
 package aireats.tools;
 
-import aireats.model.Restaurant;
-
 import java.util.List;
 
 public class RestaurantConverter implements ObjectConverter {

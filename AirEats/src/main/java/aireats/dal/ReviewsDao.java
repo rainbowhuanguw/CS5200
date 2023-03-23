@@ -1,6 +1,6 @@
 package aireats.dal;
 
-import aireats.model.*;
+import aireats.model.Review;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,12 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Data access object (DAO) class to interact with the underlying Persons table in your MySQL
- * instance. This is used to store {@link Persons} into your MySQL instance and retrieve 
- * {@link Persons} from MySQL instance.
- */
 public class ReviewsDao {
     private ConnectionManager connectionManager;
     private static ReviewsDao instance = null;

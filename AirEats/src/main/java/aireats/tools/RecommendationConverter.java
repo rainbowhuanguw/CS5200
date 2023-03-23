@@ -1,7 +1,5 @@
 package aireats.tools;
 
-import aireats.model.Recommendation;
-
 import java.util.List;
 
 public class RecommendationConverter implements ObjectConverter {

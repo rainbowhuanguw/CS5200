@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import aireats.model.*;
 
@@ -80,7 +82,7 @@ public class AttributesDao {
 	}
 
 	public List<Restaurant> getRestaurantsByAttributes(String keyword) throws SQLException {
-		List<Restaurant> ret = new ArrayList<Restaurant>();
+		List<Restaurant> ret = new ArrayList<>();
         String selectRestaurants = "SELECT Restaurants.RestaurantId, Name, Address, City, State, Zip, Latitude, Longitude, Stars "
                 +
                 "FROM Attributes LEFT JOIN Restaurants " +
@@ -135,7 +137,6 @@ public class AttributesDao {
 		try {
 			connection = connectionManager.getConnection();
 			updateStmt = connection.prepareStatement(updateAttribute);
-	
 			updateStmt.setString(1, attribute.getRestaurantId());
 			updateStmt.setString(2, attribute.getAttributesStr());
 			updateStmt.executeUpdate();

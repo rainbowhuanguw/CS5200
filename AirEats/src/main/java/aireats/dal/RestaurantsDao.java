@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import aireats.model.Restaurant;
 
 
@@ -24,7 +25,6 @@ public class RestaurantsDao {
 		}
 		return instance;
 	}
-
 	
 	public Restaurant create(Restaurant restaurant) throws SQLException {
 	    String query = "INSERT INTO Restaurants(RestaurantId, Name, Address, City, State, Zip, Latitude, Longitude, Stars) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

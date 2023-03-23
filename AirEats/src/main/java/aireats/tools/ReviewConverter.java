@@ -1,8 +1,5 @@
 package aireats.tools;
 
-import aireats.model.Review;
-
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 

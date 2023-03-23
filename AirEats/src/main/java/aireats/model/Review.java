@@ -2,10 +2,6 @@ package aireats.model;
 
 import java.time.LocalDateTime;
 
-/**
- * Administrators is a simple, plain old java objects (POJO).
- * Well, almost (it extends {@link Persons}).
- */
 public class Review {
     protected String reviewId;
     protected String userId;
