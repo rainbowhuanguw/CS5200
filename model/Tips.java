@@ -2,20 +2,20 @@ package aireats.model;
 
 import java.util.Date;
 
-public class Recommendations {
-	private int tipId;
-	private string userId;
-	private string restaurantId;
-	private int complimentCount;
+public class Tips {
+	private Integer tipId;
+	private String userId;
+	private String restaurantId;
+	private Integer complimentCount;
 	private Date date;
-	private string context;
+	private String context;
 
-	public Recommendations(int tipId) {
+	public Tips(Integer tipId) {
 		this.tipId = tipId;
 	}
 
-	public Recommendations(int tipId, string userId, string restaurantId, int complimentCount, Date date,
-			string context) {
+	public Tips(Integer tipId, String userId, String restaurantId, Integer complimentCount, Date date,
+			String context) {
 		this.tipId = tipId;
 		this.userId = userId;
 		this.restaurantId = restaurantId;
@@ -24,7 +24,7 @@ public class Recommendations {
 		this.context = context;
 	}
 
-	public Recommendations(string userId, string restaurantId, int complimentCount, Date date, string context) {
+	public Tips(String userId, String restaurantId, Integer complimentCount, Date date, String context) {
 		this.userId = userId;
 		this.restaurantId = restaurantId;
 		this.complimentCount = complimentCount;
@@ -32,35 +32,35 @@ public class Recommendations {
 		this.context = context;
 	}
 
-	public int getTipId() {
+	public Integer getTipId() {
 		return this.tipId;
 	}
 
-	public void setTipId(int tipId) {
+	public void setTipId(Integer tipId) {
 		this.tipId = tipId;
 	}
 
-	public string getUserId() {
+	public String getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(string userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public string getRestaurantId() {
+	public String getRestaurantId() {
 		return this.restaurantId;
 	}
 
-	public void setRestaurantId(string restaurantId) {
+	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
 
-	public int getComplimentCount() {
+	public Integer getComplimentCount() {
 		return this.complimentCount;
 	}
 
-	public void setComplimentCount(int complimentCount) {
+	public void setComplimentCount(Integer complimentCount) {
 		this.complimentCount = complimentCount;
 	}
 
@@ -72,11 +72,11 @@ public class Recommendations {
 		this.date = date;
 	}
 
-	public string getContext() {
+	public String getContext() {
 		return this.context;
 	}
 
-	public void setContext(string context) {
+	public void setContext(String context) {
 		this.context = context;
 	}
 
