@@ -34,7 +34,7 @@ public class ReviewsDao {
      * Saves the review instance by storing it in your MySQL instance.
      * This runs an INSERT statement.
      */
-    public Reviews create(Reviews review) throws SQLException {
+    public Review create(Review review) throws SQLException {
         String query = "INSERT INTO Reviews(ReviewId, UserId, RestaurantId, Stars, Useful, Funny, Cool, Content, Date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -58,7 +58,7 @@ public class ReviewsDao {
     /**
      * Retrieves a review by its review ID.
      */
-    public Reviews getReviewById(int reviewId) throws SQLException {
+    public Review getReviewById(int reviewId) throws SQLException {
         String query = "SELECT * FROM Reviews WHERE ReviewId = ?";
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -73,7 +73,7 @@ public class ReviewsDao {
                 BigDecimal cool = rs.getBigDecimal("Cool");
                 String content = rs.getString("Content");
                 Date date = rs.getDate("Date");
-                return new Reviews(stars, userId, restaurantId, reviewId, useful, funny, cool, content, date);
+                return new Review(stars, userId, restaurantId, reviewId, useful, funny, cool, content, date);
             } else {
                 return null;
             }
@@ -86,7 +86,7 @@ public class ReviewsDao {
     /**
      * Updates an existing review in the database.
      */
-    public Reviews update(Reviews review) throws SQLException {
+    public Review update(Review review) throws SQLException {
         String query = "UPDATE Reviews SET UserId=?, RestaurantId=?, Stars=?, Useful=?, Funny=?, Cool=?, Content=?, Date=? WHERE ReviewId=?";
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -107,7 +107,7 @@ public class ReviewsDao {
         return review;
     }
 
-    public Reviews delete(Reviews review) throws SQLException {
+    public Review delete(Review review) throws SQLException {
         String query = "DELETE FROM Reviews WHERE ReviewId = ?";
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(query)) {

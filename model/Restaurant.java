@@ -7,7 +7,7 @@ import java.util.Date;
  * Administrators is a simple, plain old java objects (POJO).
  * Well, almost (it extends {@link Persons}).
  */
-public class Restaurants {
+public class Restaurant {
     private String restaurantId;
     private String name;
     private String address;
@@ -18,7 +18,7 @@ public class Restaurants {
     private BigDecimal longitude;
     private BigDecimal stars;
     
-    public Restaurants(String restaurantId, String name, String address, String city, String state, String zip, double latitude2, double longitude2, double stars2) {
+    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, double latitude2, double longitude2, double stars2) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.address = address;

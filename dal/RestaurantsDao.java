@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import aireats.model.Restaurants;
+import aireats.model.Restaurant;
 
 /**
  * Use ConnectionManager to connect to your database instance.
@@ -51,7 +51,7 @@ public class RestaurantsDao {
 	}
 
 	
-	public Restaurants create(Restaurants restaurant) throws SQLException {
+	public Restaurant create(Restaurant restaurant) throws SQLException {
 	    String query = "INSERT INTO Restaurants(RestaurantId, Name, Address, City, State, Zip, Latitude, Longitude, Stars) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    Connection connection = connectionManager.getConnection();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -72,10 +72,10 @@ public class RestaurantsDao {
 	    return restaurant;
 	}
 
-	public List<Restaurants> getNearbyRestaurants(double airbnbLatitude, double airbnbLongitude, double maxDistanceInMiles) throws SQLException {
+	public List<Restaurant> getNearbyRestaurants(double airbnbLatitude, double airbnbLongitude, double maxDistanceInMiles) throws SQLException {
 	    String query = "SELECT *, (3959 * acos(cos(radians(?)) * cos(radians(Latitude)) * cos(radians(Longitude) - radians(?)) + sin(radians(?)) * sin(radians(Latitude)))) AS distance FROM Restaurants HAVING distance < ?";
 	    Connection connection = connectionManager.getConnection();
-	    List<Restaurants> nearbyRestaurants = new ArrayList<>();
+	    List<Restaurant> nearbyRestaurants = new ArrayList<>();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {
 	        statement.setDouble(1, airbnbLatitude);
 	        statement.setDouble(2, airbnbLongitude);
@@ -92,7 +92,7 @@ public class RestaurantsDao {
 	            double latitude = rs.getDouble("Latitude");
 	            double longitude = rs.getDouble("Longitude");
 	            double stars = rs.getDouble("Stars");
-	            Restaurants restaurant = new Restaurants(restaurantId, name, address, city, state, zip, latitude, longitude, stars);
+	            Restaurant restaurant = new Restaurant(restaurantId, name, address, city, state, zip, latitude, longitude, stars);
 	            nearbyRestaurants.add(restaurant);
 	        }
 	        return nearbyRestaurants;
@@ -102,7 +102,7 @@ public class RestaurantsDao {
 	    }
 	}
 
-	public Restaurants delete(Restaurants restaurant) throws SQLException {
+	public Restaurant delete(Restaurant restaurant) throws SQLException {
 	    String query = "DELETE FROM Restaurants WHERE RestaurantId = ?";
 	    Connection connection = connectionManager.getConnection();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {
