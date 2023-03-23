@@ -1,8 +1,5 @@
 package aireats.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 /**
  * Administrators is a simple, plain old java objects (POJO).
  * Well, almost (it extends {@link Persons}).
@@ -14,11 +11,11 @@ public class Restaurant {
     private String city;
     private String state;
     private String zip;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
-    private BigDecimal stars;
+    private double latitude;
+    private double longitude;
+    private double stars;
     
-    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, BigDecimal latitude, BigDecimal longitude, BigDecimal stars) {
+    public Restaurant(String restaurantId, String name, String address, String city, String state, String zip, double latitude, double longitude, double stars) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.address = address;
@@ -30,7 +27,8 @@ public class Restaurant {
         this.stars = stars;
     }
 
-    public String getRestaurantId() {
+
+	public String getRestaurantId() {
         return restaurantId;
     }
 
@@ -78,27 +76,27 @@ public class Restaurant {
         this.zip = zip;
     }
 
-    public BigDecimal getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public BigDecimal getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getStars() {
+    public double getStars() {
         return stars;
     }
 
-    public void setStars(BigDecimal stars) {
+    public void setStars(double stars) {
         this.stars = stars;
     }
 }
