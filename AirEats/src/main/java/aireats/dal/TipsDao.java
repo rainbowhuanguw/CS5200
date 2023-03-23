@@ -6,8 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Data access object (DAO) class to interact with the underlying
@@ -48,7 +50,7 @@ public class TipsDao {
             insertStmt.setString(1, tip.getUserId());
             insertStmt.setString(2, tip.getRestaurantId());
             insertStmt.setInt(3, tip.getComplimentCount());
-            insertStmt.setDate(4, tip.getDate());
+            insertStmt.setDate(4, new Date(tip.getDate().getTime()));
             insertStmt.setString(5, tip.getContext());
             insertStmt.executeUpdate();
 
@@ -87,7 +89,7 @@ public class TipsDao {
             connection = connectionManager.getConnection();
             updateStmt = connection.prepareStatement(updateTips);
             updateStmt.setString(1, newContext);
-            updateStmt.setString(2, tip.getTipId());
+            updateStmt.setInt(2, tip.getTipId());
             updateStmt.executeUpdate();
             // Update the context param before returning to the caller.
             tip.setContext(newContext);
@@ -116,7 +118,7 @@ public class TipsDao {
         try {
             connection = connectionManager.getConnection();
             deleteStmt = connection.prepareStatement(deleteTips);
-            deleteStmt.setString(1, tip.getTipId());
+            deleteStmt.setInt(1, tip.getTipId());
             deleteStmt.executeUpdate();
 
             // Return null so the caller can no longer operate on the Tips instance.
@@ -146,7 +148,7 @@ public class TipsDao {
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectTips);
-            selectStmt.setString(1, tipId);
+            selectStmt.setInt(1, tipId);
             results = selectStmt.executeQuery();
             if (results.next()) {
                 String resultUserId = results.getString("UserId");
