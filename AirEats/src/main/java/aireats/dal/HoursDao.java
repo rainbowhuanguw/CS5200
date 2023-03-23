@@ -4,7 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+<<<<<<< HEAD
 import aireats.model.*;
+=======
+import aireats.AirEats.src.main.java.aireats.model.Hours;
+import aireats.dal.ConnectionManager;
+>>>>>>> 08de58f (changed import paths)
 
 public class HoursDao<T extends Hours> implements Dao<T> {
 	protected ConnectionManager connectionManager;

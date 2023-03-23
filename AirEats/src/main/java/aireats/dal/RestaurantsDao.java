@@ -11,7 +11,7 @@ import aireats.model.Restaurant;
 
 
 //MinYih Leu
-public class RestaurantsDao {
+public class RestaurantsDao<T extends Restaurant> implements Dao<T> {
 	protected ConnectionManager connectionManager;
 	
 	// Single pattern: instantiation is limited to one object.

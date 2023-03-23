@@ -2,11 +2,7 @@ package aireats.dal;
 
 import aireats.model.Review;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +37,7 @@ public class ReviewsDao {
             statement.setDouble(6, review.getFunny());
             statement.setDouble(7, review.getCool());
             statement.setString(8, review.getContent());
-            statement.setTimestamp(9, java.sql.Timestamp.valueOf(review.getDate()));
+            statement.setTimestamp(9, review.getDate());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error creating review: " + e.getMessage());
@@ -67,7 +63,7 @@ public class ReviewsDao {
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Timestamp date = rs.getTimestamp("Date");
                     Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                     reviews.add(review);
                 }
@@ -97,7 +93,7 @@ public class ReviewsDao {
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Timestamp date = rs.getTimestamp("Date");
                     Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                     reviews.add(review);
                 }
@@ -126,7 +122,7 @@ public class ReviewsDao {
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Timestamp date = rs.getTimestamp("Date");
                     return new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                 } else {
                     return null;
@@ -152,7 +148,7 @@ public class ReviewsDao {
             statement.setDouble(5, review.getFunny());
             statement.setDouble(6, review.getCool());
             statement.setString(7, review.getContent());
-            statement.setTimestamp(9, java.sql.Timestamp.valueOf(review.getDate()));
+            statement.setTimestamp(9, review.getDate());
             statement.setString(9, review.getReviewId());
             statement.executeUpdate();
         } catch (SQLException e) {

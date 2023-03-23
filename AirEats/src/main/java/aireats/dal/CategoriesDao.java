@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import aireats.AirEats.src.main.java.aireats.model.Categories;
 import aireats.dal.ConnectionManager;
-import aireats.model.*;
 
-public class CategoriesDao {
+public class CategoriesDao<T extends Categories> implements Dao<T> {
     protected ConnectionManager connectionManager;
     private static CategoriesDao instance = null;
 

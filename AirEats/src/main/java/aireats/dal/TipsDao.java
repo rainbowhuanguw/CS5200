@@ -1,7 +1,6 @@
 package aireats.dal;
 
-import aireats.dal.ConnectionManager;
-import aireats.model.*;
+import aireats.model.Tips;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.List;
  * retrieve
  * {@link Tips} from MySQL instance.
  */
-public class TipsDao {
+public class TipsDao<T extends Tips> implements Dao<T> {
     protected ConnectionManager connectionManager;
 
     // Single pattern: instantiation is limited to one object.

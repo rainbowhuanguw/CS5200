@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
-public class YelpUsersDao {
+public class YelpUsersDao<T extends YelpUsers> implements Dao<T> {
     protected aireats.dal.ConnectionManager connectionManager;
 
     private static YelpUsersDao instance = null;

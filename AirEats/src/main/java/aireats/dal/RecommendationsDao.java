@@ -18,7 +18,7 @@ import java.util.List;
  * retrieve
  * {@link Recommendations} from MySQL instance.
  */
-public class RecommendationsDao {
+public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
     protected ConnectionManager connectionManager;
 
     // Single pattern: instantiation is limited to one object.
