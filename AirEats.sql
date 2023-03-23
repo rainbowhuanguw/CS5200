@@ -37,13 +37,15 @@ CREATE TABLE YelpUsers (
 );
 CREATE TABLE Airbnb (
   AirbnbId VARCHAR(255),
+  HostId Int,
   Name VARCHAR(255),
   City VARCHAR(255),
   Neighborhood VARCHAR(255),
   State VARCHAR(22),
   Latitude DECIMAL(10, 7),
   Longitude DECIMAL(10, 7),
-  CONSTRAINT pk_Airbnb_AirbnbId PRIMARY KEY (AirbnbId)
+  CONSTRAINT pk_Airbnb_AirbnbId PRIMARY KEY (AirbnbId),
+  CONSTRAINT fk_Airbnb_HostId FOREIGN KEY (HostId) REFERENCES Hosts(HostId) ON UPDATE CASCADE ON DELETE SET NULL
 );
 CREATE TABLE Users (
   UserName VARCHAR(255),
@@ -53,7 +55,7 @@ CREATE TABLE Users (
   Phone VARCHAR(20),
   AirbnbId VARCHAR(255),
   CONSTRAINT pk_Users_UserName PRIMARY KEY (UserName),
-  CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId) REFERENCES Airbnb(AirbnbId) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId) REFERENCES Airbnb(AirbnbId) ON UPDATE CASCADE ON DELETE SET NULL
 );
 CREATE TABLE Hosts (
   HostId Int,
@@ -84,7 +86,7 @@ CREATE TABLE Reviews (
   Content TEXT,
   Date datetime,
   CONSTRAINT pk_Reviews_ReviewId PRIMARY KEY (ReviewId),
-  CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
 );
 CREATE TABLE Tips(
   TipId INT AUTO_INCREMENT,
@@ -94,14 +96,14 @@ CREATE TABLE Tips(
   Date datetime,
   Context TEXT,
   CONSTRAINT pk_Tips_TipId PRIMARY KEY (TipId),
-  CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
 );
 CREATE TABLE Recommendations(
   RecommendationId INT AUTO_INCREMENT,
   RestaurantId VARCHAR(22),
   UserId VARCHAR(22),
   CONSTRAINT pk_Recommendations_RecommendationId PRIMARY KEY (RecommendationId),
-  CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
 );
 CREATE TABLE Hours(
   RestaurantId VARCHAR(255),
