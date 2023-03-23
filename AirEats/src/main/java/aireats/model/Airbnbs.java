@@ -23,12 +23,6 @@ public class Airbnbs {
         this.longitude = longitude;
     }
     
-    
-    // PK only
-    public Airbnbs(String airbnbId) {
-    	this.airbnbId = airbnbId;
-    }
-    
     // Everything except PK
     public Airbnbs(String name, String city, String neighborhood, String state,
                    Double latitude, Double longitude) {
