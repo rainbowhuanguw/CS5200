@@ -17,7 +17,7 @@ LOAD DATA local INFILE "cleaned_airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Windows platforms may need '\r\n'.#  # Windows platforms may need '\r\n'.
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES
-  (@dummy,AirbnbId, Name,@dummy,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
+  (@dummy,AirbnbId, Name,HostId,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
 
 LOAD DATA INFILE 'hosts.csv' INTO TABLE Hosts
   FIELDS TERMINATED BY ','
