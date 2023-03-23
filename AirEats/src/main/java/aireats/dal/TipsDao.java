@@ -6,11 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * Data access object (DAO) class to interact with the underlying Persons table
+ * Data access object (DAO) class to interact with the underlying
+ * Recommendations table
  * in MySQL instance. This is used to store {@link Tips} into MySQL instance and
  * retrieve
  * {@link Tips} from MySQL instance.
@@ -36,30 +39,30 @@ public class TipsDao {
      * Save the Tips instance by storing it in MySQL instance.
      * This runs a INSERT statement.
      */
-    public Tips create(Tips tips) throws SQLException {
-        String insertTip = "INSERT INTO Tips(UserId, RestaurantId, Compliment_count, Date, Context) VALUES(?,?,?,?,?);";
+    public Tips create(Tips tip) throws SQLException {
+        String insertTips = "INSERT INTO Tips(UserId, RestaurantId, Compliment_count, Date, Context) VALUES(?,?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
         ResultSet resultKey = null;
         try {
             connection = connectionManager.getConnection();
-            insertStmt = connection.prepareStatement(insertTip);
-            insertStmt.setString(1, tips.getUserId());
-            insertStmt.setString(2, tips.getRestaurantId());
-            insertStmt.setInt(3, tips.getComplimentCount());
-            insertStmt.setDate(4, tips.getDate());
-            insertStmt.setString(5, tips.getContext());
+            insertStmt = connection.prepareStatement(insertTips);
+            insertStmt.setString(1, tip.getUserId());
+            insertStmt.setString(2, tip.getRestaurantId());
+            insertStmt.setInt(3, tip.getComplimentCount());
+            insertStmt.setDate(4, new Date(tip.getDate().getTime()));
+            insertStmt.setString(5, tip.getContext());
             insertStmt.executeUpdate();
 
             resultKey = insertStmt.getGeneratedKeys();
-            int tipsId = -1;
+            int tipId = -1;
             if (resultKey.next()) {
-                tipsId = resultKey.getInt(1);
+                tipId = resultKey.getInt(1);
             } else {
                 throw new SQLException("Unable to retrieve auto-generated key.");
             }
-            tips.setTipId(tipsId);
-            return tips;
+            tip.setTipId(tipId);
+            return tip;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,7 +81,7 @@ public class TipsDao {
      * Update the Context of the Tips instance.
      * This runs a UPDATE statement.
      */
-    public Tips updateContext(Tips tips, String newContext) throws SQLException {
+    public Tips updateContext(Tips tip, String newContext) throws SQLException {
         String updateTips = "UPDATE Tips SET Context=? WHERE TipId=?;";
         Connection connection = null;
         PreparedStatement updateStmt = null;
@@ -86,11 +89,11 @@ public class TipsDao {
             connection = connectionManager.getConnection();
             updateStmt = connection.prepareStatement(updateTips);
             updateStmt.setString(1, newContext);
-            updateStmt.setString(2, tips.getTipId());
+            updateStmt.setInt(2, tip.getTipId());
             updateStmt.executeUpdate();
             // Update the context param before returning to the caller.
-            tips.setContext(newContext);
-            return tips;
+            tip.setContext(newContext);
+            return tip;
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -108,14 +111,14 @@ public class TipsDao {
      * Delete the Tips instance.
      * This runs a DELETE statement.
      */
-    public Tips delete(Tips tips) throws SQLException {
+    public Tips delete(Tips tip) throws SQLException {
         String deleteTips = "DELETE FROM Tips WHERE TipId=?;";
         Connection connection = null;
         PreparedStatement deleteStmt = null;
         try {
             connection = connectionManager.getConnection();
             deleteStmt = connection.prepareStatement(deleteTips);
-            deleteStmt.setString(1, tips.getTipId());
+            deleteStmt.setInt(1, tip.getTipId());
             deleteStmt.executeUpdate();
 
             // Return null so the caller can no longer operate on the Tips instance.
@@ -145,7 +148,7 @@ public class TipsDao {
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectTips);
-            selectStmt.setString(1, tipId);
+            selectStmt.setInt(1, tipId);
             results = selectStmt.executeQuery();
             if (results.next()) {
                 String resultUserId = results.getString("UserId");
@@ -186,7 +189,7 @@ public class TipsDao {
         ResultSet results = null;
         try {
             connection = connectionManager.getConnection();
-            selectStmt = connection.prepareStatement(selectPersons);
+            selectStmt = connection.prepareStatement(selectTips);
             selectStmt.setString(1, userId);
             results = selectStmt.executeQuery();
             while (results.next()) {
@@ -195,9 +198,9 @@ public class TipsDao {
                 int resultComplimentCount = results.getInt("Compliment_count");
                 Date resultDate = new Date(results.getTime("Date").getTime());
                 String resultContext = results.getString("Context");
-                Tips tips = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
+                Tips tip = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
-                returnTipsList.add(person);
+                returnTipsList.add(tip);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -228,7 +231,7 @@ public class TipsDao {
         ResultSet results = null;
         try {
             connection = connectionManager.getConnection();
-            selectStmt = connection.prepareStatement(selectPersons);
+            selectStmt = connection.prepareStatement(selectTips);
             selectStmt.setString(1, restaurantId);
             results = selectStmt.executeQuery();
             while (results.next()) {
@@ -237,9 +240,9 @@ public class TipsDao {
                 int resultComplimentCount = results.getInt("Compliment_count");
                 Date resultDate = new Date(results.getDate("Date").getTime());
                 String resultContext = results.getString("Context");
-                Tips tips = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
+                Tips tip = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
-                returnTipsList.add(person);
+                returnTipsList.add(tip);
             }
         } catch (SQLException e) {
             e.printStackTrace();

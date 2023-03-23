@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class YelpUsersDao {
@@ -76,17 +73,73 @@ public class YelpUsersDao {
     	}
     }
     
+    public YelpUsers delete(YelpUsers yelpUser) throws SQLException{
+    	String deleteYelpUser = "DELETE FROM YelpUsers WHERE UserId=?;";
+        Connection connection = null;
+        PreparedStatement deleteStmt = null;
+        try {
+            connection = connectionManager.getConnection();
+            deleteStmt = connection.prepareStatement(deleteYelpUser);
+            
+            deleteStmt.setString(1, yelpUser.getUserId());
+            deleteStmt.executeUpdate();
+
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if(connection != null) {
+                connection.close();
+            }
+            if(deleteStmt != null) {
+                deleteStmt.close();
+            }
+        }
+    }
+    
+    public YelpUsers updateUser(YelpUsers yelpUser, int reviewCount) throws SQLException {
+        String updateUser = "UPDATE YelpUsers SET review_count=? WHERE UserId=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+        try {
+            connection = connectionManager.getConnection();
+            updateStmt = connection.prepareStatement(updateUser);
+            
+            updateStmt.setInt(1, reviewCount);
+            updateStmt.setString(2, yelpUser.getUserId());
+            updateStmt.executeUpdate();
+
+            // Update the yelpUser param before returning to the caller.
+            yelpUser.setReviewCount(reviewCount);
+            return yelpUser;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if(connection != null) {
+                connection.close();
+            }
+            if(updateStmt != null) {
+                updateStmt.close();
+            }
+        }
+    }
+    
     public YelpUsers getYelpUserById(String userId) throws SQLException {
         String selectYelpUser =
-            "SELECT UserId, UserName, review_count, yelping_since, useful, funny, cool, fans, average_stars, compliment_hot, compliment_more, compliment_profile, compliment_cute, compliment_list, compliment_note, compliment_plain, compliment_cool, compliment_funny, compliment_writer, compliment_photos " +
-            "FROM YelpUsers " +
-            "WHERE UserId=?;";
+            "SELECT UserId, UserName, review_count, yelping_since, useful, funny, cool, fans, "
+            + "average_stars, compliment_hot, compliment_more, compliment_profile, compliment_cute, compliment_list, "
+            + "compliment_note, compliment_plain, compliment_cool, compliment_funny, compliment_writer, compliment_photos " 
+            + "FROM YelpUsers " 
+            + "WHERE UserId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectYelpUser);
+            
             selectStmt.setString(1, userId);
             results = selectStmt.executeQuery();
             if(results.next()) {
@@ -111,7 +164,10 @@ public class YelpUsersDao {
                 int complimentWriter = results.getInt("compliment_writer");
                 int complimentPhotos = results.getInt("compliment_photos");
 
-                YelpUsers yelpUser = new YelpUsers(resultUserId, userName, reviewCount, yelpingSince, useful, funny, cool, fans, averageStars, complimentHot, complimentMore, complimentProfile, complimentCute, complimentList, complimentNote, complimentPlain, complimentCool, complimentFunny, complimentWriter, complimentPhotos);
+                YelpUsers yelpUser = new YelpUsers(resultUserId, userName, reviewCount, yelpingSince, 
+                		useful, funny, cool, fans, averageStars, complimentHot, complimentMore, 
+                		complimentProfile, complimentCute, complimentList, complimentNote, complimentPlain, 
+                		complimentCool, complimentFunny, complimentWriter, complimentPhotos);
                 return yelpUser;
             }
         } catch (SQLException e) {
@@ -130,6 +186,8 @@ public class YelpUsersDao {
         }
         return null;
     }
+    
+    
 
 
 }

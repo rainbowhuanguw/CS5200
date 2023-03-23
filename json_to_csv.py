@@ -133,8 +133,8 @@ def handleTip(path: str, partition_size: int = 50000) -> dict:
             df['text'] = df['text'].str.replace("\r", "\\r")
 
             data_frames.append(df)
-            # if count == 100:
-            #     break
+            if count == 20000:
+                break
             count += 1
             print("Converting {}/{} records...".format(count, total), end="\r")
             if count % partition_size == 0:
@@ -148,11 +148,76 @@ def handleTip(path: str, partition_size: int = 50000) -> dict:
         print()
         print("Converted {} tip records".format(count))
 
+        
+def handleReview(path: str, partition_size: int = 50000) -> dict:
+    data_frames = []
+    total = rawcount(path)
+    with open(path, 'r') as f:
+        count = 0
+        for line in f:
+            data = json.loads(line)
+            df = pd.json_normalize(data)
+
+            df = df[['review_id', 'user_id', 'business_id', 'stars', 'useful', 'funny',
+                    'cool', 'text', 'date']]
+            df['text'] = df['text'].str.replace("\n", "\\n")
+            df['text'] = df['text'].str.replace("\r", "\\r")
+
+            data_frames.append(df)
+            # if count == 100:
+            #     break
+            count += 1
+            print("Converting {}/{} records...".format(count, total), end="\r")
+            if count % partition_size == 0:
+                outputDataFrames(data_frames, 'review.csv',
+                                 first=count == partition_size)
+                data_frames = []
+                gc.collect()
+            if count == 10000:
+                break
+        if count % partition_size != 0:
+            outputDataFrames(data_frames, 'review.csv',
+                             first=count < partition_size)
+        print()
+        print("Converted {} review records".format(count))
+
+def handelUsers(path: str, partition_size: int = 50000) -> dict:
+    data_frames = []
+    total = rawcount(path)
+    with open(path,'r') as f:
+        count = 0
+        for line in f:
+            data = json.loads(line)
+            df = pd.json_normalize(data)
+
+            df = df[["user_id","name","review_count","yelping_since","useful","funny",
+                     "cool","fans","average_stars","compliment_hot","compliment_more",
+                     "compliment_profile","compliment_cute","compliment_list",
+                     "compliment_note","compliment_plain","compliment_cool",
+                     "compliment_funny","compliment_writer","compliment_photos"]]
+
+            data_frames.append(df)
+            count += 1
+            print("Converting {}/{} records...".format(count, total), end="\r")
+            if count % partition_size == 0:
+                outputDataFrames(data_frames, 'users.csv',
+                                 first=count == partition_size)
+                data_frames = []
+                gc.collect()
+            if count == 20000:
+                break
+        if count % partition_size != 0:
+            outputDataFrames(data_frames, 'users.csv',
+                             first=count < partition_size)
+        print()
+        print("Converted {} user records".format(count))
+
 
 if __name__ == "__main__":
     start = timer()
     # print(rawcount("review.csv"))
-    handleBusiness("./yelp_academic_dataset_business.json")
+    # handleBusiness("./yelp_academic_dataset_business.json")
     # handleReview("./yelp_academic_dataset_review.json")
     # handleTip("./yelp_academic_dataset_tip.json")
+    handelUsers("./yelp_academic_dataset_user.json")
     print(f"Finished in {timer()-start}s")
