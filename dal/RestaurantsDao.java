@@ -1,6 +1,5 @@
 package aireats.dal;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,9 +36,9 @@ public class RestaurantsDao {
 	        statement.setString(4, restaurant.getCity());
 	        statement.setString(5, restaurant.getState());
 	        statement.setString(6, restaurant.getZip());
-	        statement.setBigDecimal(7, restaurant.getLatitude());
-	        statement.setBigDecimal(8, restaurant.getLongitude());
-	        statement.setBigDecimal(9, restaurant.getStars());
+	        statement.setDouble(7, restaurant.getLatitude());
+	        statement.setDouble(8, restaurant.getLongitude());
+	        statement.setDouble(9, restaurant.getStars());
 	        statement.executeUpdate();
 	    } catch (SQLException e) {
 	        System.out.println("Error: " + e.getMessage());
@@ -61,9 +60,9 @@ public class RestaurantsDao {
 	            String city = rs.getString("City");
 	            String state = rs.getString("State");
 	            String zip = rs.getString("Zip");
-	            BigDecimal latitude = rs.getBigDecimal("Latitude");
-	            BigDecimal longitude = rs.getBigDecimal("Longitude");
-	            BigDecimal stars = rs.getBigDecimal("Stars");
+	            double latitude = rs.getDouble("Latitude");
+	            double longitude = rs.getDouble("Longitude");
+	            double stars = rs.getDouble("Stars");
 	            Restaurant restaurant = new Restaurant(restaurantId, name, address, city, state, zip, latitude, longitude, stars);
 	            return restaurant;
 	        }
@@ -75,12 +74,12 @@ public class RestaurantsDao {
 	}
 
 	public List<Restaurant> getRestaurantByName(String name) throws SQLException {
-	    String query = "SELECT * FROM Restaurants WHERE Name LIKE ?";
+	    String query = "SELECT * FROM Restaurants WHERE Name = ?";
 	    Connection connection = connectionManager.getConnection();
-	    List<Restaurant> restaurants = new ArrayList<>();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {
-	        statement.setString(1, "%" + name + "%");
+	        statement.setString(1, name);
 	        ResultSet rs = statement.executeQuery();
+	        List<Restaurant> restaurants = new ArrayList<>();
 	        while (rs.next()) {
 	            String restaurantId = rs.getString("RestaurantId");
 	            String restaurantName = rs.getString("Name");
@@ -88,9 +87,9 @@ public class RestaurantsDao {
 	            String city = rs.getString("City");
 	            String state = rs.getString("State");
 	            String zip = rs.getString("Zip");
-	            BigDecimal latitude = rs.getBigDecimal("Latitude");
-	            BigDecimal longitude = rs.getBigDecimal("Longitude");
-	            BigDecimal stars = rs.getBigDecimal("Stars");
+	            double latitude = rs.getDouble("Latitude");
+	            double longitude = rs.getDouble("Longitude");
+	            double stars = rs.getDouble("Stars");
 	            Restaurant restaurant = new Restaurant(restaurantId, restaurantName, address, city, state, zip, latitude, longitude, stars);
 	            restaurants.add(restaurant);
 	        }
@@ -100,7 +99,7 @@ public class RestaurantsDao {
 	        throw e;
 	    }
 	}
-
+	
 	public List<Restaurant> getNearbyRestaurants(double airbnbLatitude, double airbnbLongitude, double maxDistanceInMiles) throws SQLException {
 	    String query = "SELECT * FROM"
 	    		+ " (SELECT *, (3959 * acos(cos(radians(?)) * cos(radians(Latitude)) * cos(radians(Longitude) - radians(?)) + sin(radians(?)) * sin(radians(Latitude)))) AS distance "
@@ -121,9 +120,9 @@ public class RestaurantsDao {
 	            String city = rs.getString("City");
 	            String state = rs.getString("State");
 	            String zip = rs.getString("Zip");
-	            BigDecimal latitude = rs.getBigDecimal("Latitude");
-	            BigDecimal longitude = rs.getBigDecimal("Longitude");
-	            BigDecimal stars = rs.getBigDecimal("Stars");
+	            double latitude = rs.getDouble("Latitude");
+	            double longitude = rs.getDouble("Longitude");
+	            double stars = rs.getDouble("Stars");
 	            Restaurant restaurant = new Restaurant(restaurantId, name, address, city, state, zip, latitude, longitude, stars);
 	            nearbyRestaurants.add(restaurant);
 	        }

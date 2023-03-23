@@ -1,7 +1,6 @@
 package aireats.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Administrators is a simple, plain old java objects (POJO).
@@ -12,13 +11,13 @@ public class Review {
     protected String userId;
     protected String restaurantId;
     protected int stars;
-    protected BigDecimal useful;
-    protected BigDecimal funny;
-    protected BigDecimal cool;
+    protected double useful;
+    protected double funny;
+    protected double cool;
     protected String content;
-    protected Date date;
+    protected LocalDateTime date;
 
-    public Review(String reviewId, String userId, String restaurantId, int stars, BigDecimal useful, BigDecimal funny, BigDecimal cool, String content, Date date) {
+    public Review(String reviewId, String userId, String restaurantId, int stars, double useful, double funny, double cool, String content, LocalDateTime date) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.restaurantId = restaurantId;
@@ -62,27 +61,27 @@ public class Review {
 		this.stars = stars;
 	}
 
-	public BigDecimal getUseful() {
+	public double getUseful() {
 		return useful;
 	}
 
-	public void setUseful(BigDecimal useful) {
+	public void setUseful(double useful) {
 		this.useful = useful;
 	}
 
-	public BigDecimal getFunny() {
+	public double getFunny() {
 		return funny;
 	}
 
-	public void setFunny(BigDecimal funny) {
+	public void setFunny(double funny) {
 		this.funny = funny;
 	}
 
-	public BigDecimal getCool() {
+	public double getCool() {
 		return cool;
 	}
 
-	public void setCool(BigDecimal cool) {
+	public void setCool(double cool) {
 		this.cool = cool;
 	}
 
@@ -94,13 +93,12 @@ public class Review {
 		this.content = content;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-
     
 }
