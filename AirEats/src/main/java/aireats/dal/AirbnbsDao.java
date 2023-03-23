@@ -165,7 +165,7 @@ public class AirbnbsDao {
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
-                int hostId = results.getInd("HostId");
+                int hostId = results.getInt("HostId");
                 String name = results.getString("Name");
                 String city = results.getString("City");
                 String neighborhood = results.getString("Neighborhood");
@@ -211,7 +211,7 @@ public class AirbnbsDao {
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
-                int hostId = results.getInd("HostId");
+                int hostId = results.getInt("HostId");
                 String resultName = results.getString("Name");
                 String resultCity = results.getString("City");
                 String resultNeighborhood = results.getString("Neighborhood");
@@ -240,8 +240,8 @@ public class AirbnbsDao {
     }
     
     // Get Airbnbs by hostId
-    public List<Airbnb> getAirbnbsByHostId(int hostId) throws SQLException {
-        List<Airbnb> airbnbs = new ArrayList<Airbnb>();
+    public List<Airbnbs> getAirbnbsByHostId(int hostId) throws SQLException {
+        List<Airbnbs> airbnbs = new ArrayList<Airbnbs>();
         String selectAirbnbs =
             "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude " +
             "FROM Airbnbs " +
@@ -264,7 +264,7 @@ public class AirbnbsDao {
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
 
-                Airbnb airbnb = new Airbnb(resultAirbnbId, resultHostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultHostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
             }
         } catch (SQLException e) {
