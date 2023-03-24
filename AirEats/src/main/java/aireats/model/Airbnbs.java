@@ -14,7 +14,6 @@ public class Airbnbs {
     public Airbnbs(String airbnbId, Integer hostId, String name, String city, String neighborhood, String state,
                    Double latitude, Double longitude) {
         this.airbnbId = airbnbId;
-        this.hostId = hostId;
         this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
