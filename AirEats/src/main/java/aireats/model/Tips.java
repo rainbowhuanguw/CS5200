@@ -1,6 +1,7 @@
 package aireats.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Tips {
@@ -8,14 +9,14 @@ public class Tips {
 	private String userId;
 	private String restaurantId;
 	private Integer complimentCount;
-	private Timestamp date;
+	private Date date;
 	private String context;
 
 	public Tips(Integer tipId) {
 		this.tipId = tipId;
 	}
 
-	public Tips(Integer tipId, String userId, String restaurantId, Integer complimentCount, Timestamp date,
+	public Tips(Integer tipId, String userId, String restaurantId, Integer complimentCount, Date date,
 			String context) {
 		this.tipId = tipId;
 		this.userId = userId;
@@ -65,7 +66,7 @@ public class Tips {
 		this.complimentCount = complimentCount;
 	}
 
-	public Timestamp getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
