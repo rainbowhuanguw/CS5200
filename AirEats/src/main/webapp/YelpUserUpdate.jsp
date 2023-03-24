@@ -8,19 +8,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<title>Create a Yelp User</title>
+<title>Update a User</title>
 </head>
 <body>
-	<h1>Create YelpUser</h1>
-	<form action="yelpusercreate" method="post">
+	<h1>Update YelpUser</h1>
+	<form action="yelpuserupdate" method="post">
 		<p>
 			<label for="userId">User ID</label>
-			<input id="userId" name="userId" value="">
+			<input id="userId" name="userId" value="${fn:escapeXml(param.userId)}">
 		</p>
-        <p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="">
+		<p>
+			<label for="reviewcount">New Review Count</label>
+			<input id="reviewcount" name="reviewcount" value="">
 		</p>
 		<p>
 			<input type="submit">
@@ -30,8 +29,5 @@
 	<p>
 		<span id="successMessage"><b>${messages.success}</b></span>
 	</p>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

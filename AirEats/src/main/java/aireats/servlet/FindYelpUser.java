@@ -33,14 +33,14 @@ import javax.servlet.http.HttpServletResponse;
  * 3. Run the Tomcat server at localhost.
  * 4. Point your browser to http://localhost:8080/BlogApplication/findusers.
  */
-@WebServlet("/HostsQuery")
-public class HostsQuery extends HttpServlet {
-
-	protected HostsDao hostsDao;
+@WebServlet("/findyelpusers")
+public class FindYelpUser extends HttpServlet {
+	
+	protected YelpUsersDao yelpUsersDao;
 	
 	@Override
 	public void init() throws ServletException {
-		hostsDao = HostsDao.getInstance();
+		yelpUsersDao = YelpUsersDao.getInstance();
 	}
 	
 	@Override
@@ -50,28 +50,30 @@ public class HostsQuery extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<Hosts> hosts = new ArrayList<>();
+        List<YelpUsers> yelpUsers = new ArrayList<YelpUsers>();
         
-        // Retrieve and validate parameter.
-        String hostId = req.getParameter("host_id");
-		if (hostId == null || hostId.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid id.");
+        // Retrieve and validate name.
+        // firstname is retrieved from the URL query string.
+        String userId = req.getParameter("userId");
+        if (userId == null || userId.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid user ID.");
         } else {
+        	// Retrieve BlogUsers, and store as a message.
         	try {
-        		Hosts host = hostsDao.getHostByHostId(Integer.valueOf(hostId));
-        		hosts.add(host);
+        		YelpUsers yelpUser = yelpUsersDao.getYelpUserById(userId);
+        		yelpUsers.add(yelpUser);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + hostId);
+        	messages.put("success", "Displaying results for " + userId);
         	// Save the previous search term, so it can be used as the default
         	// in the input box when rendering FindUsers.jsp.
-        	messages.put("previousHostId", hostId);
+        	messages.put("previousUserId", userId);
         }
-        req.setAttribute("hosts", hosts);
+        req.setAttribute("yelpUsers", yelpUsers);
         
-        req.getRequestDispatcher("/HostsQuery.jsp").forward(req, resp);
+        req.getRequestDispatcher("/FindYelpUsers.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -81,23 +83,27 @@ public class HostsQuery extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<Hosts> hosts = new ArrayList<>();
+        List<YelpUsers> yelpUsers = new ArrayList<YelpUsers>();
         
         // Retrieve and validate name.
-        String hostId = req.getParameter("host_id");
-		if (hostId == null || hostId.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid id.");
+        // firstname is retrieved from the form POST submission. By default, it
+        // is populated by the URL query string (in FindUsers.jsp).
+        String userId = req.getParameter("userId");
+        if (userId == null || userId.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid name.");
         } else {
+        	// Retrieve BlogUsers, and store as a message.
         	try {
-        		Hosts host = hostsDao.getHostByHostId(Integer.valueOf(hostId));
-        		hosts.add(host);
+        		YelpUsers yelpUser = yelpUsersDao.getYelpUserById(userId);
+        		yelpUsers.add(yelpUser);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + hostId);
+        	messages.put("success", "Displaying results for " + userId);
         }
-		  req.setAttribute("hosts", hosts);
-        req.getRequestDispatcher("/HostsQuery.jsp").forward(req, resp);
+        req.setAttribute("yelpUsers", yelpUsers);
+        
+        req.getRequestDispatcher("/FindYelpUsers.jsp").forward(req, resp);
     }
 }

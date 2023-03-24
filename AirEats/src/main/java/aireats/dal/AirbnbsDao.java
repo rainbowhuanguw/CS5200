@@ -59,7 +59,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
 
     @Override
     public Airbnbs delete(Airbnbs airbnb) throws SQLException {
-        String deleteAirbnb = "DELETE FROM Airbnbs WHERE AirbnbId=?;";
+        String deleteAirbnb = "DELETE FROM Airbnb WHERE AirbnbId=?;";
         Connection connection = null;
         PreparedStatement deleteStmt = null;
         try {
@@ -85,7 +85,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
     }
     
     public Airbnbs updateName(Airbnbs airbnb, String newName) throws SQLException {
-        String updateAirbnb = "UPDATE Airbnbs SET Name=? WHERE AirbnbId=?;";
+        String updateAirbnb = "UPDATE Airbnb SET Name=? WHERE AirbnbId=?;";
         Connection connection = null;
         PreparedStatement updateStmt = null;
         try {
@@ -203,7 +203,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
         List<Airbnbs> airbnbs = new ArrayList<Airbnbs>();
         String selectAirbnbs =
             "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude "
-            + "FROM Airbnbs "
+            + "FROM Airbnb "
             + "WHERE City=? AND State=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -249,7 +249,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
         List<Airbnbs> airbnbs = new ArrayList<Airbnbs>();
         String selectAirbnbs =
             "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude " +
-            "FROM Airbnbs " +
+            "FROM Airbnb " +
             "WHERE HostId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;

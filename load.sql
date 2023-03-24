@@ -10,6 +10,12 @@ LOAD DATA INFILE 'business.csv' INTO TABLE Restaurants
   IGNORE 1 LINES
   (RestaurantId,Name,Address,City,State,Zip,Latitude,Longitude,Stars,@dummy,@dummy);
   
+LOAD DATA INFILE 'hosts.csv' INTO TABLE Hosts
+  FIELDS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\r\n'
+  IGNORE 1 LINES;
+
 LOAD DATA local INFILE "cleaned_airbnb_listings_usa.csv" INTO TABLE Airbnb
   # Fields are not quoted.
   FIELDS TERMINATED BY ','
@@ -18,12 +24,6 @@ LOAD DATA local INFILE "cleaned_airbnb_listings_usa.csv" INTO TABLE Airbnb
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES
   (@dummy,AirbnbId, Name,HostId,@dummy,@dummy,Neighborhood,latitude,longitude,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy,@dummy, State, City);
-
-LOAD DATA INFILE 'hosts.csv' INTO TABLE Hosts
-  FIELDS TERMINATED BY ','
-  ENCLOSED BY '"'
-  LINES TERMINATED BY '\r\n'
-  IGNORE 1 LINES;
   
 LOAD DATA INFILE 'review_small.csv' INTO TABLE Reviews
   FIELDS TERMINATED BY ','
@@ -38,10 +38,6 @@ LOAD DATA INFILE 'tip.csv' IGNORE INTO TABLE Tips
   IGNORE 1 LINES
   (UserId,RestaurantId,Compliment_count,Date,Context);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c4a319c (Change hours upload details)
 LOAD DATA INFILE 'hours.csv' IGNORE INTO TABLE Hours
   FIELDS TERMINATED BY ','
   ENCLOSED BY '"'
