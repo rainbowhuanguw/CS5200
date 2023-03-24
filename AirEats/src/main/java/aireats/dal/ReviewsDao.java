@@ -5,8 +5,11 @@ import aireats.model.Review;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 public class ReviewsDao <T extends Review> implements Dao<T>{
+
+
     private ConnectionManager connectionManager;
     private static ReviewsDao instance = null;
 
@@ -39,7 +42,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
             statement.setDouble(6, review.getFunny());
             statement.setDouble(7, review.getCool());
             statement.setString(8, review.getContent());
-            statement.setTimestamp(9, review.getDate());
+            statement.setTimestamp(9, Timestamp.valueOf(review.getDate()));
             statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error creating review: " + e.getMessage());
@@ -65,7 +68,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    Timestamp date = rs.getTimestamp("Date");
+                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
                     Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                     reviews.add(review);
                 }
@@ -95,7 +98,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    Timestamp date = rs.getTimestamp("Date");
+                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
                     Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                     reviews.add(review);
                 }
@@ -124,7 +127,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    Timestamp date = rs.getTimestamp("Date");
+                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
                     return new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                 } else {
                     return null;
@@ -150,7 +153,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
             statement.setDouble(5, review.getFunny());
             statement.setDouble(6, review.getCool());
             statement.setString(7, review.getContent());
-            statement.setTimestamp(9, review.getDate());
+            statement.setTimestamp(8, Timestamp.valueOf(review.getDate()));
             statement.setString(9, review.getReviewId());
             statement.executeUpdate();
         } catch (SQLException e) {

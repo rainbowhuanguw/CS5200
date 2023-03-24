@@ -1,7 +1,7 @@
 package aireats.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Review {
 
@@ -13,10 +13,11 @@ public class Review {
     protected Double funny;
     protected Double cool;
     protected String content;
-    protected Timestamp date;
+
+	protected LocalDateTime date;
 
     public Review(String reviewId, String userId, String restaurantId, int stars, Double useful, Double funny, Double cool,
-				  String content, Timestamp date) {
+				  String content, LocalDateTime date) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.restaurantId = restaurantId;
@@ -92,11 +93,11 @@ public class Review {
 		this.content = content;
 	}
 
-	public Timestamp getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
     
