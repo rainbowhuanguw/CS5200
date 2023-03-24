@@ -11,8 +11,8 @@ public class Airbnbs {
     protected Double longitude;
 
     // Everything included
-    public Airbnbs(String airbnbId, int hostId, String name, String city, String neighborhood, String state,
-            Double latitude, Double longitude) {
+    public Airbnbs(String airbnbId, Integer hostId, String name, String city, String neighborhood, String state,
+                   Double latitude, Double longitude) {
         this.airbnbId = airbnbId;
         this.hostId = hostId;
         this.name = name;
@@ -24,10 +24,9 @@ public class Airbnbs {
     }
 
     // Everything except PK
-    public Airbnbs(String name, int hostId, String city, String neighborhood, String state,
-            Double latitude, Double longitude) {
-    	this.hostId = hostId;
-        this.name = name;
+    public Airbnbs(Integer hostId, String name, String city, String neighborhood, String state,
+                   Double latitude, Double longitude) {
+    	this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
         this.state = state;
