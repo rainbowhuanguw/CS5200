@@ -223,7 +223,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
                 Integer resultsHostId = results.getInt("HostId");
-
+                
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultsHostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
             }
