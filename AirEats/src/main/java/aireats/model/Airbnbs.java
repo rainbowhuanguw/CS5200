@@ -11,7 +11,7 @@ public class Airbnbs {
     protected Integer hostId;
 
     // Everything included
-    public Airbnbs(String airbnbId, String name, Integer hostId, String city, String neighborhood, String state,
+    public Airbnbs(String airbnbId, Integer hostId, String name, String city, String neighborhood, String state,
                    Double latitude, Double longitude) {
         this.airbnbId = airbnbId;
         this.hostId = hostId;
@@ -25,7 +25,7 @@ public class Airbnbs {
     }
 
     // Everything except PK
-    public Airbnbs(String name, Integer hostId, String city, String neighborhood, String state,
+    public Airbnbs(Integer hostId, String name, String city, String neighborhood, String state,
                    Double latitude, Double longitude) {
     	this.name = name;
         this.city = city;
