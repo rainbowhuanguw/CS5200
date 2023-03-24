@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
  * 4. Point your browser to http://localhost:8080/BlogApplication/findusers.
  */
 @WebServlet("/findyelpusers")
-public class FindUsers extends HttpServlet {
+public class FindYelpUser extends HttpServlet {
 	
 	protected YelpUsersDao yelpUsersDao;
 	
@@ -50,7 +50,7 @@ public class FindUsers extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<BlogUsers> yelpUsers = new ArrayList<YelpUsers>();
+        List<YelpUsers> yelpUsers = new ArrayList<YelpUsers>();
         
         // Retrieve and validate name.
         // firstname is retrieved from the URL query string.
@@ -60,7 +60,8 @@ public class FindUsers extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-        		yelpUser = yelpUsersDao.getYelpUserById(userId);
+        		YelpUsers yelpUser = yelpUsersDao.getYelpUserById(userId);
+        		yelpUsers.add(yelpUser);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
@@ -93,12 +94,13 @@ public class FindUsers extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	yelpUsers = yelpUsersDao.getYelpUserById(userId);
+        		YelpUsers yelpUser = yelpUsersDao.getYelpUserById(userId);
+        		yelpUsers.add(yelpUser);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + firstName);
+        	messages.put("success", "Displaying results for " + userId);
         }
         req.setAttribute("yelpUsers", yelpUsers);
         

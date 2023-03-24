@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/yelpuserupdate")
-public class UserUpdate extends HttpServlet {
+public class YelpUserUpdate extends HttpServlet {
 	
 	protected YelpUsersDao yelpUsersDao;
 	
@@ -38,7 +38,7 @@ public class UserUpdate extends HttpServlet {
             messages.put("success", "Please enter a valid User ID.");
         } else {
         	try {
-        		YelpUsers yelpUser = YelpUsersDao.getYelpUserById(userId);
+        		YelpUsers yelpUser = yelpUsersDao.getYelpUserById(userId);
         		if(yelpUser == null) {
         			messages.put("success", "User ID does not exist.");
         		}
@@ -65,15 +65,15 @@ public class UserUpdate extends HttpServlet {
             messages.put("success", "Please enter a valid User ID.");
         } else {
         	try {
-        		YelpUsers yelpUser = YelpUsersDao.getYelpUserById(userId);
+        		YelpUsers yelpUser = yelpUsersDao.getYelpUserById(userId);
         		if(yelpUser == null) {
         			messages.put("success", "User ID does not exist. No update to perform.");
         		} else {
-                    int newReviewCount = Integer.parseInt(req.getParameter("reviewcount"));
-        			if (newReviewCount == NaN) {
+                    String newReviewCount = req.getParameter("reviewcount");
+        			if (newReviewCount == null|| userId.trim().isEmpty()) {
         	            messages.put("success", "Please enter a valid review count.");
         	        } else {
-        	        	yelpUser = yelpUsersDao.updateUser(yelpUser, newReviewCount);
+        	        	yelpUser = yelpUsersDao.updateUser(yelpUser, Integer.parseInt(newReviewCount));
         	        	messages.put("success", "Successfully updated " + userId);
         	        }
         		}

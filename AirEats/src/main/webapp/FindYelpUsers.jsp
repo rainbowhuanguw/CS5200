@@ -42,8 +42,8 @@
                     <td><c:out value="${yelpUser.getReviewCount()}" /></td>
                    <%--  <td><a href="userblogposts?username=<c:out value="${blogUser.getUserName()}"/>">BlogPosts</a></td>
                     <td><a href="blogcomments?username=<c:out value="${blogUser.getUserName()}"/>">BlogComments</a></td> --%>
-                    <td><a href="userdelete?username=<c:out value="${yelpUser.getUserId()}"/>">Delete</a></td>
-                    <td><a href="userupdate?username=<c:out value="${yelpUser.getUserId()}"/>">Update</a></td>
+                    <td><a href="./yelpuserdelete?username=<c:out value="${yelpUser.getUserId()}"/>">Delete</a></td>
+                    <td><a href="./yelpuserupdate?username=<c:out value="${yelpUser.getUserId()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>
