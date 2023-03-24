@@ -22,6 +22,10 @@ public class Airbnbs {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+    
+    public Airbnbs(String airbnbId) {
+    	this.airbnbId = airbnbId;
+    }
 
     // Everything except PK
     public Airbnbs(String name, int hostId, String city, String neighborhood, String state,
