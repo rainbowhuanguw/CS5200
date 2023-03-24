@@ -1,11 +1,7 @@
 package aireats.tools;
-<<<<<<< HEAD
-=======
 
 import aireats.model.Review;
->>>>>>> cbd3e85 (corrected import paths to start from AirEats)
 
-import aireats.model.Review;
 import java.sql.Timestamp;
 import java.util.List;
 

@@ -15,7 +15,7 @@ public class AirbnbConverter implements ObjectConverter {
         try {
         	Integer hostId = Integer.parseInt(strs.get(2));
             Double latitude = Double.parseDouble(strs.get(6)), longitude = Double.parseDouble(strs.get(7));
-            return new Airbnbs(airbnbId, name, hostId, city, neighborHood, state, latitude, longitude);
+            return new Airbnbs(airbnbId, hostId, name, city, neighborHood, state, latitude, longitude);
         } catch (Exception e) {
         	return null;
         }
