@@ -134,7 +134,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 Double longitude = results.getDouble("Longitude");
                 Integer hostId = results.getInt("HostId");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, hostId, city, neighborhood, state, latitude, longitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, name, city, neighborhood, state, latitude, longitude);
                 return airbnb;
             }
         } catch (SQLException e) {
@@ -178,7 +178,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 Double longitude = results.getDouble("Longitude");
                 Integer hostId = results.getInt("HostId");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, hostId, city, neighborhood, state, latitude, longitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, name, city, neighborhood, state, latitude, longitude);
                 airbnbs.add(airbnb);
             }
     	} catch (SQLException e) {
@@ -224,7 +224,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 Double resultLongitude = results.getDouble("Longitude");
                 Integer resultsHostId = results.getInt("HostId");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultName, resultsHostId, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultsHostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
             }
         } catch (SQLException e) {
@@ -269,7 +269,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultName, resultHostId, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultHostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
             }
         } catch (SQLException e) {
