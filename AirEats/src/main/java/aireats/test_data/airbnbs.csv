@@ -1,0 +1,6 @@
+id,name,host_id,host_name,neighbourhood_group,neighbourhood,latitude,longitude,room_type,price,minimum_nights,number_of_reviews,last_review,reviews_per_month,calculated_host_listings_count,availability_365,number_of_reviews_ltm,license,state,city
+a1,Panoramic Ocean View Venice Beach,1,Barbara X,City of Los Angeles,Venice,33.99211,-118.476,Entire home/apt,152,30,3,2/25/19,0.02,2,0,0,,CA,Los Angeles
+a2,Amazing bright elegant condo park front *UPGRADED*,2,Paolo,Other Cities,Culver City,33.98301,-118.38607,Entire home/apt,115,30,2,5/15/16,0.01,1,139,0,,CA,Los Angeles
+a3,Zen Life at the Beach,1,Barbara X,Other Cities,Santa Monica,34.0044,-118.48095,Private room,179,7,24,8/21/22,0.17,2,323,3,228269,CA,Los Angeles
+a4,* Beautiful Master Suite/Jacuzzi Tub/*,2,Paolo,Other Cities,Bellflower,33.8749,-118.11515,Entire home/apt,50,30,0,,,1,0,0,,CA,Los Angeles
+a5,Cool Pad Under the Hollywood Sign,1,Barbara X,City of Los Angeles,Hollywood Hills,34.11874,-118.32113,Entire home/apt,100,31,188,4/29/22,1.3,1,250,4,,CA,Los Angeles

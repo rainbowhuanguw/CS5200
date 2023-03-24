@@ -1,6 +1,6 @@
 package aireats.dal;
 
-import aireats.model.*;
+import aireats.model.Recommendations;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,12 +13,12 @@ import java.util.List;
 /**
  * Data access object (DAO) class to interact with the underƒlying
  * Recommendations table
- * in MySQL instance. This is used to store {@link Recommendation} into MySQL
+ * in MySQL instance. This is used to store {@link Recommendations} into MySQL
  * instance and
  * retrieve
- * {@link Recommendation} from MySQL instance.
+ * {@link Recommendations} from MySQL instance.
  */
-public class RecommendationsDao {
+public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
     protected ConnectionManager connectionManager;
 
     // Single pattern: instantiation is limited to one object.
@@ -41,6 +41,8 @@ public class RecommendationsDao {
      * This runs a INSERT statement.
      */
     public Recommendations create(Recommendations recommendation) throws SQLException {
+    	if (recommendation == null) return null; 
+    	
         String insertRecommendation = "INSERT INTO Recommendations(RestaurantId, UserId) VALUES(?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
@@ -151,7 +153,7 @@ public class RecommendationsDao {
      * .
      */
     public List<Recommendations> getRecommendationsFromUserId(String userId) throws SQLException {
-        List<Recommendations> returnRecommendationsList = new ArrayList<Recommendations>();
+        List<Recommendations> returnRecommendationList = new ArrayList<>();
         String selectRecommendation = "SELECT * FROM Recommendations WHERE UserId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -165,9 +167,9 @@ public class RecommendationsDao {
                 int resultRecommendationId = results.getInt("RecommendationId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 String resultUserId = results.getString("UserId");
-                Recommendations recommendation = new Recommendations(resultRecommendationId, 
+                Recommendations recommendation = new Recommendations(resultRecommendationId,
                         resultRestaurantId, resultUserId);
-                returnRecommendationsList.add(recommendation);
+                returnRecommendationList.add(recommendation);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -183,7 +185,7 @@ public class RecommendationsDao {
                 results.close();
             }
         }
-        return returnRecommendationsList;
+        return returnRecommendationList;
     }
 
     /**
@@ -207,7 +209,7 @@ public class RecommendationsDao {
                 int resultRecommendationId = results.getInt("RecommendationId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 String resultUserId = results.getString("UserId");
-                Recommendations recommendation = new Recommendations(resultRecommendationId, 
+                Recommendations recommendation = new Recommendations(resultRecommendationId,
                         resultRestaurantId, resultUserId);
                 returnRecommendationList.add(recommendation);
             }

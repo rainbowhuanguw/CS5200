@@ -1,22 +1,12 @@
 package aireats.dal;
 
-import aireats.model.*;
+import aireats.model.Review;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Data access object (DAO) class to interact with the underlying Persons table in your MySQL
- * instance. This is used to store {@link Persons} into your MySQL instance and retrieve 
- * {@link Persons} from MySQL instance.
- */
-public class ReviewsDao {
+public class ReviewsDao <T extends Review> implements Dao<T>{
     private ConnectionManager connectionManager;
     private static ReviewsDao instance = null;
 
@@ -36,6 +26,8 @@ public class ReviewsDao {
      * This runs an INSERT statement.
      */
     public Review create(Review review) throws SQLException {
+    	if (review == null) return null; 
+    	
         String query = "INSERT INTO Reviews(ReviewId, UserId, RestaurantId, Stars, Useful, Funny, Cool, Content, Date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -47,7 +39,7 @@ public class ReviewsDao {
             statement.setDouble(6, review.getFunny());
             statement.setDouble(7, review.getCool());
             statement.setString(8, review.getContent());
-            statement.setTimestamp(9, java.sql.Timestamp.valueOf(review.getDate()));
+            statement.setTimestamp(9, review.getDate());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error creating review: " + e.getMessage());
@@ -73,7 +65,7 @@ public class ReviewsDao {
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Timestamp date = rs.getTimestamp("Date");
                     Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                     reviews.add(review);
                 }
@@ -103,7 +95,7 @@ public class ReviewsDao {
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Timestamp date = rs.getTimestamp("Date");
                     Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                     reviews.add(review);
                 }
@@ -132,7 +124,7 @@ public class ReviewsDao {
                     double funny = rs.getDouble("Funny");
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
-                    LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
+                    Timestamp date = rs.getTimestamp("Date");
                     return new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
                 } else {
                     return null;
@@ -158,7 +150,7 @@ public class ReviewsDao {
             statement.setDouble(5, review.getFunny());
             statement.setDouble(6, review.getCool());
             statement.setString(7, review.getContent());
-            statement.setTimestamp(9, java.sql.Timestamp.valueOf(review.getDate()));
+            statement.setTimestamp(9, review.getDate());
             statement.setString(9, review.getReviewId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -167,7 +159,7 @@ public class ReviewsDao {
         }
         return review;
     }
-    
+
     public Review delete(Review review) throws SQLException {
         String query = "DELETE FROM Reviews WHERE ReviewId = ?";
         Connection connection = connectionManager.getConnection();

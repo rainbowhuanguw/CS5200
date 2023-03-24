@@ -8,7 +8,7 @@ import java.util.List;
 
 import aireats.model.*;
 
-public class AttributesDao {
+public class AttributesDao<T extends Attributes> implements Dao<T> {
 	protected ConnectionManager connectionManager;
 	
 	private static AttributesDao instance = null;
@@ -23,6 +23,8 @@ public class AttributesDao {
 	}
 	
 	public Attributes create(Attributes attribute) throws SQLException {
+		if (attribute == null) return null; 
+		
 		String insertUser = "INSERT INTO Attributes(RestaurantId,Attributes) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -30,7 +32,7 @@ public class AttributesDao {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertUser);
 			insertStmt.setString(1, attribute.getRestaurantId());
-			insertStmt.setString(2, attribute.getAttributesStr());
+			insertStmt.setString(2,  attribute.getAttributesStr());
 			insertStmt.executeUpdate();
 			return attribute;
 		} catch (SQLException e) {
@@ -82,7 +84,7 @@ public class AttributesDao {
 	}
 
 	public List<Restaurant> getRestaurantsByAttributes(String keyword) throws SQLException {
-		List<Restaurant> ret = new ArrayList<Restaurant>();
+		List<Restaurant> ret = new ArrayList<>();
         String selectRestaurants = "SELECT Restaurants.RestaurantId, Name, Address, City, State, Zip, Latitude, Longitude, Stars "
                 +
                 "FROM Attributes LEFT JOIN Restaurants " +
@@ -137,7 +139,6 @@ public class AttributesDao {
 		try {
 			connection = connectionManager.getConnection();
 			updateStmt = connection.prepareStatement(updateAttribute);
-	
 			updateStmt.setString(1, attribute.getRestaurantId());
 			updateStmt.setString(2, attribute.getAttributesStr());
 			updateStmt.executeUpdate();

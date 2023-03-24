@@ -1,6 +1,12 @@
 # Create the schema if necessary.
 CREATE SCHEMA IF NOT EXISTS AirEats;
 USE AirEats;
+
+# for inserter only 
+# drop database AirEats_test; 
+# CREATE SCHEMA IF NOT EXISTS AirEats_test;
+# USE AirEats_test;
+
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Tips;
 DROP TABLE IF EXISTS Hours;
@@ -35,6 +41,7 @@ CREATE TABLE YelpUsers (
   compliment_photos int,
   CONSTRAINT pk_YelpUsers_UserId PRIMARY KEY (UserId)
 );
+
 CREATE TABLE Hosts (
   HostId Int,
   HostName VARCHAR(255),
@@ -62,6 +69,8 @@ CREATE TABLE Users (
   CONSTRAINT pk_Users_UserName PRIMARY KEY (UserName),
   CONSTRAINT fk_Airbnb_AirbnbId FOREIGN KEY (AirbnbId) REFERENCES Airbnb(AirbnbId) ON UPDATE CASCADE ON DELETE SET NULL
 );
+
+);
 CREATE TABLE Restaurants(
   RestaurantId VARCHAR(22),
   Name VARCHAR(255),
@@ -74,6 +83,7 @@ CREATE TABLE Restaurants(
   Stars DECIMAL(2, 1),
   CONSTRAINT pk_Restaurant_RestaurantId PRIMARY KEY (RestaurantId)
 );
+
 CREATE TABLE Reviews (
   ReviewId VARCHAR(255),
   UserId VARCHAR(255),
@@ -88,6 +98,7 @@ CREATE TABLE Reviews (
   CONSTRAINT pk_Reviews_ReviewId PRIMARY KEY (ReviewId),
   CONSTRAINT fk_Reviews_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
 );
+
 CREATE TABLE Tips(
   TipId INT AUTO_INCREMENT,
   UserId VARCHAR(22),
@@ -98,6 +109,7 @@ CREATE TABLE Tips(
   CONSTRAINT pk_Tips_TipId PRIMARY KEY (TipId),
   CONSTRAINT fk_Tips_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
 );
+
 CREATE TABLE Recommendations(
   RecommendationId INT AUTO_INCREMENT,
   RestaurantId VARCHAR(22),
@@ -105,6 +117,7 @@ CREATE TABLE Recommendations(
   CONSTRAINT pk_Recommendations_RecommendationId PRIMARY KEY (RecommendationId),
   CONSTRAINT fk_Recommendations_RestaurantId FOREIGN KEY (RestaurantId) REFERENCES Restaurants(RestaurantId) ON UPDATE CASCADE ON DELETE SET NULL
 );
+
 CREATE TABLE Hours(
   RestaurantId VARCHAR(255),
   Monday VARCHAR(255),

@@ -1,12 +1,8 @@
 package aireats.dal;
 
-import aireats.model.*;
+import aireats.model.Tips;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +14,7 @@ import java.util.List;
  * retrieve
  * {@link Tips} from MySQL instance.
  */
-public class TipsDao {
+public class TipsDao<T extends Tips> implements Dao<T> {
     protected ConnectionManager connectionManager;
 
     // Single pattern: instantiation is limited to one object.
@@ -40,18 +36,21 @@ public class TipsDao {
      * This runs a INSERT statement.
      */
     public Tips create(Tips tip) throws SQLException {
+    	if (tip == null) return null; 
+    	
         String insertTips = "INSERT INTO Tips(UserId, RestaurantId, Compliment_count, Date, Context) VALUES(?,?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
         ResultSet resultKey = null;
         try {
             connection = connectionManager.getConnection();
-            insertStmt = connection.prepareStatement(insertTips);
+            insertStmt = connection.prepareStatement(insertTips, Statement.RETURN_GENERATED_KEYS);
             insertStmt.setString(1, tip.getUserId());
             insertStmt.setString(2, tip.getRestaurantId());
             insertStmt.setInt(3, tip.getComplimentCount());
             insertStmt.setDate(4, new Date(tip.getDate().getTime()));
             insertStmt.setString(5, tip.getContext());
+
             insertStmt.executeUpdate();
 
             resultKey = insertStmt.getGeneratedKeys();
@@ -90,6 +89,7 @@ public class TipsDao {
             updateStmt = connection.prepareStatement(updateTips);
             updateStmt.setString(1, newContext);
             updateStmt.setInt(2, tip.getTipId());
+
             updateStmt.executeUpdate();
             // Update the context param before returning to the caller.
             tip.setContext(newContext);
@@ -154,7 +154,7 @@ public class TipsDao {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 int resultComplimentCount = results.getInt("Compliment_count");
-                Date resultDate = new Date(results.getTime("Date").getTime());
+                Timestamp resultDate = new Timestamp(results.getTime("Date").getTime());
                 String resultContext = results.getString("Context");
                 Tips tips = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
@@ -196,11 +196,12 @@ public class TipsDao {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 int resultComplimentCount = results.getInt("Compliment_count");
-                Date resultDate = new Date(results.getTime("Date").getTime());
+                Timestamp resultDate = results.getTimestamp("Date");
                 String resultContext = results.getString("Context");
                 Tips tip = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
                 returnTipsList.add(tip);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -238,7 +239,7 @@ public class TipsDao {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 int resultComplimentCount = results.getInt("Compliment_count");
-                Date resultDate = new Date(results.getDate("Date").getTime());
+                Timestamp resultDate = results.getTimestamp("Date");
                 String resultContext = results.getString("Context");
                 Tips tip = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
