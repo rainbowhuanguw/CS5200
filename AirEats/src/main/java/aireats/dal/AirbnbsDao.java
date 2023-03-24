@@ -218,7 +218,7 @@ public class AirbnbsDao {
                 String resultState = results.getString("State");
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
-
+                
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
             }

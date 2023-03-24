@@ -2,10 +2,6 @@ package aireats.model;
 
 import java.time.LocalDateTime;
 
-/**
- * Administrators is a simple, plain old java objects (POJO).
- * Well, almost (it extends {@link Persons}).
- */
 public class Review {
     protected String reviewId;
     protected String userId;
@@ -15,9 +11,10 @@ public class Review {
     protected Double funny;
     protected Double cool;
     protected String content;
-    protected LocalDateTime date;
+	protected LocalDateTime date;
 
-    public Review(String reviewId, String userId, String restaurantId, int stars, Double useful, Double funny, Double cool, String content, LocalDateTime date) {
+    public Review(String reviewId, String userId, String restaurantId, int stars, Double useful, Double funny, Double cool,
+				  String content, LocalDateTime date) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.restaurantId = restaurantId;
