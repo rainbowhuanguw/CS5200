@@ -1,7 +1,6 @@
 package aireats.dal;
 
-import aireats.model.Airbnbs;
-
+import aireats.model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
+public class AirbnbsDao {
     protected ConnectionManager connectionManager;
 
     private static AirbnbsDao instance = null;
@@ -22,10 +21,8 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
         }
         return instance;
     }
-
-    @Override
+    
     public Airbnbs create(Airbnbs airbnb) throws SQLException {
-        if (airbnb == null) return null;
         String insertAirbnb = "INSERT INTO Airbnb(AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude) VALUES(?,?,?,?,?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
@@ -41,7 +38,6 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             insertStmt.setString(6, airbnb.getState());
             insertStmt.setDouble(7, airbnb.getLatitude());
             insertStmt.setDouble(8, airbnb.getLongitude());
-
             insertStmt.executeUpdate();
             return airbnb;
         } catch (SQLException e) {
@@ -57,7 +53,6 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
         }
     }
 
-    @Override
     public Airbnbs delete(Airbnbs airbnb) throws SQLException {
         String deleteAirbnb = "DELETE FROM Airbnb WHERE AirbnbId=?;";
         Connection connection = null;
@@ -126,15 +121,15 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             results = selectStmt.executeQuery();
             if (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
+                int hostId = results.getInt("HostId");
                 String name = results.getString("Name");
                 String city = results.getString("City");
                 String neighborhood = results.getString("Neighborhood");
                 String state = results.getString("State");
                 Double latitude = results.getDouble("Latitude");
                 Double longitude = results.getDouble("Longitude");
-                Integer hostId = results.getInt("HostId");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, hostId, city, neighborhood, state, latitude, longitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, name, city, neighborhood, state, latitude, longitude);
                 return airbnb;
             }
         } catch (SQLException e) {
@@ -170,15 +165,15 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
+                int hostId = results.getInt("HostId");
                 String name = results.getString("Name");
                 String city = results.getString("City");
                 String neighborhood = results.getString("Neighborhood");
                 String state = results.getString("State");
                 Double latitude = results.getDouble("Latitude");
                 Double longitude = results.getDouble("Longitude");
-                Integer hostId = results.getInt("HostId");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, name, hostId, city, neighborhood, state, latitude, longitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, name, city, neighborhood, state, latitude, longitude);
                 airbnbs.add(airbnb);
             }
     	} catch (SQLException e) {
@@ -216,15 +211,15 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
+                int hostId = results.getInt("HostId");
                 String resultName = results.getString("Name");
                 String resultCity = results.getString("City");
                 String resultNeighborhood = results.getString("Neighborhood");
                 String resultState = results.getString("State");
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
-                Integer resultsHostId = results.getInt("HostId");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultName, resultsHostId, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
             }
         } catch (SQLException e) {
@@ -261,7 +256,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
-                Integer resultHostId = results.getInt("HostId");
+                int resultHostId = results.getInt("HostId");
                 String resultName = results.getString("Name");
                 String resultCity = results.getString("City");
                 String resultNeighborhood = results.getString("Neighborhood");
@@ -269,7 +264,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
 
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultName, resultHostId, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultHostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
                 airbnbs.add(airbnb);
             }
         } catch (SQLException e) {

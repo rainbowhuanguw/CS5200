@@ -1,5 +1,9 @@
 package aireats.model;
 
+/**
+ * Administrators is a simple, plain old java objects (POJO).
+ * Well, almost (it extends {@link Persons}).
+ */
 public class Restaurant {
     private String restaurantId;
     private String name;
@@ -7,7 +11,6 @@ public class Restaurant {
     private String city;
     private String state;
     private String zip;
-
     private Double latitude;
     private Double longitude;
     private Double stars;
@@ -17,7 +20,6 @@ public class Restaurant {
 
     public Restaurant(String restaurantId, String name, String address, String city, String state, String zip,
             Double latitude, Double longitude, Double stars) {
-
         this.restaurantId = restaurantId;
         this.name = name;
         this.address = address;

@@ -1,8 +1,12 @@
 package aireats.dal;
 
-import aireats.model.Tips;
+import aireats.model.*;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +18,7 @@ import java.util.List;
  * retrieve
  * {@link Tips} from MySQL instance.
  */
-public class TipsDao<T extends Tips> implements Dao<T> {
+public class TipsDao {
     protected ConnectionManager connectionManager;
 
     // Single pattern: instantiation is limited to one object.
@@ -36,21 +40,18 @@ public class TipsDao<T extends Tips> implements Dao<T> {
      * This runs a INSERT statement.
      */
     public Tips create(Tips tip) throws SQLException {
-    	if (tip == null) return null; 
-    	
         String insertTips = "INSERT INTO Tips(UserId, RestaurantId, Compliment_count, Date, Context) VALUES(?,?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
         ResultSet resultKey = null;
         try {
             connection = connectionManager.getConnection();
-            insertStmt = connection.prepareStatement(insertTips, Statement.RETURN_GENERATED_KEYS);
+            insertStmt = connection.prepareStatement(insertTips);
             insertStmt.setString(1, tip.getUserId());
             insertStmt.setString(2, tip.getRestaurantId());
             insertStmt.setInt(3, tip.getComplimentCount());
             insertStmt.setDate(4, new Date(tip.getDate().getTime()));
             insertStmt.setString(5, tip.getContext());
-
             insertStmt.executeUpdate();
 
             resultKey = insertStmt.getGeneratedKeys();
@@ -89,7 +90,6 @@ public class TipsDao<T extends Tips> implements Dao<T> {
             updateStmt = connection.prepareStatement(updateTips);
             updateStmt.setString(1, newContext);
             updateStmt.setInt(2, tip.getTipId());
-
             updateStmt.executeUpdate();
             // Update the context param before returning to the caller.
             tip.setContext(newContext);
@@ -154,7 +154,7 @@ public class TipsDao<T extends Tips> implements Dao<T> {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 int resultComplimentCount = results.getInt("Compliment_count");
-                Timestamp resultDate = new Timestamp(results.getTime("Date").getTime());
+                Date resultDate = new Date(results.getTime("Date").getTime());
                 String resultContext = results.getString("Context");
                 Tips tips = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
@@ -196,12 +196,11 @@ public class TipsDao<T extends Tips> implements Dao<T> {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 int resultComplimentCount = results.getInt("Compliment_count");
-                Timestamp resultDate = results.getTimestamp("Date");
+                Date resultDate = new Date(results.getTime("Date").getTime());
                 String resultContext = results.getString("Context");
                 Tips tip = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);
                 returnTipsList.add(tip);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -239,7 +238,7 @@ public class TipsDao<T extends Tips> implements Dao<T> {
                 String resultUserId = results.getString("UserId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 int resultComplimentCount = results.getInt("Compliment_count");
-                Timestamp resultDate = results.getTimestamp("Date");
+                Date resultDate = new Date(results.getDate("Date").getTime());
                 String resultContext = results.getString("Context");
                 Tips tip = new Tips(resultUserId, resultRestaurantId, resultComplimentCount, resultDate,
                         resultContext);

@@ -1,6 +1,6 @@
 package aireats.dal;
 
-import aireats.model.Recommendations;
+import aireats.model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,12 +13,12 @@ import java.util.List;
 /**
  * Data access object (DAO) class to interact with the underƒlying
  * Recommendations table
- * in MySQL instance. This is used to store {@link Recommendations} into MySQL
+ * in MySQL instance. This is used to store {@link Recommendation} into MySQL
  * instance and
  * retrieve
- * {@link Recommendations} from MySQL instance.
+ * {@link Recommendation} from MySQL instance.
  */
-public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
+public class RecommendationsDao {
     protected ConnectionManager connectionManager;
 
     // Single pattern: instantiation is limited to one object.
@@ -41,8 +41,6 @@ public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
      * This runs a INSERT statement.
      */
     public Recommendations create(Recommendations recommendation) throws SQLException {
-    	if (recommendation == null) return null; 
-    	
         String insertRecommendation = "INSERT INTO Recommendations(RestaurantId, UserId) VALUES(?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
@@ -153,7 +151,7 @@ public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
      * .
      */
     public List<Recommendations> getRecommendationsFromUserId(String userId) throws SQLException {
-        List<Recommendations> returnRecommendationList = new ArrayList<>();
+        List<Recommendations> returnRecommendationsList = new ArrayList<Recommendations>();
         String selectRecommendation = "SELECT * FROM Recommendations WHERE UserId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -167,9 +165,9 @@ public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
                 int resultRecommendationId = results.getInt("RecommendationId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 String resultUserId = results.getString("UserId");
-                Recommendations recommendation = new Recommendations(resultRecommendationId,
+                Recommendations recommendation = new Recommendations(resultRecommendationId, 
                         resultRestaurantId, resultUserId);
-                returnRecommendationList.add(recommendation);
+                returnRecommendationsList.add(recommendation);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -185,7 +183,7 @@ public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
                 results.close();
             }
         }
-        return returnRecommendationList;
+        return returnRecommendationsList;
     }
 
     /**
@@ -209,7 +207,7 @@ public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
                 int resultRecommendationId = results.getInt("RecommendationId");
                 String resultRestaurantId = results.getString("RestaurantId");
                 String resultUserId = results.getString("UserId");
-                Recommendations recommendation = new Recommendations(resultRecommendationId,
+                Recommendations recommendation = new Recommendations(resultRecommendationId, 
                         resultRestaurantId, resultUserId);
                 returnRecommendationList.add(recommendation);
             }
