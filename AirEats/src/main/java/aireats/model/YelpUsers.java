@@ -1,35 +1,36 @@
 package aireats.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class YelpUsers {
-	protected String userId;
-	protected String userName;
-	protected int reviewCount;
-	protected Timestamp yelpingSince;
-	protected int useful;
-	protected int funny;
-	protected int cool;
-	protected int fans;
-	protected Double averageStars;
-	protected int complimentHot;
-	protected int complimentMore;
-	protected int complimentProfile;
-	protected int complimentCute;
-	protected int complimentList;
-	protected int complimentNote;
-	protected int complimentPlain;
-	protected int complimentCool;
-	protected int complimentFunny;
-	protected int complimentWriter;
-	protected int complimentPhotos;
-	
-	// Everything included
-    public YelpUsers(String userId, String userName, 
-    		int reviewCount, Timestamp yelpingSince, int useful, int funny, int cool, 
-    		int fans, Double averageStars, int complimentHot, int complimentMore, int complimentProfile, 
-    		int complimentCute, int complimentList, int complimentNote, int complimentPlain, int complimentCool, 
-    		int complimentFunny, int complimentWriter, int complimentPhotos) {
+    protected String userId;
+    protected String userName;
+    protected int reviewCount;
+    protected Timestamp yelpingSince;
+    protected int useful;
+    protected int funny;
+    protected int cool;
+    protected int fans;
+    protected Double averageStars;
+    protected int complimentHot;
+    protected int complimentMore;
+    protected int complimentProfile;
+    protected int complimentCute;
+    protected int complimentList;
+    protected int complimentNote;
+    protected int complimentPlain;
+    protected int complimentCool;
+    protected int complimentFunny;
+    protected int complimentWriter;
+    protected int complimentPhotos;
+
+    // Everything included
+    public YelpUsers(String userId, String userName,
+            int reviewCount, Timestamp yelpingSince, int useful, int funny, int cool,
+            int fans, Double averageStars, int complimentHot, int complimentMore, int complimentProfile,
+            int complimentCute, int complimentList, int complimentNote, int complimentPlain, int complimentCool,
+            int complimentFunny, int complimentWriter, int complimentPhotos) {
         this.userId = userId;
         this.userName = userName;
         this.reviewCount = reviewCount;
@@ -51,24 +52,42 @@ public class YelpUsers {
         this.complimentWriter = complimentWriter;
         this.complimentPhotos = complimentPhotos;
     }
-    
-	// Only PK
-	public YelpUsers(String userId) {
-		this.userId = userId;
-	}
+
+    // Only PK
+    public YelpUsers(String userId) {
+        this.userId = userId;
+    }
 
     // user ID and username
-    public YelpUser(String userId, String userName) {
+    public YelpUsers(String userId, String userName) {
         this.userId = userId;
         this.userName = userName;
+        this.reviewCount = 0;
+        this.yelpingSince = new Timestamp(new Date().getTime());
+        this.useful = 0;
+        this.funny = 0;
+        this.cool = 0;
+        this.fans = 0;
+        this.averageStars = 0.0;
+        this.complimentHot = 0;
+        this.complimentMore = 0;
+        this.complimentProfile = 0;
+        this.complimentCute = 0;
+        this.complimentList = 0;
+        this.complimentNote = 0;
+        this.complimentPlain = 0;
+        this.complimentCool = 0;
+        this.complimentFunny = 0;
+        this.complimentWriter = 0;
+        this.complimentPhotos = 0;
     }
-    
+
     // Everything except PK
-    public YelpUsers(String userName, 
-    		int reviewCount, Timestamp yelpingSince, int useful, int funny, int cool, 
-    		int fans, Double averageStars, int complimentHot, int complimentMore, int complimentProfile, 
-    		int complimentCute, int complimentList, int complimentNote, int complimentPlain, int complimentCool, 
-    		int complimentFunny, int complimentWriter, int complimentPhotos) {
+    public YelpUsers(String userName,
+            int reviewCount, Timestamp yelpingSince, int useful, int funny, int cool,
+            int fans, Double averageStars, int complimentHot, int complimentMore, int complimentProfile,
+            int complimentCute, int complimentList, int complimentNote, int complimentPlain, int complimentCool,
+            int complimentFunny, int complimentWriter, int complimentPhotos) {
         this.userName = userName;
         this.reviewCount = reviewCount;
         this.yelpingSince = yelpingSince;
@@ -89,40 +108,40 @@ public class YelpUsers {
         this.complimentWriter = complimentWriter;
         this.complimentPhotos = complimentPhotos;
     }
-	
-	// getters and setters
-	public String getUserId() {
-		return userId;
-	}
-	
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	
-	public String getUserName() {
-		return userName;
-	}
-	
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
-	public int getReviewCount() {
-		return reviewCount;
-	}
-	
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
-	
-	public Timestamp getYelpingSince() {
-		return yelpingSince;
-	}
-	
-	public void setYelpingSince(Timestamp yelpingSince) {
-		this.yelpingSince = yelpingSince; 
-	}
-	
+
+    // getters and setters
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public Timestamp getYelpingSince() {
+        return yelpingSince;
+    }
+
+    public void setYelpingSince(Timestamp yelpingSince) {
+        this.yelpingSince = yelpingSince;
+    }
+
     public int getUseful() {
         return useful;
     }
@@ -170,85 +189,85 @@ public class YelpUsers {
     public void setComplimentHot(int complimentHot) {
         this.complimentHot = complimentHot;
     }
-    
+
     public int getComplimentMore() {
-    	return complimentMore;
+        return complimentMore;
     }
-    
+
     public void setComplimentMore(int complimentMore) {
-    	this.complimentMore = complimentMore;
+        this.complimentMore = complimentMore;
     }
 
     public int getComplimentProfile() {
-    	return complimentProfile;
+        return complimentProfile;
     }
-    
+
     public void setComplimentProfile(int complimentProfile) {
-    	this.complimentProfile = complimentProfile;
+        this.complimentProfile = complimentProfile;
     }
-    
+
     public int getComplimentCute() {
-    	return complimentCute;
+        return complimentCute;
     }
-    
+
     public void setComplimentCute(int complimentCute) {
-    	this.complimentCute = complimentCute;
+        this.complimentCute = complimentCute;
     }
-    
+
     public int getComplimentList() {
-    	return complimentList;
+        return complimentList;
     }
-    
+
     public void setComplimentList(int complimentList) {
-    	this.complimentList = complimentList;
+        this.complimentList = complimentList;
     }
-    
+
     public int getComplimentNote() {
-    	return complimentNote;
+        return complimentNote;
     }
-    
+
     public void setComplimentNote(int complimentNote) {
-    	this.complimentNote = complimentNote;
+        this.complimentNote = complimentNote;
     }
-    
+
     public int getComplimentPlain() {
-    	return complimentPlain;
+        return complimentPlain;
     }
-    
+
     public void setComplimentPlain(int complimentPlain) {
-    	this.complimentPlain = complimentPlain;
+        this.complimentPlain = complimentPlain;
     }
-    
+
     public int getComplimentCool() {
-    	return complimentCool;
+        return complimentCool;
     }
-    
+
     public void setComplimentCool(int complimentCool) {
-    	this.complimentCool = complimentCool;
+        this.complimentCool = complimentCool;
     }
-    
-	public int getComplimentFunny() {
-		return complimentFunny;
-	}
-    
-	public void setComplimentFunny(int complimentFunny) {
-		this.complimentFunny = complimentFunny;
-	}
-    
-	public int getComplimentWriter() {
-		return complimentWriter;
-	}
-	
-	public void setComplimentWriter(int complimentWriter) {
-		this.complimentWriter = complimentWriter;
-	}
-	
-	public int getComplimentPhotos() {
-		return complimentPhotos;
-	}
-	
-	public void setComplimentPhotos(int complimentPhotos) {
-		this.complimentPhotos = complimentPhotos; 
-	}
-	
+
+    public int getComplimentFunny() {
+        return complimentFunny;
+    }
+
+    public void setComplimentFunny(int complimentFunny) {
+        this.complimentFunny = complimentFunny;
+    }
+
+    public int getComplimentWriter() {
+        return complimentWriter;
+    }
+
+    public void setComplimentWriter(int complimentWriter) {
+        this.complimentWriter = complimentWriter;
+    }
+
+    public int getComplimentPhotos() {
+        return complimentPhotos;
+    }
+
+    public void setComplimentPhotos(int complimentPhotos) {
+        this.complimentPhotos = complimentPhotos;
+    }
+
 }
