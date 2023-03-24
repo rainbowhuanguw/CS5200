@@ -51,7 +51,7 @@ public class AirbnbsQuery extends HttpServlet {
         	// in the input box when rendering FindUsers.jsp.
         	messages.put("previous Airbnb Name", airbnbName);
         }
-        req.setAttribute("airbnbs", airbnbName);
+        req.setAttribute("airbnbs", airbnbs);
         
         req.getRequestDispatcher("/AirbnbsQuery.jsp").forward(req, resp);
 	}
@@ -78,7 +78,7 @@ public class AirbnbsQuery extends HttpServlet {
             }
         	messages.put("success", "Displaying results for " + airbnbName);
         }
-		req.setAttribute("airbnbs", airbnbName);
+		req.setAttribute("airbnbs", airbnbs);
         
         req.getRequestDispatcher("/AirbnbsQuery.jsp").forward(req, resp);
     }

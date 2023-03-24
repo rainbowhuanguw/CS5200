@@ -9,18 +9,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<title>Create a Yelp User</title>
+<title>Create a Airbnb</title>
 </head>
 <body>
-	<h1>Create YelpUser</h1>
-	<form action="yelpusercreate" method="post">
+	<h1>Create Airbnb</h1>
+	<form action="airbnbcreate" method="post">
 		<p>
-			<label for="userId">User ID</label>
-			<input id="userId" name="userId" value="">
+			<label for="airbnbId">AirbnbId</label>
+			<input id="airbnbId" name="airbnbId" value="">
+		</p>
+		<p>
+			<label for="hostId">HostId</label>
+			<input id="hostId" name="hostId" value="">
 		</p>
         <p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="">
+			<label for="name">Name</label>
+			<input id="name" name="name" value="">
+		</p>
+		<p>
+			<label for="city">City</label>
+			<input id="city" name="city" value="">
+		</p>
+		<p>
+			<label for="neighborhood">Neighborhood</label>
+			<input id="neighborhood" name="neighborhood" value="">
+		</p>
+		<p>
+			<label for="state">State</label>
+			<input id="state" name="statee" value="">
+		</p>
+		<p>
+			<label for="latitude">latitude</label>
+			<input id="latitude" name="latitude" value="">
+		</p>
+		<p>
+			<label for="longitude">longitude</label>
+			<input id="longitude" name="longitude" value="">
 		</p>
 		<p>
 			<input type="submit">

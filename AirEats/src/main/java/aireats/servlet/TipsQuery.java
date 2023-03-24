@@ -33,14 +33,14 @@ import javax.servlet.http.HttpServletResponse;
  * 3. Run the Tomcat server at localhost.
  * 4. Point your browser to http://localhost:8080/BlogApplication/findusers.
  */
-@WebServlet("/HostsQuery")
-public class HostsQuery extends HttpServlet {
-
-	protected HostsDao hostsDao;
+@WebServlet("/TipsQuery")
+public class TipsQuery extends HttpServlet {
+	
+	protected TipsDao tipsDao;
 	
 	@Override
 	public void init() throws ServletException {
-		hostsDao = HostsDao.getInstance();
+		tipsDao = TipsDao.getInstance();
 	}
 	
 	@Override
@@ -50,28 +50,27 @@ public class HostsQuery extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<Hosts> hosts = new ArrayList<>();
+        List<Tips> tips = new ArrayList<>();
         
         // Retrieve and validate parameter.
-        String hostId = req.getParameter("host_id");
-		if (hostId == null || hostId.trim().isEmpty()) {
+        String restaurantId = req.getParameter("restaurant_id");
+		if (restaurantId == null || restaurantId.trim().isEmpty()) {
             messages.put("success", "Please enter a valid id.");
         } else {
         	try {
-        		Hosts host = hostsDao.getHostByHostId(Integer.valueOf(hostId));
-        		hosts.add(host);
+        		tips = tipsDao.getTipsFromRestaurantId(restaurantId);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + hostId);
+        	messages.put("success", "Displaying results for " + restaurantId);
         	// Save the previous search term, so it can be used as the default
         	// in the input box when rendering FindUsers.jsp.
-        	messages.put("previousHostId", hostId);
+        	messages.put("previousRestaurantId", restaurantId);
         }
-        req.setAttribute("hosts", hosts);
+        req.setAttribute("tips", tips);
         
-        req.getRequestDispatcher("/HostsQuery.jsp").forward(req, resp);
+        req.getRequestDispatcher("/TipsQuery.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -81,23 +80,23 @@ public class HostsQuery extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        List<Hosts> hosts = new ArrayList<>();
+        List<Tips> tips = new ArrayList<>();
         
         // Retrieve and validate name.
-        String hostId = req.getParameter("host_id");
-		if (hostId == null || hostId.trim().isEmpty()) {
+        String restaurantId = req.getParameter("restaurant_id");
+        if (restaurantId == null || restaurantId.trim().isEmpty()) {
             messages.put("success", "Please enter a valid id.");
         } else {
         	try {
-        		Hosts host = hostsDao.getHostByHostId(Integer.valueOf(hostId));
-        		hosts.add(host);
+        		tips = tipsDao.getTipsFromRestaurantId(restaurantId);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + hostId);
+        	messages.put("success", "Displaying results for " + restaurantId);
         }
-		  req.setAttribute("hosts", hosts);
-        req.getRequestDispatcher("/HostsQuery.jsp").forward(req, resp);
+        req.setAttribute("tips", tips);
+        
+        req.getRequestDispatcher("/TipsQuery.jsp").forward(req, resp);
     }
 }
