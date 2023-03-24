@@ -26,6 +26,8 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
      * This runs an INSERT statement.
      */
     public Review create(Review review) throws SQLException {
+    	if (review == null) return null; 
+    	
         String query = "INSERT INTO Reviews(ReviewId, UserId, RestaurantId, Stars, Useful, Funny, Cool, Content, Date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(query)) {

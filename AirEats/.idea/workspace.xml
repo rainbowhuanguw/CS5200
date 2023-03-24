@@ -5,18 +5,81 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64f6239f-24c6-4565-b524-0c9dab0e703b" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/AirEats.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/airbnbs.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/attributes.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/category.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/hosts.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/hours.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/restaurants.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/reviews.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/tips.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aireats/test_data/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AirEats.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../AirEats.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+>>>>>>> a5314d3 (finished inserter and uploaded smaller datasets for testing)
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/dal/AttributesDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/dal/AttributesDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/dal/CategoriesDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/dal/CategoriesDao.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/dal/HostsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/dal/HostsDao.java" afterDir="false" />
+=======
+>>>>>>> a5314d3 (finished inserter and uploaded smaller datasets for testing)
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/dal/HoursDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/dal/HoursDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/dal/ReviewsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/dal/ReviewsDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/dal/YelpUsersDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/dal/YelpUsersDao.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/Restaurant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/Inserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/Inserter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/ReviewConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/ReviewConverter.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/Airbnbs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/Airbnbs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/Hours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/Hours.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/Recommendations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/Recommendations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/Tips.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/Tips.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/model/YelpUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/model/YelpUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/AirbnbConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/AirbnbConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/AttributesConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/AttributesConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/CategoriesConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/CategoriesConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/HostsConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/HostsConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/Inserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/Inserter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/RestaurantConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/RestaurantConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/ReviewConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/ReviewConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/TipsConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/TipsConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aireats/tools/YelpUsersConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aireats/tools/YelpUsersConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/dal/AttributesDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/dal/AttributesDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/dal/CategoriesDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/dal/CategoriesDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/dal/HostsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/dal/HostsDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/dal/HoursDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/dal/HoursDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/dal/RecommendationDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/dal/TipsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/dal/TipsDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/dal/YelpUsersDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/dal/YelpUsersDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/model/Attributes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/model/Attributes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/model/Hours.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/model/Hours.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/model/Recommendation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/model/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/model/Restaurant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/model/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/model/Review.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/model/Tips.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/model/Tips.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/model/YelpUsers.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/model/YelpUsers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/AttributesConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/AttributesConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/CSVReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/CategoriesConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/CategoriesConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/HostsConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/HostsConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/Inserter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/Inserter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/RecommendationConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/RecommendationConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/RestaurantConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/RestaurantConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/ReviewConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/ReviewConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/TipsConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/TipsConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/aireats/tools/YelpUsersConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/aireats/tools/YelpUsersConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hosts.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CS5200.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../CS5200.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../load.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../load.sql" afterDir="false" />
+>>>>>>> a5314d3 (finished inserter and uploaded smaller datasets for testing)
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +105,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -67,6 +131,46 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "19",
+    "last_opened_file_path": "/Users/rainbowh/Desktop/CS5200/AirEats/src/main/java",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3140625"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Inserter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="aireats.tools.Inserter" />
+      <module name="AirEats" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="aireats.tools.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Inserter" />
+      </list>
+    </recent_temporary>
+>>>>>>> a5314d3 (finished inserter and uploaded smaller datasets for testing)
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -77,7 +181,7 @@
       <option name="presentableId" value="Default" />
       <updated>1679571812530</updated>
       <workItem from="1679571815003" duration="14000" />
-      <workItem from="1679607572817" duration="481000" />
+      <workItem from="1679607572817" duration="8362000" />
     </task>
     <servers />
   </component>
@@ -94,5 +198,25 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/aireats/tools/TipsConverter.java</url>
+          <line>10</line>
+          <properties class="aireats.tools.TipsConverter" method="listToObject">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/aireats/tools/Inserter.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

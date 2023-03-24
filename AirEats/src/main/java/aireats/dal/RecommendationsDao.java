@@ -41,6 +41,8 @@ public class RecommendationsDao<T extends Recommendations> implements Dao<T> {
      * This runs a INSERT statement.
      */
     public Recommendations create(Recommendations recommendation) throws SQLException {
+    	if (recommendation == null) return null; 
+    	
         String insertRecommendation = "INSERT INTO Recommendations(RestaurantId, UserId) VALUES(?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;

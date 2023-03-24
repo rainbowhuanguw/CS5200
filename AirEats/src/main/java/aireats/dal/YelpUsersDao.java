@@ -25,6 +25,8 @@ public class YelpUsersDao<T extends YelpUsers> implements Dao<T> {
     }
     
     public YelpUsers create(YelpUsers yelpUser) throws SQLException {
+    	if (yelpUser == null) return null; 
+    	
     	String insertYelpUser = "INSERT INTO YelpUsers(UserId, UserName, review_count, yelping_since,"
     			+ "useful, funny, cool, fans, average_stars, compliment_hot, compliment_more, compliment_profile,"
     			+ "compliment_cute, compliment_list, compliment_note, compliment_plain, compliment_cool, compliment_funny,"

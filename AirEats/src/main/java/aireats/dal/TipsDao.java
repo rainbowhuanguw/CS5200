@@ -36,13 +36,15 @@ public class TipsDao<T extends Tips> implements Dao<T> {
      * This runs a INSERT statement.
      */
     public Tips create(Tips tip) throws SQLException {
+    	if (tip == null) return null; 
+    	
         String insertTips = "INSERT INTO Tips(UserId, RestaurantId, Compliment_count, Date, Context) VALUES(?,?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
         ResultSet resultKey = null;
         try {
             connection = connectionManager.getConnection();
-            insertStmt = connection.prepareStatement(insertTips);
+            insertStmt = connection.prepareStatement(insertTips, Statement.RETURN_GENERATED_KEYS);
             insertStmt.setString(1, tip.getUserId());
             insertStmt.setString(2, tip.getRestaurantId());
             insertStmt.setInt(3, tip.getComplimentCount());

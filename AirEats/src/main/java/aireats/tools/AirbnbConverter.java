@@ -10,10 +10,14 @@ public class AirbnbConverter implements ObjectConverter {
     // number_of_reviews_itm, license, state, city
     @Override
     public Airbnbs listToObject(List<String> strs) {
-        String airbnbId = strs.get(0), name = strs.get(1), neighborHood = strs.get(5), city = strs.get(18),
-                state = strs.get(17);
-        int hostId = Integer.parseInt(strs.get(2));
-        Double latitude = Double.parseDouble(strs.get(6)), longitude = Double.parseDouble(strs.get(7));
-        return new Airbnbs(airbnbId, name, hostId, city, neighborHood, state, latitude, longitude);
+        String airbnbId = strs.get(0), name = strs.get(1), neighborHood = strs.get(5),
+                state = strs.get(18), city = strs.get(19);
+        try {
+        	Integer hostId = Integer.parseInt(strs.get(2));
+            Double latitude = Double.parseDouble(strs.get(6)), longitude = Double.parseDouble(strs.get(7));
+            return new Airbnbs(airbnbId, name, hostId, city, neighborHood, state, latitude, longitude);
+        } catch (Exception e) {
+        	return null;
+        }
     }
 }

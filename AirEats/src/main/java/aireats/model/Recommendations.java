@@ -44,4 +44,11 @@ public class Recommendations {
         this.userId = userId;
     }
 
+	@Override
+	public String toString() {
+		return "Recommendations [recommendationId=" + recommendationId + ", restaurantId=" + restaurantId + ", userId="
+				+ userId + "]";
+	}
+    
+
 }

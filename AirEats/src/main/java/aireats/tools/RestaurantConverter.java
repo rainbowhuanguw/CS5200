@@ -11,10 +11,15 @@ public class RestaurantConverter implements ObjectConverter {
         String restaurantId = strs.get(0), name = strs.get(1), address = strs.get(2),
                 city = strs.get(3), state = strs.get(4), zipcode = strs.get(5);
 
-        Double latitude = Double.parseDouble(strs.get(6)),
-                longitude = Double.parseDouble(strs.get(7)),
-                stars = Double.parseDouble(strs.get(6));
+        try {
+        	Double latitude = Double.parseDouble(strs.get(6)),
+                    longitude = Double.parseDouble(strs.get(7)),
+                    stars = Double.parseDouble(strs.get(8));
 
-        return new Restaurant(restaurantId, name, address, city, state, zipcode, latitude, longitude, stars);
+            return new Restaurant(restaurantId, name, address, city, state, zipcode, latitude, longitude, stars);
+        } catch (Exception e) {
+        	return null; 
+        }
+        
     }
 }

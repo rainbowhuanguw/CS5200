@@ -4,7 +4,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Review {
-    protected String reviewId;
+
+	protected String reviewId;
     protected String userId;
     protected String restaurantId;
     protected int stars;
@@ -99,4 +100,11 @@ public class Review {
 		this.date = date;
 	}
     
+    @Override
+	public String toString() {
+		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", restaurantId=" + restaurantId + ", stars="
+				+ stars + ", useful=" + useful + ", funny=" + funny + ", cool=" + cool + ", content=" + content
+				+ ", date=" + date + "]";
+	}
+
 }

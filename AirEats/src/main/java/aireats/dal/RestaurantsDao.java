@@ -27,6 +27,8 @@ public class RestaurantsDao<T extends Restaurant> implements Dao<T> {
 	}
 	
 	public Restaurant create(Restaurant restaurant) throws SQLException {
+		if (restaurant == null) return null; 
+		
 	    String query = "INSERT INTO Restaurants(RestaurantId, Name, Address, City, State, Zip, Latitude, Longitude, Stars) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    Connection connection = connectionManager.getConnection();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {

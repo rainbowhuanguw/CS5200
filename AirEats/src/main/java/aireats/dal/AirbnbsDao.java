@@ -25,6 +25,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
 
     @Override
     public Airbnbs create(Airbnbs airbnb) throws SQLException {
+        if (airbnb == null) return null;
         String insertAirbnb = "INSERT INTO Airbnb(AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude) VALUES(?,?,?,?,?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
@@ -40,6 +41,7 @@ public class AirbnbsDao<T extends Airbnbs> implements Dao<T> {
             insertStmt.setString(6, airbnb.getState());
             insertStmt.setDouble(7, airbnb.getLatitude());
             insertStmt.setDouble(8, airbnb.getLongitude());
+
             insertStmt.executeUpdate();
             return airbnb;
         } catch (SQLException e) {

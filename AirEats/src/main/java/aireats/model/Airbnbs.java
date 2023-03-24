@@ -103,4 +103,11 @@ public class Airbnbs {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
+	@Override
+	public String toString() {
+		return "Airbnbs [airbnbId=" + airbnbId + ", name=" + name + ", city=" + city + ", neighborhood=" + neighborhood
+				+ ", state=" + state + ", latitude=" + latitude + ", longitude=" + longitude + ", hostId=" + hostId
+				+ "]";
+	}
 }

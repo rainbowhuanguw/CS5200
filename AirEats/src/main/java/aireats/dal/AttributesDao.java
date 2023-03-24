@@ -23,6 +23,8 @@ public class AttributesDao<T extends Attributes> implements Dao<T> {
 	}
 	
 	public Attributes create(Attributes attribute) throws SQLException {
+		if (attribute == null) return null; 
+		
 		String insertUser = "INSERT INTO Attributes(RestaurantId,Attributes) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;

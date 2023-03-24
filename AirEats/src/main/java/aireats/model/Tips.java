@@ -81,4 +81,9 @@ public class Tips {
 		this.context = context;
 	}
 
+	@Override
+	public String toString() {
+		return "Tips [tipId=" + tipId + ", userId=" + userId + ", restaurantId=" + restaurantId + ", complimentCount="
+				+ complimentCount + ", date=" + date + ", context=" + context + "]";
+	}
 }

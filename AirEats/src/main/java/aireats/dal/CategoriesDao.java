@@ -27,6 +27,8 @@ public class CategoriesDao<T extends Categories> implements Dao<T> {
     }
 
     public Categories create(Categories category) throws SQLException {
+    	if (category == null) return null; 
+    	
         String insertCategory = "INSERT INTO Categories(RestaurantId,Categories) VALUES(?,?)";
         Connection conn = null;
         PreparedStatement insertStmt = null;

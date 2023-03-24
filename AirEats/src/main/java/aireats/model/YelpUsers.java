@@ -271,4 +271,15 @@ public class YelpUsers {
 		this.complimentPhotos = complimentPhotos; 
 	}
 
+	@Override
+	public String toString() {
+		return "YelpUsers [userId=" + userId + ", userName=" + userName + ", reviewCount=" + reviewCount
+				+ ", yelpingSince=" + yelpingSince + ", useful=" + useful + ", funny=" + funny + ", cool=" + cool
+				+ ", fans=" + fans + ", averageStars=" + averageStars + ", complimentHot=" + complimentHot
+				+ ", complimentMore=" + complimentMore + ", complimentProfile=" + complimentProfile
+				+ ", complimentCute=" + complimentCute + ", complimentList=" + complimentList + ", complimentNote="
+				+ complimentNote + ", complimentPlain=" + complimentPlain + ", complimentCool=" + complimentCool
+				+ ", complimentFunny=" + complimentFunny + ", complimentWriter=" + complimentWriter
+				+ ", complimentPhotos=" + complimentPhotos + "]";
+	}
 }

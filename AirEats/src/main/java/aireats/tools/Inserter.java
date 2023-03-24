@@ -12,8 +12,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Inserter {
-    private static final String delim = ",";
-    private static final int ROW_COUNT_LIMIT = 5000;
+	// split by comma but ignore commas inside quotes 
+    private static final String delim = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
+    
     private static final HostsConverter hostsConverter = new HostsConverter();
     private static final HostsDao<Hosts> hostsDao = HostsDao.getInstance();
 
@@ -41,15 +42,19 @@ public class Inserter {
     private static final RecommendationConverter recommendationConverter = new RecommendationConverter();
     private static final RecommendationsDao<Recommendations> recommendationsDao = RecommendationsDao.getInstance();
 
-
     private static final AirbnbConverter airbnbConverter = new AirbnbConverter();
     private static final AirbnbsDao<Airbnbs> airbnbsDao = AirbnbsDao.getInstance();
 
-    private static final String HOSTS_CSV = "data/hosts.csv", USERS_CSV = "data/users.csv",
-            CATEGORIES_CSV = "data/category.csv", TIPS_CSV = "data/tip.csv",
-            HOURS_CSV = "data/hours.csv", RESTAURANTS_CSV = "data/restaurants.csv",
-            REVIEWS_CSV = "data/review_small.csv", ATTRIBUTES_CSV = "data/attributes_new.csv",
-            RECOMMENDATIONS_CSV = "xxxxxx", AIRBNBS_CSV = "data/cleaned_airbnb_listings_usa.csv";
+    private static final String DATA_ROOT = "src/main/java/aireats/test_data/";
+    private static final String HOSTS_CSV = DATA_ROOT + "hosts.csv", 
+    		USERS_CSV = DATA_ROOT + "users.csv",
+            CATEGORIES_CSV = DATA_ROOT + "category.csv", 
+            TIPS_CSV = DATA_ROOT + "tips.csv",
+            HOURS_CSV = DATA_ROOT + "hours.csv", 
+            RESTAURANTS_CSV = DATA_ROOT + "restaurants.csv",
+            REVIEWS_CSV = DATA_ROOT + "reviews.csv",
+            ATTRIBUTES_CSV = DATA_ROOT + "attributes.csv",
+            AIRBNBS_CSV = DATA_ROOT + "airbnbs.csv";
 
     private static final Map<String, ObjectConverter> converterMap = Map.of(
             HOSTS_CSV, hostsConverter,
@@ -60,7 +65,6 @@ public class Inserter {
             RESTAURANTS_CSV, restaurantConverter,
             REVIEWS_CSV, reviewConverter,
             ATTRIBUTES_CSV, attributeConverter,
-            RECOMMENDATIONS_CSV, recommendationConverter,
             AIRBNBS_CSV, airbnbConverter
     );
     private static final Map<String, Dao> daoMap = Map.of(
@@ -72,7 +76,6 @@ public class Inserter {
             RESTAURANTS_CSV, restaurantDao,
             REVIEWS_CSV, reviewsDao,
             ATTRIBUTES_CSV, attributesDao,
-            RECOMMENDATIONS_CSV, recommendationsDao,
             AIRBNBS_CSV, airbnbsDao
     );
 
@@ -82,7 +85,6 @@ public class Inserter {
         ObjectConverter converter = converterMap.get(csvPath);
         Dao dao = daoMap.get(csvPath);
         boolean isHeader = true;
-        int rowCount = 0;
 
         while ((line = br.readLine()) != null) {
             List<String> strs = List.of(line.split(delim));
@@ -92,22 +94,22 @@ public class Inserter {
                 continue;
             }
 
-            // read max 5000 lines for each load
-            if (rowCount >= ROW_COUNT_LIMIT) break;
-
             try {
-                rowCount++;
-                dao.create(converter.listToObject(strs));
+                Object ob = dao.create(converter.listToObject(strs));
+                System.out.println("[inserted]  " + ob.toString());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
+
+        System.out.println();
     }
+    
     public static void main(String[] args) throws IOException, SQLException {
         // note: run create table statements before running the following
 
-        // load files and populate tables
+        // load files and populate tables 
+    	// do NOT populate recommendation table as it's for user input 
         load(USERS_CSV);
         load(RESTAURANTS_CSV);
         load(AIRBNBS_CSV);
@@ -117,15 +119,14 @@ public class Inserter {
         load(HOURS_CSV);
         load(ATTRIBUTES_CSV);
         load(CATEGORIES_CSV);
-        load(RECOMMENDATIONS_CSV);
 
         // users
-        String userId = "fJZO_skqpnhk1kvomI4dmA";
+        String userId = "u1";
         YelpUsers yelpUsers = yelpUserDao.getYelpUserById(userId);
         System.out.println("find user by id:\n" + yelpUsers.toString());
 
         // restaurant
-        String restaurantId = "0bPLkL0QhhPO5kt1_EXmNQ";
+        String restaurantId = "rest1";
         Restaurant restaurant = restaurantDao.getRestaurantById(restaurantId);
         System.out.println("find restaurant by id:\n" + restaurant.toString());
 
@@ -136,44 +137,43 @@ public class Inserter {
 
         double latitude = 34.15227, longitude = -118.10359, radius = 0.1;
         List<Restaurant> nearbys = restaurantDao.getNearbyRestaurants(latitude, longitude, radius);
-        System.out.println("find nearby restaurant by name:\n" +
+        System.out.println("find nearby restaurant:\n" +
                 nearbys.stream().map(Object::toString).collect(Collectors.joining("\n")));
 
         // aibnbs
-        String airbnbId = "61153";
+        String airbnbId = "a1";
         Airbnbs airbnb = airbnbsDao.getAirbnbById(airbnbId);
         System.out.println("find airbnb by id:\n" + airbnb.toString());
 
-        String airbnbName = "Hollywood  Hills Bedroom";
-        List<Airbnbs> hollywoodRooms = airbnbsDao.getAirbnbByName(airbnbName);
+        String airbnbName = "Zen Life at the Beach";
+        List<Airbnbs> zenRooms = airbnbsDao.getAirbnbByName(airbnbName);
         System.out.println("find airbnbs by name:\n" +
-                hollywoodRooms.stream().map(Object::toString).collect(Collectors.joining("\n")));
+        		zenRooms.stream().map(Object::toString).collect(Collectors.joining("\n")));
 
-        String city = "Seattle", state = "WA";
-        List<Airbnbs> seattleAirbnbs = airbnbsDao.getAirbnbsByCityAndState(city, state);
+        String city = "Los Angeles", state = "CA";
+        List<Airbnbs> laAirbnbs = airbnbsDao.getAirbnbsByCityAndState(city, state);
         System.out.println("find airbnbs by city and state:\n" +
-                seattleAirbnbs.stream().map(Object::toString).collect(Collectors.joining("\n")));
+                laAirbnbs.stream().map(Object::toString).collect(Collectors.joining("\n")));
 
         // hosts
-        int hostId = 481002317;
+        int hostId = 1;
         Hosts hosts = hostsDao.getHostByHostId(hostId);
         System.out.println("find host by id:\n" + hosts.toString());
 
         // reviews
-        String reviewId = "lUUhg8ltDsUZ9h0xnwY4Dg";
+        String reviewId = "r1";
         Review review = reviewsDao.getReviewById(reviewId);
         System.out.println("find review by id:\n" + review.toString());
 
         // tips
-        int tipId = 10;
+        int tipId = 1;
         Tips tips = tipsDao.getTipsFromTipId(tipId);
         System.out.println("find tips by id:\n" + tips.toString());
 
-        String tipUserId = "kjFgyrCvmVVGSlgWzRXILw";
+        String tipUserId = "u2";
         List<Tips> tipsByUser = tipsDao.getTipsFromUserId(tipUserId);
         System.out.println("find tips by user id:\n" +
                 tipsByUser.stream().map(Object::toString).collect(Collectors.joining("\n")));
-
 
         List<Tips> tipsByRestaurant = tipsDao.getTipsFromRestaurantId(restaurantId);
         System.out.println("find tips by restaurant id:\n" +
@@ -203,18 +203,17 @@ public class Inserter {
         categoriesDao.updateCategories(updatedCategories, originalCategories); // IMPORTANT: restore data
 
         // recommendations
-        int recommendationId = 100;
-        Recommendations recommendations = recommendationsDao.getRecommendationsFromRecommendationId(recommendationId);
-        System.out.println("get recommendation by id: \n" + recommendations.toString());
-
-        List<Recommendations> recommendationsFromUserId = recommendationsDao.getRecommendationsFromUserId(userId);
-        System.out.println("get recommendation by user id: \n" +
-                recommendationsFromUserId.stream().map(Object::toString).collect(Collectors.joining("\n")));
-
-        List<Recommendations> recommendationsFromRestaurantId = recommendationsDao.getRecommendationsFromRestaurantId(userId);
-        System.out.println("get recommendation by restaurant id: \n" +
-                recommendationsFromRestaurantId.stream().map(Object::toString).collect(Collectors.joining("\n")));
-
+//        int recommendationId = 1;
+//        Recommendations recommendations = recommendationsDao.getRecommendationsFromRecommendationId(recommendationId);
+//        System.out.println("get recommendation by id: \n" + recommendations.toString());
+//
+//        List<Recommendations> recommendationsFromUserId = recommendationsDao.getRecommendationsFromUserId(userId);
+//        System.out.println("get recommendation by user id: \n" +
+//                recommendationsFromUserId.stream().map(Object::toString).collect(Collectors.joining("\n")));
+//
+//        List<Recommendations> recommendationsFromRestaurantId = recommendationsDao.getRecommendationsFromRestaurantId(userId);
+//        System.out.println("get recommendation by restaurant id: \n" +
+//                recommendationsFromRestaurantId.stream().map(Object::toString).collect(Collectors.joining("\n")));
     }
 
 }
