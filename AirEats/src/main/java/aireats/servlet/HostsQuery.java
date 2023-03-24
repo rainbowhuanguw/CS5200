@@ -35,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/HostsQuery")
 public class HostsQuery extends HttpServlet {
-	
+
 	protected HostsDao hostsDao;
 	
 	@Override
@@ -97,8 +97,7 @@ public class HostsQuery extends HttpServlet {
             }
         	messages.put("success", "Displaying results for " + hostId);
         }
-		req.setAttribute("hosts", hosts);
-        
+		  req.setAttribute("hosts", hosts);
         req.getRequestDispatcher("/HostsQuery.jsp").forward(req, resp);
     }
 }
