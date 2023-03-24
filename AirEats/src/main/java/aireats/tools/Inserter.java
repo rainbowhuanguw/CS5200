@@ -39,9 +39,6 @@ public class Inserter {
     private static final AttributesConverter attributeConverter = new AttributesConverter();
     private static final AttributesDao<Attributes> attributesDao = AttributesDao.getInstance();
 
-    private static final RecommendationConverter recommendationConverter = new RecommendationConverter();
-    private static final RecommendationsDao<Recommendations> recommendationsDao = RecommendationsDao.getInstance();
-
     private static final AirbnbConverter airbnbConverter = new AirbnbConverter();
     private static final AirbnbsDao<Airbnbs> airbnbsDao = AirbnbsDao.getInstance();
 
@@ -187,33 +184,9 @@ public class Inserter {
         Attributes attributes = attributesDao.getAttributesByRestaurantId(restaurantId);
         System.out.println("find attributes by restaurant id:\n" + attributes.toString());
 
-        Attributes updatedAttributes = new Attributes(restaurantId, List.of("random", "placeholder", "attributes"));
-        attributesDao.updateAttributes(updatedAttributes);
-        System.out.println("update attributes: \n" + updatedAttributes.toString());
-        attributesDao.updateAttributes(attributes); // IMPORTANT: restore data
-
         // categories
         Categories categories = categoriesDao.getCategoryByRestaurantId(restaurantId);
         System.out.println("find categories by restaurant id:\n" + categories.toString());
-
-        List<String> newCategoriesStrs = List.of("random", "placeholder", "categories");
-        List<String> originalCategories = categories.getCategoryList();
-        Categories updatedCategories = categoriesDao.updateCategories(categories, newCategoriesStrs);
-        System.out.println("update categories: \n" + updatedCategories.toString());
-        categoriesDao.updateCategories(updatedCategories, originalCategories); // IMPORTANT: restore data
-
-        // recommendations
-//        int recommendationId = 1;
-//        Recommendations recommendations = recommendationsDao.getRecommendationsFromRecommendationId(recommendationId);
-//        System.out.println("get recommendation by id: \n" + recommendations.toString());
-//
-//        List<Recommendations> recommendationsFromUserId = recommendationsDao.getRecommendationsFromUserId(userId);
-//        System.out.println("get recommendation by user id: \n" +
-//                recommendationsFromUserId.stream().map(Object::toString).collect(Collectors.joining("\n")));
-//
-//        List<Recommendations> recommendationsFromRestaurantId = recommendationsDao.getRecommendationsFromRestaurantId(userId);
-//        System.out.println("get recommendation by restaurant id: \n" +
-//                recommendationsFromRestaurantId.stream().map(Object::toString).collect(Collectors.joining("\n")));
     }
 
 }
