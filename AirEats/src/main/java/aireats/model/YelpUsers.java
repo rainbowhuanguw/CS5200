@@ -52,34 +52,16 @@ public class YelpUsers {
         this.complimentWriter = complimentWriter;
         this.complimentPhotos = complimentPhotos;
     }
-    
-	// Only PK
-	public YelpUsers(String userId) {
-		this.userId = userId;
-	}
 
+    // Only PK
+    public YelpUsers(String userId) {
+        this.userId = userId;
+    }
+    
     // user ID and username
     public YelpUsers(String userId, String userName) {
         this.userId = userId;
         this.userName = userName;
-        this.reviewCount = 0;
-        this.yelpingSince = new Timestamp(new Date().getTime());
-        this.useful = 0;
-        this.funny = 0;
-        this.cool = 0;
-        this.fans = 0;
-        this.averageStars = 0.0;
-        this.complimentHot = 0;
-        this.complimentMore = 0;
-        this.complimentProfile = 0;
-        this.complimentCute = 0;
-        this.complimentList = 0;
-        this.complimentNote = 0;
-        this.complimentPlain = 0;
-        this.complimentCool = 0;
-        this.complimentFunny = 0;
-        this.complimentWriter = 0;
-        this.complimentPhotos = 0;
     }
     
     // Everything except PK
