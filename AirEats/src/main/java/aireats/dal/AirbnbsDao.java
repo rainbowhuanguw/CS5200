@@ -218,12 +218,8 @@ public class AirbnbsDao {
                 String resultState = results.getString("State");
                 Double resultLatitude = results.getDouble("Latitude");
                 Double resultLongitude = results.getDouble("Longitude");
-
-<<<<<<< HEAD
+                
                 Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
-=======
-                Airbnbs airbnb = new Airbnbs(resultAirbnbId, resultsHostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
->>>>>>> f48a9ad (changed airbnb constuctor args order back)
                 airbnbs.add(airbnb);
             }
         } catch (SQLException e) {
