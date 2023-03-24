@@ -41,7 +41,7 @@ CREATE TABLE YelpUsers (
   compliment_photos int,
   CONSTRAINT pk_YelpUsers_UserId PRIMARY KEY (UserId)
 );
-<<<<<<< HEAD
+
 CREATE TABLE Hosts (
   HostId Int,
   HostName VARCHAR(255),
