@@ -56,6 +56,12 @@ public class YelpUsers {
 	public YelpUsers(String userId) {
 		this.userId = userId;
 	}
+
+    // user ID and username
+    public YelpUser(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
     
     // Everything except PK
     public YelpUsers(String userName, 
