@@ -1,12 +1,9 @@
 package aireats.tools;
-<<<<<<< HEAD
-=======
-
 import aireats.model.Review;
->>>>>>> cbd3e85 (corrected import paths to start from AirEats)
 
-import aireats.model.Review;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ReviewConverter implements ObjectConverter {
@@ -21,7 +18,9 @@ public class ReviewConverter implements ObjectConverter {
             Double useful = Double.parseDouble(strs.get(4)),
                     funny = Double.parseDouble(strs.get(5)),
                     cool = Double.parseDouble(strs.get(6));
-            Timestamp date = Timestamp.valueOf(strs.get(8));
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime date = LocalDateTime.from(LocalDate.parse(strs.get(8), formatter));
             return new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, text, date);
         } catch (Exception e) {
         	return null; 
