@@ -2,7 +2,6 @@ package aireats.tools;
 
 import aireats.model.Attributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AttributesConverter implements ObjectConverter {
@@ -11,10 +10,7 @@ public class AttributesConverter implements ObjectConverter {
     @Override
     public Attributes listToObject(List<String> strs) {
         String restaurantId = strs.get(0);
-        List<String> attributes = new ArrayList<>();
-        for (int i = 1; i < strs.size(); i++) {
-        	attributes.add(strs.get(i));
-        }
+        strs.remove(0);
         return new Attributes(restaurantId, strs);
     }
 }

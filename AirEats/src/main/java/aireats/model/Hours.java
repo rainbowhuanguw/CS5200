@@ -1,5 +1,6 @@
 package aireats.model;
 
+
 public class Hours {
 	protected String restaurantId;
 	protected String monday;
@@ -133,13 +134,5 @@ public class Hours {
 	public void setSunday(String sunday) {
 		this.sunday = sunday;
 	}
-
-	@Override
-	public String toString() {
-		return "Hours [restaurantId=" + restaurantId + ", monday=" + monday + ", tuesday=" + tuesday + ", wednesday="
-				+ wednesday + ", thursday=" + thursday + ", friday=" + friday + ", saturday=" + saturday + ", sunday="
-				+ sunday + "]";
-	}
-	
 	
 }

@@ -1,6 +1,5 @@
 package aireats.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class Tips {
@@ -8,14 +7,14 @@ public class Tips {
 	private String userId;
 	private String restaurantId;
 	private Integer complimentCount;
-	private Timestamp date;
+	private Date date;
 	private String context;
 
 	public Tips(Integer tipId) {
 		this.tipId = tipId;
 	}
 
-	public Tips(Integer tipId, String userId, String restaurantId, Integer complimentCount, Timestamp date,
+	public Tips(Integer tipId, String userId, String restaurantId, Integer complimentCount, Date date,
 			String context) {
 		this.tipId = tipId;
 		this.userId = userId;
@@ -25,7 +24,7 @@ public class Tips {
 		this.context = context;
 	}
 
-	public Tips(String userId, String restaurantId, Integer complimentCount, Timestamp date, String context) {
+	public Tips(String userId, String restaurantId, Integer complimentCount, Date date, String context) {
 		this.userId = userId;
 		this.restaurantId = restaurantId;
 		this.complimentCount = complimentCount;
@@ -65,11 +64,11 @@ public class Tips {
 		this.complimentCount = complimentCount;
 	}
 
-	public Timestamp getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -81,9 +80,4 @@ public class Tips {
 		this.context = context;
 	}
 
-	@Override
-	public String toString() {
-		return "Tips [tipId=" + tipId + ", userId=" + userId + ", restaurantId=" + restaurantId + ", complimentCount="
-				+ complimentCount + ", date=" + date + ", context=" + context + "]";
-	}
 }

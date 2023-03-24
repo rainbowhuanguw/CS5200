@@ -1,11 +1,13 @@
 package aireats.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/**
+ * Administrators is a simple, plain old java objects (POJO).
+ * Well, almost (it extends {@link Persons}).
+ */
 public class Review {
-
-	protected String reviewId;
+    protected String reviewId;
     protected String userId;
     protected String restaurantId;
     protected int stars;
@@ -13,10 +15,9 @@ public class Review {
     protected Double funny;
     protected Double cool;
     protected String content;
-    protected Timestamp date;
+    protected LocalDateTime date;
 
-    public Review(String reviewId, String userId, String restaurantId, int stars, Double useful, Double funny, Double cool,
-				  String content, Timestamp date) {
+    public Review(String reviewId, String userId, String restaurantId, int stars, Double useful, Double funny, Double cool, String content, LocalDateTime date) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.restaurantId = restaurantId;
@@ -92,19 +93,12 @@ public class Review {
 		this.content = content;
 	}
 
-	public Timestamp getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
     
-    @Override
-	public String toString() {
-		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", restaurantId=" + restaurantId + ", stars="
-				+ stars + ", useful=" + useful + ", funny=" + funny + ", cool=" + cool + ", content=" + content
-				+ ", date=" + date + "]";
-	}
-
 }

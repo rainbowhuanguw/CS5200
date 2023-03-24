@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import aireats.model.Hours;
+import aireats.model.*;
 
-public class HoursDao<T extends Hours> implements Dao<T> {
+public class HoursDao {
 	protected ConnectionManager connectionManager;
 	
 	private static HoursDao instance = null;
@@ -21,8 +21,6 @@ public class HoursDao<T extends Hours> implements Dao<T> {
 	}
 	
 	public Hours create(Hours hour) throws SQLException {
-		if (hour == null) return null; 
-		
 		String insertHour = 
 				"INSERT INTO Hours("
 				+ "RestaurantId,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday"
