@@ -9,18 +9,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<title>Create a Yelp User</title>
+<title>Delete a Airbnb</title>
 </head>
 <body>
-	<h1>Create YelpUser</h1>
-	<form action="yelpusercreate" method="post">
+	<h1>Delete Airbnb</h1>
+	<form action="airbnbdelete" method="post">
 		<p>
-			<label for="userId">User ID</label>
-			<input id="userId" name="userId" value="">
-		</p>
-        <p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="">
+			<label for="airbnbId">AirbnbId</label>
+			<input id="airbnbId" name="airbnbId" value="">
 		</p>
 		<p>
 			<input type="submit">
