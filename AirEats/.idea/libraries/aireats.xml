@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="aireats">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/main/java/aireats.zip!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
