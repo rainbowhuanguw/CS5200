@@ -26,7 +26,7 @@ public class YelpUserCreate extends HttpServlet {
 	
 	@Override
 	public void init() throws ServletException {
-		YelpUsersDao = YelpUsersDao.getInstance();
+		yelpUsersDao = YelpUsersDao.getInstance();
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class YelpUserCreate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve and validate name.
-        String userId = req.getParameter("userId")
+        String userId = req.getParameter("userId");
         String userName = req.getParameter("username");
         if (userId == null || userId.trim().isEmpty()) {
             messages.put("success", "Invalid User ID");
@@ -69,8 +69,8 @@ public class YelpUserCreate extends HttpServlet {
         	// }
 	        try {
 	        	// Exercise: parse the input for StatusLevel.
-	        	YelpUsers YelpUser = new YelpUsers(userId, userName);
-	        	YelpUser = YelpUsersDao.create(YelpUser);
+	        	YelpUsers yelpUser = new YelpUsers(userId, userName);
+	        	yelpUser = YelpUsersDao.create(yelpUser);
 	        	messages.put("success", "Successfully created " + userName);
 	        } catch (SQLException e) {
 				e.printStackTrace();
