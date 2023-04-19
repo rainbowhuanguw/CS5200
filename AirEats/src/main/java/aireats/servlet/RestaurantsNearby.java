@@ -49,10 +49,12 @@ public class RestaurantsNearby extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// Map for storing messages.
+		
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-
+        
         List<Restaurant> restaurants = new ArrayList<>();
+        List<Airbnbs> airbnbs = new ArrayList<>();
         
         // Retrieve and validate parameter.
         String airbnbId = req.getParameter("airbnb_id");
@@ -65,7 +67,8 @@ public class RestaurantsNearby extends HttpServlet {
         	try {
         		Airbnbs airbnb = airbnbsDao.getAirbnbById(airbnbId);
         		restaurants = restaurantsDao.getNearbyRestaurants(airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
-        		messages.put("success", "Displaying results for Location(" + airbnb.getLatitude() + "),(" + airbnb.getLongitude()+")");
+        		airbnbs.add(airbnb);
+        		messages.put("success", "Airbnb: " + airbnb.getName() + " (" + airbnb.getLatitude() + ", " + airbnb.getLongitude() + ")");
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
@@ -74,8 +77,8 @@ public class RestaurantsNearby extends HttpServlet {
         	// in the input box when rendering FindUsers.jsp.
         	messages.put("previousAirbnbId", airbnbId);
         }
+		req.setAttribute("airbnbs", airbnbs);
         req.setAttribute("restaurants", restaurants);
-        
         req.getRequestDispatcher("/RestaurantsNearby.jsp").forward(req, resp);
 	}
 	
@@ -87,6 +90,7 @@ public class RestaurantsNearby extends HttpServlet {
         req.setAttribute("messages", messages);
 
         List<Restaurant> restaurants = new ArrayList<>();
+        List<Airbnbs> airbnbs = new ArrayList<>();
         
         // Retrieve and validate parameter.
         String airbnbId = req.getParameter("airbnb_id");
@@ -99,15 +103,16 @@ public class RestaurantsNearby extends HttpServlet {
         	try {
         		Airbnbs airbnb = airbnbsDao.getAirbnbById(airbnbId);
         		restaurants = restaurantsDao.getNearbyRestaurants(airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
-        		messages.put("success", "Displaying results for Location(" + airbnb.getLatitude() + "),(" + airbnb.getLongitude()+")");
+        		airbnbs.add(airbnb);
+        		messages.put("success", "Airbnb: " + airbnb.getName() + " (" + airbnb.getLatitude() + ", " + airbnb.getLongitude()+")");
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
         	
         }
+		req.setAttribute("airbnbs", airbnbs);
         req.setAttribute("restaurants", restaurants);
-        
         req.getRequestDispatcher("/RestaurantsNearby.jsp").forward(req, resp);
     }
 }
