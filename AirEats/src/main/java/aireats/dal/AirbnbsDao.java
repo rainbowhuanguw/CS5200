@@ -106,10 +106,14 @@ public class AirbnbsDao {
         }
     }
 
-
     public Airbnbs getAirbnbById(String airbnbId) throws SQLException {
+    	return getAirbnbById(airbnbId,0);
+    }
+
+    public Airbnbs getAirbnbById(String airbnbId, int offSet) throws SQLException {
         String selectAirbnb = "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude "
-        		+ "FROM Airbnb WHERE AirbnbId=?;";
+        		+ "FROM Airbnb WHERE AirbnbId=?"
+        		+ "LIMIT 100 OFFSET ?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -118,6 +122,7 @@ public class AirbnbsDao {
             selectStmt = connection.prepareStatement(selectAirbnb);
             
             selectStmt.setString(1, airbnbId);
+            selectStmt.setInt(2, offSet);
             results = selectStmt.executeQuery();
             if (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
@@ -150,10 +155,11 @@ public class AirbnbsDao {
     }
     
     // Get Airbnbs by Name (a name can be used in multiple airbnbs) 
-    public List<Airbnbs> getAirbnbByName (String airbnbName) throws SQLException{
+    public List<Airbnbs> getAirbnbByName (String airbnbName, int offSet) throws SQLException{
     	List<Airbnbs> airbnbs = new ArrayList<Airbnbs>();
     	String selectAirbnb = "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude "
-    			+ "FROM Airbnb WHERE Name=?;";
+    			+ "FROM Airbnb WHERE Name like ?"
+    			+ "LIMIT 100 OFFSET ?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -161,7 +167,8 @@ public class AirbnbsDao {
     		connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectAirbnb);
     		
-            selectStmt.setString(1, airbnbName);
+            selectStmt.setString(1, "%"+airbnbName+"%");
+            selectStmt.setInt(2, offSet);
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
@@ -194,12 +201,13 @@ public class AirbnbsDao {
     }
     
     // Get Airbnbs by (city&state)
-    public List<Airbnbs> getAirbnbsByCityAndState(String city, String state) throws SQLException {
+    public List<Airbnbs> getAirbnbsByCityAndState(String city, String state, int offSet) throws SQLException {
         List<Airbnbs> airbnbs = new ArrayList<Airbnbs>();
         String selectAirbnbs =
             "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude "
             + "FROM Airbnb "
-            + "WHERE City=? AND State=?;";
+            + "WHERE City=? AND State=?"
+            + "LIMIT 100 OFFSET ?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -208,6 +216,7 @@ public class AirbnbsDao {
             selectStmt = connection.prepareStatement(selectAirbnbs);
             selectStmt.setString(1, city);
             selectStmt.setString(2, state);
+            selectStmt.setInt(3, offSet);
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
@@ -240,12 +249,13 @@ public class AirbnbsDao {
     }
     
     // Get Airbnbs by hostId
-    public List<Airbnbs> getAirbnbsByHostId(int hostId) throws SQLException {
+    public List<Airbnbs> getAirbnbsByHostId(int hostId, int offSet) throws SQLException {
         List<Airbnbs> airbnbs = new ArrayList<Airbnbs>();
         String selectAirbnbs =
             "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude " +
             "FROM Airbnb " +
-            "WHERE HostId=?;";
+            "WHERE HostId=?"
+            + "LIMIT 100 OFFSET ?;";;
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -253,6 +263,7 @@ public class AirbnbsDao {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectAirbnbs);
             selectStmt.setInt(1, hostId);
+            selectStmt.setInt(2, offSet);
             results = selectStmt.executeQuery();
             while (results.next()) {
                 String resultAirbnbId = results.getString("AirbnbId");
@@ -283,5 +294,55 @@ public class AirbnbsDao {
         }
         return airbnbs;
     }  
+    
+    //Get Airbnbs by state, city and name
+    public List<Airbnbs> getAirbnbsByCityStateName(String city, String state, String name, int offSet) throws SQLException {
+        List<Airbnbs> airbnbs = new ArrayList<Airbnbs>();
+        String selectAirbnbs =
+            "SELECT AirbnbId, HostId, Name, City, Neighborhood, State, Latitude, Longitude "
+            + "FROM Airbnb "
+            + "WHERE City=? AND State=? AND Name like ?"
+            + "LIMIT 100 OFFSET ?;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectAirbnbs);
+            selectStmt.setString(1, city);
+            selectStmt.setString(2, state);
+            selectStmt.setString(3, "%"+name+"%");
+            selectStmt.setInt(4, offSet);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                String resultAirbnbId = results.getString("AirbnbId");
+                int hostId = results.getInt("HostId");
+                String resultName = results.getString("Name");
+                String resultCity = results.getString("City");
+                String resultNeighborhood = results.getString("Neighborhood");
+                String resultState = results.getString("State");
+                Double resultLatitude = results.getDouble("Latitude");
+                Double resultLongitude = results.getDouble("Longitude");
+                
+                Airbnbs airbnb = new Airbnbs(resultAirbnbId, hostId, resultName, resultCity, resultNeighborhood, resultState, resultLatitude, resultLongitude);
+                airbnbs.add(airbnb);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return airbnbs;
+    }
+    
     
 }
