@@ -12,8 +12,9 @@ public class Airbnbs {
 
     // Everything included
     public Airbnbs(String airbnbId, Integer hostId, String name, String city, String neighborhood, String state,
-                   Double latitude, Double longitude) {
+            Double latitude, Double longitude) {
         this.airbnbId = airbnbId;
+        this.hostId = hostId;
         this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
@@ -24,17 +25,18 @@ public class Airbnbs {
 
     // Everything except PK
     public Airbnbs(Integer hostId, String name, String city, String neighborhood, String state,
-                   Double latitude, Double longitude) {
-    	this.name = name;
+            Double latitude, Double longitude) {
+        this.hostId = hostId;
+        this.name = name;
         this.city = city;
         this.neighborhood = neighborhood;
         this.state = state;
         this.latitude = latitude;
         this.longitude = longitude;
     }
-    
+
     public Airbnbs(String airbnbId) {
-    	this.airbnbId = airbnbId;
+        this.airbnbId = airbnbId;
         this.hostId = 0;
         this.name = "";
         this.city = "";
@@ -53,13 +55,13 @@ public class Airbnbs {
     }
 
     public int getHostId() {
-    	return hostId;
+        return hostId;
     }
-    
+
     public void setHostId(int hostId) {
-    	this.hostId = hostId;
+        this.hostId = hostId;
     }
-    
+
     public String getName() {
         return name;
     }
