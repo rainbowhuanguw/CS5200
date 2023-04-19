@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import aireats.model.Hosts;
+import aireats.model.*;
 
-public class HostsDao<T extends Hosts> implements Dao<T> {
+public class HostsDao {
 	protected ConnectionManager connectionManager;
 	private static HostsDao instance = null;
 
@@ -22,10 +22,7 @@ public class HostsDao<T extends Hosts> implements Dao<T> {
 		return instance;
 	}
 
-	@Override
 	public Hosts create(Hosts host) throws SQLException {
-		if (host == null) return host;
-
 		String insertHost = "INSERT INTO Hosts(HostId,HostName) VALUES(?,?)";
 		Connection conn = null;
 		PreparedStatement insertStmt = null;
@@ -106,7 +103,6 @@ public class HostsDao<T extends Hosts> implements Dao<T> {
 		}
 	}
 
-	@Override
 	public Hosts delete(Hosts host) throws SQLException {
 		String deleteHost = "DELETE FROM Hosts WHERE HostId=?;";
 		Connection connection = null;

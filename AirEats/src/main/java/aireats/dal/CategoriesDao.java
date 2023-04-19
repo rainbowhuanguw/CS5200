@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import  aireats.model.Categories;
-import aireats.model.Restaurant;
+import aireats.model.*;
 
-public class CategoriesDao<T extends Categories> implements Dao<T> {
+public class CategoriesDao {
     protected ConnectionManager connectionManager;
     private static CategoriesDao instance = null;
 
@@ -27,8 +26,6 @@ public class CategoriesDao<T extends Categories> implements Dao<T> {
     }
 
     public Categories create(Categories category) throws SQLException {
-    	if (category == null) return null; 
-    	
         String insertCategory = "INSERT INTO Categories(RestaurantId,Categories) VALUES(?,?)";
         Connection conn = null;
         PreparedStatement insertStmt = null;

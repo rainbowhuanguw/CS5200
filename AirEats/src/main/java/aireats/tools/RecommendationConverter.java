@@ -1,13 +1,14 @@
 package aireats.tools;
 
+import aireats.model.Recommendation;
+
 import java.util.List;
-import aireats.model.Recommendations;
 
 public class RecommendationConverter implements ObjectConverter {
 
     // column : restaurantId, userId
     @Override
-    public Recommendations listToObject(List<String> strs) {
-        return new Recommendations(strs.get(0), strs.get(1));
+    public Recommendation listToObject(List<String> strs) {
+        return new Recommendation(strs.get(0), strs.get(1));
     }
 }

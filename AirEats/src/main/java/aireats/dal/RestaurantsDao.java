@@ -6,12 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import aireats.model.Restaurant;
 
 
 //MinYih Leu
-public class RestaurantsDao<T extends Restaurant> implements Dao<T> {
+public class RestaurantsDao {
 	protected ConnectionManager connectionManager;
 	
 	// Single pattern: instantiation is limited to one object.
@@ -25,10 +24,9 @@ public class RestaurantsDao<T extends Restaurant> implements Dao<T> {
 		}
 		return instance;
 	}
+
 	
 	public Restaurant create(Restaurant restaurant) throws SQLException {
-		if (restaurant == null) return null; 
-		
 	    String query = "INSERT INTO Restaurants(RestaurantId, Name, Address, City, State, Zip, Latitude, Longitude, Stars) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    Connection connection = connectionManager.getConnection();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {

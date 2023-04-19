@@ -13,7 +13,6 @@ public class ReviewConverter implements ObjectConverter {
     @Override
     public Review listToObject(List<String> strs) {
         String reviewId = strs.get(0), userId = strs.get(1), restaurantId = strs.get(2), text = strs.get(7);
-
         try {
         	int stars = Integer.parseInt(strs.get(3));
             Double useful = Double.parseDouble(strs.get(4)),

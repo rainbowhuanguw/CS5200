@@ -16,7 +16,7 @@ LOAD DATA INFILE 'hosts.csv' INTO TABLE Hosts
   LINES TERMINATED BY '\r\n'
   IGNORE 1 LINES;
 
-LOAD DATA local INFILE "cleaned_airbnb_listings_usa.csv" INTO TABLE Airbnb
+LOAD DATA INFILE "cleaned_airbnb_listings_usa.csv" IGNORE INTO TABLE Airbnb
   # Fields are not quoted.
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'

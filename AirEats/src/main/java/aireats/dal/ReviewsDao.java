@@ -1,13 +1,14 @@
 package aireats.dal;
 
-import aireats.model.Review;
+import aireats.model.*;
 
 import java.sql.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewsDao <T extends Review> implements Dao<T>{
+public class ReviewsDao {
     private ConnectionManager connectionManager;
     private static ReviewsDao instance = null;
 
@@ -16,7 +17,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
     }
 
     public static ReviewsDao getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ReviewsDao();
         }
         return instance;
@@ -27,8 +28,6 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
      * This runs an INSERT statement.
      */
     public Review create(Review review) throws SQLException {
-    	if (review == null) return null; 
-    	
         String query = "INSERT INTO Reviews(ReviewId, UserId, RestaurantId, Stars, Useful, Funny, Cool, Content, Date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -48,6 +47,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
         }
         return review;
     }
+
     /**
      * Retrieves a list of reviews for a given user ID.
      */
@@ -55,7 +55,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
         List<Review> reviews = new ArrayList<>();
         String query = "SELECT * FROM Reviews WHERE UserId = ?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, userId);
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
@@ -67,7 +67,8 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
                     LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
-                    Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
+                    Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content,
+                            date);
                     reviews.add(review);
                 }
             }
@@ -85,7 +86,7 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
         List<Review> reviews = new ArrayList<>();
         String query = "SELECT * FROM Reviews WHERE RestaurantId = ?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, restaurantId);
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
@@ -97,7 +98,8 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
                     double cool = rs.getDouble("Cool");
                     String content = rs.getString("Content");
                     LocalDateTime date = rs.getTimestamp("Date").toLocalDateTime();
-                    Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content, date);
+                    Review review = new Review(reviewId, userId, restaurantId, stars, useful, funny, cool, content,
+                            date);
                     reviews.add(review);
                 }
             }
@@ -108,13 +110,13 @@ public class ReviewsDao <T extends Review> implements Dao<T>{
         return reviews;
     }
 
-	/**
+    /**
      * Retrieves a review by its review ID.
      */
     public Review getReviewById(String reviewId) throws SQLException {
         String query = "SELECT * FROM Reviews WHERE ReviewId = ?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, reviewId);
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
