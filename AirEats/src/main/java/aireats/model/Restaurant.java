@@ -144,6 +144,14 @@ public class Restaurant {
         this.categories = categories;
     }
 
+    public String getDescription() {
+    	return  "Stars: " + stars + "; " + 
+    			"Category: " + categories + "; " + 
+    			"Address: " + address + ", " + city + ", " + state + " " + zip + "; " + 
+    		    "Hours: " + hours + "; " + 
+    			"Other attributes: " + attributes;
+    }
+
     @Override
     public String toString() {
         return "Restaurant [restaurantId=" + restaurantId + ", name=" + name + ", address=" + address + ", city=" + city
