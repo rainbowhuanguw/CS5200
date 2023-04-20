@@ -37,8 +37,8 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
-	      <a class="nav-item nav-link" href="airbnbsquery">Index<span class="sr-only">(current)</span></a>
-	      <a class="nav-item nav-link active" href="RestaurantsNearby">Nearby</a>
+	      <a class="nav-item nav-link" href="airbnbsquery">Index</a>
+	      <a class="nav-item nav-link active" href="RestaurantsNearby">Nearby<span class="sr-only">(current)</span></a>
 	      <a class="nav-item nav-link" href="RestaurantsQuery">Restaurants</a>
 	    </div>
 	  </div>
