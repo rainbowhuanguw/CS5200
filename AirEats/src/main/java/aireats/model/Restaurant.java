@@ -49,6 +49,9 @@ public class Restaurant {
     }
 
     public String getRestaurantId() {
+    	if (restaurantId == null) {
+    		return "";
+    	}
         return restaurantId;
     }
 
@@ -57,6 +60,9 @@ public class Restaurant {
     }
 
     public String getName() {
+    	if (name == null) {
+    		return "";
+    	}
         return name;
     }
 
@@ -65,6 +71,9 @@ public class Restaurant {
     }
 
     public String getAddress() {
+    	if (address == null) {
+    		return "";
+    	}
         return address;
     }
 
@@ -73,6 +82,9 @@ public class Restaurant {
     }
 
     public String getCity() {
+    	if (city == null) {
+    		return "";
+    	}
         return city;
     }
 
@@ -81,6 +93,9 @@ public class Restaurant {
     }
 
     public String getState() {
+    	if (state == null) {
+    		return "";
+    	}
         return state;
     }
 
@@ -89,6 +104,9 @@ public class Restaurant {
     }
 
     public String getZip() {
+    	if (zip == null) {
+    		return "";
+    	}
         return zip;
     }
 
@@ -113,7 +131,17 @@ public class Restaurant {
     }
 
     public Double getStars() {
+    	if (stars == null) {
+    		return 0.0;
+    	}
         return stars;
+    }
+    
+    public String getStarsString() {
+    	if (stars == null) {
+    		return "0.0";
+    	}
+        return stars.toString();
     }
 
     public void setStars(Double stars) {
@@ -123,6 +151,13 @@ public class Restaurant {
     public Hours getHours() {
         return hours;
     }
+    
+    public String getHoursString() {
+    	if (hours == null) {
+    		return "";
+    	}
+        return "" + hours;
+    }
 
     public void setHours(Hours hours) {
         this.hours = hours;
@@ -131,6 +166,13 @@ public class Restaurant {
     public Attributes getAttributes() {
         return attributes;
     }
+    
+    public String getAttributesString() {
+    	if (attributes == null) {
+    		return "";
+    	}
+        return "" + attributes;
+    }
 
     public void setAttributes(Attributes attributes) {
         this.attributes = attributes;
@@ -138,6 +180,13 @@ public class Restaurant {
 
     public Categories getCategories() {
         return categories;
+    }
+    
+    public String getCategoryString() {
+    	if (categories == null) {
+    		return "";
+    	}
+    	return "" + categories;
     }
 
     public void setCategories(Categories categories) {

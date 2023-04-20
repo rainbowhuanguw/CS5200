@@ -30,7 +30,22 @@
     </style>
 </head>
 <body>
-    <div class="container theme-showcase" role="main">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="padding-left:20px">
+	  <a class="navbar-brand" href="airbnbsquery">AirEats</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	      <a class="nav-item nav-link" href="airbnbsquery">Index<span class="sr-only">(current)</span></a>
+	      <a class="nav-item nav-link active" href="RestaurantsNearby">Nearby</a>
+	      <a class="nav-item nav-link" href="RestaurantsQuery">Restaurants</a>
+	    </div>
+	  </div>
+	</nav>
+
+
+    <div class="container-fluid" role="main" style="margin-top:20px">
     
 	<form action="RestaurantsNearby" method="post">
 	    <div class="jumbotron">
@@ -42,14 +57,14 @@
 		</p>
 		<p>
 			<h2><label for="radius">Radius</label></h2>
-			<input id="radius" name="radius" value="${fn:escapeXml(param.radius)}" maxlength="3" oninput="checkInput(this)">
+			<input id="radius" name="radius" value="${fn:escapeXml(param.radius)}" maxlength="2" oninput="checkInput(this)">
 			<p id="inputError"></p>
 			<script>
 				function checkInput(input) {
 				  let value = parseInt(input.value);
 				  let error = document.getElementById("inputError");
 				  
-				  if (isNaN(value) || value < 1 || value > 100) {
+				  if (isNaN(value) || value < 1 || value > 70) {
 				    error.textContent = "Please set the radius between 1 and 70.";
 				    input.setCustomValidity("Invalid input.");
 				  } else {
@@ -68,7 +83,8 @@
 	<br/>
 	
 	<div class="alert alert-info" role="alert">
-	<h2><span id="successMessage"><b>${messages.success}</b></span></h2>
+	<h2><span id="successMessage"><b>${messages.airbnbName}</b></span></h2>
+	<h2><span id="successMessage"><b>${messages.airbnbArea}</b></span></h2>
 	</div>
        
           
@@ -124,9 +140,17 @@
      		restaurant = new Object();
      		
      		restaurant.name = "${restaurant.getName()}";
+     		restaurant.id = "${restaurant.getRestaurantId()}";
      		restaurant.latitude = parseFloat(${restaurant.getLatitude()});
      		restaurant.longitude = parseFloat(${restaurant.getLongitude()});
-  			restaurant.description = "${restaurant.getDescription()}"; 
+     	 	restaurant.stars = "${restaurant.getStarsString()}"; 
+     	 	restaurant.catagory = "${restaurant.getCategoryString()}";
+     	 	restaurant.address = "${restaurant.getAddress()}"; 
+     	 	restaurant.city = "${restaurant.getCity()}"; 
+     		restaurant.state = "${restaurant.getState()}";
+     		restaurant.zip = "${restaurant.getZip()}";
+     		restaurant.hours = "${restaurant.getHoursString()}";
+     		restaurant.attributes = "${restaurant.getAttributesString()}"; 
   			
      		restaurants.push(restaurant);
      		center = new google.maps.LatLng(restaurant.latitude, restaurant.longitude);
@@ -146,9 +170,14 @@
         	    '<div id="content">' +
         	    '<div id="siteNotice">' +
         	    "</div>" +
-        	    '<h1 id="firstHeading" class="firstHeading">' + restaurant.name + '</h1>' +
+        	    '<h1 id="firstHeading" class="firstHeading">' + '<a href="RestaurantsQuery?restaurant_id=' + restaurant.id + '">' + restaurant.name + '</a></h1>' +
         	    '<div id="bodyContent">' +
-        	    "<p>" + restaurant.description + "</p>" +
+        	    "<p>Stars: " + restaurant.stars + "</br>" +
+        	    "Category: " + restaurant.category + "</br>" + 
+        	    "Address: " + restaurant.address + ", " + restaurant.city + ", " + restaurant.state + " " + restaurant.zip + "</br>" + 
+        	   	"Hours: " + restaurant.hours + "</br>" + 
+        	    "Attributes: " + restaurant.attributes + 
+        	    "</p>" +
         	    "</div>" +
         	    "</div>";
           const infowindow = new google.maps.InfoWindow({
@@ -232,6 +261,7 @@
                     <td><c:out value="${restaurant.getLatitude()}" /></td>
                     <td><c:out value="${restaurant.getLongitude()}" /></td>
                     <td><c:out value="${restaurant.getStars()}" /></td>
+                    <td><a href="RestaurantsQuery?restaurant_id=<c:out value="${restaurant.getRestaurantId()}"/>">Detail</a></td>
                 </tr></tbody>
             </c:forEach>
        </table>
