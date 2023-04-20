@@ -68,7 +68,9 @@ public class RestaurantsNearby extends HttpServlet {
         		Airbnbs airbnb = airbnbsDao.getAirbnbById(airbnbId);
         		restaurants = restaurantsDao.getNearbyRestaurants(airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
         		airbnbs.add(airbnb);
-        		messages.put("success", "Airbnb: " + airbnb.getName() + " (" + airbnb.getLatitude() + ", " + airbnb.getLongitude() + ")");
+        		messages.put("success", "Airbnb: " + airbnb.getName() + "; City: " + airbnb.getCity() + "; Neighborhood: " + airbnb.getNeighborhood());
+        		messages.put("airbnbName", airbnb.getName());
+        		messages.put("airbnbArea", airbnb.getCity() + ", " + airbnb.getNeighborhood());
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
@@ -104,8 +106,10 @@ public class RestaurantsNearby extends HttpServlet {
         		Airbnbs airbnb = airbnbsDao.getAirbnbById(airbnbId);
         		restaurants = restaurantsDao.getNearbyRestaurants(airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
         		airbnbs.add(airbnb);
-        		messages.put("success", "Airbnb: " + airbnb.getName() + " (" + airbnb.getLatitude() + ", " + airbnb.getLongitude()+")");
-            } catch (SQLException e) {
+        		messages.put("success", "Airbnb: " + airbnb.getName() + "; City: " + airbnb.getCity() + "; Neighborhood: " + airbnb.getNeighborhood());
+        		messages.put("airbnbName", airbnb.getName());
+        		messages.put("airbnbArea", airbnb.getCity() + ", " + airbnb.getNeighborhood());
+        	} catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
