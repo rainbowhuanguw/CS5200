@@ -59,6 +59,9 @@ public class RestaurantsNearby extends HttpServlet {
         // Retrieve and validate parameter.
         String airbnbId = req.getParameter("airbnb_id");
         String radius = req.getParameter("radius");
+        String pageStr = req.getParameter("page");
+        String itemsPerPageStr = req.getParameter("itemsPerPage");
+        
 		if (airbnbId == null || airbnbId.trim().isEmpty()) {
             messages.put("success", "Please enter a valid id.");
         } else if (radius == null || radius.trim().isEmpty()) {
@@ -66,7 +69,9 @@ public class RestaurantsNearby extends HttpServlet {
         } else {
         	try {
         		Airbnbs airbnb = airbnbsDao.getAirbnbById(airbnbId);
-        		restaurants = restaurantsDao.getNearbyRestaurants(airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
+        		int page = Integer.parseInt(pageStr);
+                int itemsPerPage = Integer.parseInt(itemsPerPageStr);
+        		restaurants = restaurantsDao.getNearbyRestaurants(page, itemsPerPage, airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
         		airbnbs.add(airbnb);
         		messages.put("success", "Airbnb: " + airbnb.getName() + "; City: " + airbnb.getCity() + "; Neighborhood: " + airbnb.getNeighborhood());
         		messages.put("airbnbName", airbnb.getName());
@@ -97,6 +102,9 @@ public class RestaurantsNearby extends HttpServlet {
         // Retrieve and validate parameter.
         String airbnbId = req.getParameter("airbnb_id");
         String radius = req.getParameter("radius");
+        String pageStr = req.getParameter("page");
+        String itemsPerPageStr = req.getParameter("itemsPerPage");
+        
 		if (airbnbId == null || airbnbId.trim().isEmpty()) {
             messages.put("success", "Please enter a valid id.");
         } else if (radius == null || radius.trim().isEmpty()) {
@@ -104,7 +112,9 @@ public class RestaurantsNearby extends HttpServlet {
         } else {
         	try {
         		Airbnbs airbnb = airbnbsDao.getAirbnbById(airbnbId);
-        		restaurants = restaurantsDao.getNearbyRestaurants(airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
+        		int page = Integer.parseInt(pageStr);
+                int itemsPerPage = Integer.parseInt(itemsPerPageStr);
+        		restaurants = restaurantsDao.getNearbyRestaurants(page, itemsPerPage, airbnb.getLatitude(),airbnb.getLongitude(), Integer.valueOf(radius));
         		airbnbs.add(airbnb);
         		messages.put("success", "Airbnb: " + airbnb.getName() + "; City: " + airbnb.getCity() + "; Neighborhood: " + airbnb.getNeighborhood());
         		messages.put("airbnbName", airbnb.getName());

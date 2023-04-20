@@ -52,20 +52,20 @@
 		<h1>Search for nearby Restaurant</h1>
 		</div>
 		<p>
-			<h2><label for="airbnb_id">AirbnbId</label></h2>
+			<h2><label for="airbnb_id">Airbnb ID</label></h2>
 			<input id="airbnb_id" name="airbnb_id" value="${fn:escapeXml(param.airbnb_id)}">
 		</p>
 		<p>
 			<h2><label for="radius">Radius</label></h2>
-			<input id="radius" name="radius" value="${fn:escapeXml(param.radius)}" maxlength="2" oninput="checkInput(this)">
+			<input id="radius" name="radius" value="${fn:escapeXml(param.radius)}" maxlength="3" oninput="checkInput(this)">
 			<p id="inputError"></p>
 			<script>
 				function checkInput(input) {
 				  let value = parseInt(input.value);
 				  let error = document.getElementById("inputError");
 				  
-				  if (isNaN(value) || value < 1 || value > 70) {
-				    error.textContent = "Please set the radius between 1 and 70.";
+				  if (isNaN(value) || value < 1 || value > 100) {
+				    error.textContent = "Please set the radius between 1 and 100.";
 				    input.setCustomValidity("Invalid input.");
 				  } else {
 				    error.textContent = "";
@@ -73,6 +73,13 @@
 				  }
 				}
 			</script>
+		</p>
+		
+		<p>
+			<h5><label for="page">Page: </label>
+			<input style="width: 50px" id="page" name="page" value="${fn:escapeXml(param.page)}"><br>
+			<label for="itemsPerPage">Restaurants per page: </label>
+			<input style="width: 50px" id="itemsPerPage" name="itemsPerPage" value="${fn:escapeXml(param.itemsPerPage)}"></h5>
 		</p>
 		
 		<p>

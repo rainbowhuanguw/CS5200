@@ -100,11 +100,14 @@ public class RestaurantsDao {
 	    }
 	}
 	
-	public List<Restaurant> getNearbyRestaurants(double airbnbLatitude, double airbnbLongitude, double maxDistanceInMiles) throws SQLException {
-	    String query = "SELECT * FROM"
+	public List<Restaurant> getNearbyRestaurants(int page, int restaurantsPerPage, double airbnbLatitude, double airbnbLongitude, double maxDistanceInMiles) throws SQLException {
+	    int offset = (page - 1) * restaurantsPerPage;
+		String query = "SELECT * FROM"
 	    		+ " (SELECT *, (3959 * acos(cos(radians(?)) * cos(radians(Latitude)) * cos(radians(Longitude) - radians(?)) + sin(radians(?)) * sin(radians(Latitude)))) AS distance "
 	    		+ "FROM Restaurants) AS X "
-	    		+ "WHERE X.distance < ?";
+	    		+ "WHERE X.distance < ?" 
+	    		+ "ORDER BY X.distance "
+	    		+ "limit " + offset + "," + restaurantsPerPage;
 	    Connection connection = connectionManager.getConnection();
 	    List<Restaurant> nearbyRestaurants = new ArrayList<>();
 	    try (PreparedStatement statement = connection.prepareStatement(query)) {
