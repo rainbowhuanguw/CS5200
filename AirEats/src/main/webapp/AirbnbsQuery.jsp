@@ -132,7 +132,7 @@
                     <td><c:out value="${airbnb.getState()}" /></td>
                     <td><c:out value="${airbnb.getLatitude()}" /></td>
                     <td><c:out value="${airbnb.getLongitude()}" /></td>
-                    <td><a href="RestaurantsNearby?airbnb_id=<c:out value="${airbnb.getAirbnbId()}"/>&radius=100">Detail</a></td>
+                    <td><a href="RestaurantsNearby?airbnb_id=<c:out value="${airbnb.getAirbnbId()}"/>&radius=100&page=1&itemsPerPage=25">Detail</a></td>
                 </tr></tbody>
             </c:forEach>
        </table>
